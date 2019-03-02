@@ -16,12 +16,6 @@ public class IngredientModel {
 	 * @return
 	 */
 	public boolean validateIngredients(String name, double valueAmount, String units) {
-		if(valueAmount < 0) {
-			return false;
-		}
-		if(name == null || name.isEmpty() || units == null || units.isEmpty()) {
-			return false;
-		}
 		this.name = name;
 		this.amount = valueAmount + " " + units;
 		return true;
@@ -29,7 +23,7 @@ public class IngredientModel {
 	
 	// Format ingredient into string for display on the screen
 	public String formatIngredients() {
-		return this.amount + " of " + this.name;
+		return this.amount + this.name;
 	}
 	
 	
