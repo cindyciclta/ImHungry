@@ -35,8 +35,13 @@ public class GoogleMapsRequestModel {
 			Scanner scanner = new Scanner(wikiRequest.openStream());
 			String response = scanner.useDelimiter("\\Z").next();
 			JSONObject json = new JSONObject(response);
-			int seconds = json.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getJSONObject("duration").getInt("value");
-			drivingTime = seconds / 60;
+			
+			if(json.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getString("status").equals("OK")) {
+				int seconds = json.getJSONArray("rows").getJSONObject(0).getJSONArray("elements").getJSONObject(0).getJSONObject("duration").getInt("value");
+				drivingTime = seconds / 60;
+			}
+			
+			
 			scanner.close();
 		}catch(IOException e) {
 			e.printStackTrace();
