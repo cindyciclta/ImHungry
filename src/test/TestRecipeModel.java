@@ -2,6 +2,9 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
@@ -127,6 +130,25 @@ public class TestRecipeModel {
 	public void testAddInstructionInvalid() {
 		RecipeModel rm = new RecipeModel();
 		assertFalse(rm.addInstruction("   "));
+	}
+	
+	@Test
+	public void testRecipeModelAscending() {
+		RecipeModel rm = new RecipeModel();
+		rm.setName("test1");
+		rm.setPrepTime(10);
+		RecipeModel rm2 = new RecipeModel();
+		rm2.setPrepTime(11);
+		rm2.setName("test2");
+		assertEquals(-1, rm.compareTo(rm2));
+		
+		List<RecipeModel> rms = new ArrayList<>();
+		rms.add(rm);
+		rms.add(rm2);
+		Collections.sort(rms);
+		assertEquals("test2", rms.get(1).getFormattedFieldsForResults().get("name"));
+		assertEquals("test1", rms.get(0).getFormattedFieldsForResults().get("name"));
+		
 	}
 
 }
