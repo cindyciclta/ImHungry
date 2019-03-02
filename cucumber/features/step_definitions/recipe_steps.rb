@@ -1,53 +1,59 @@
-Given(/^I am on the search page$/) do
+Given(/^I am on the results page$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I remain on the search page$/) do
-  pending 
-end
-
-Then(/^I should see background color white smoke$/) do
+Given(/^I select recipe, "([^"]*)"$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^I should see prompt text enter food$/) do
+Given(/^I am redirected to the recipe page$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^I should see a text box to enter number of results$/) do
+Then(/^I should see "([^"]*)" as a title$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^the default value should be (\d+)$/) do |arg1|
+Then(/^I should see a results in default text size$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I enter a value less than (\d+)$/) do |arg1|
+When(/^I remain on the recipe page$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^the text box should not accept the value$/) do
+Then(/^I should see an image of the dish$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I hover over the text box$/) do
+Then(/^I should see the prep and cook time of the dish$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^text should appear saying “Number of items to show in results”$/) do
+Then(/^I should see the ingredients of the dish$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then(/^I should see a button labeled "([^"]*)"$/) do |arg1|
+Then(/^I should see instructions for the dish$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I enter text$/) do
+When(/^I click the printable button$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-When(/^I click on the "([^"]*)" button$/) do |arg1|
+Then(/^I be able to print the recipe$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
+Then(/^I should see a drop down box for lists$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
 
+When(/^I select a predefined list$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should remain on the Recipe page$/) do
+  pending # Write code here that turns the phrase above into concrete actions
+end
