@@ -25,12 +25,16 @@ public class SearchPageController extends HttpServlet {
 			requestDispatcher.forward(request, response);
 		}else if(action.equals("search")) {
 			// Results action
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageController");
-			requestDispatcher.forward(request, response);
+			String term = request.getParameter("term");
+			String limit = request.getParameter("limit");
+			if(term == null || limit == null || term.isEmpty() || limit.isEmpty()) {
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
+				requestDispatcher.forward(request, response);	
+			}else {
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageController?action=results&term=" + term + "&limit=" + limit);
+				requestDispatcher.forward(request, response);
+			}
 		}
-		
-		
-		
 		
 	}
 

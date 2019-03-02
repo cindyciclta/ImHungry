@@ -2,7 +2,7 @@ package models;
 
 import java.util.*;
 
-public class RecipeModel {
+public class RecipeModel implements Comparable<RecipeModel>{
 	
 	private String name; // Deviation from plan
 	private String imageURL;
@@ -123,6 +123,16 @@ public class RecipeModel {
 		}
 		this.imageURL = link;
 		return true;
+	}
+
+	@Override
+	public int compareTo(RecipeModel arg0) {
+		if(prepTime < arg0.prepTime) {
+			return -1;
+		}else if(prepTime == arg0.prepTime) {
+			return 0;
+		}
+		return 1;
 	}
 	
 	
