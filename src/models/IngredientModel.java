@@ -23,9 +23,6 @@ public class IngredientModel {
 	
 	// Format ingredient into string for display on the screen
 	public String formatIngredients() {
-		return (this.amount + " " + this.name).trim();
+		return (this.name).trim();
 	}
-	
-	
-
 }

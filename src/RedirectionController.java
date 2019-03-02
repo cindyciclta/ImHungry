@@ -24,11 +24,50 @@ public class RedirectionController extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String action = request.getParameter("action");
+		String index = request.getParameter("index");
+		if(action == null || action.isEmpty() || index == null || index.isEmpty()) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
+			requestDispatcher.forward(request, response);
+		}else if(action.equals("managelist")) {
+			
+		}else if(action.equals("recipe")) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("DetailedRecipeView.jsp");
+			int indexInt = Integer.parseInt(index);
+			request.setAttribute("index", indexInt);
+			String item = request.getParameter("item");
+			int itemInt = Integer.parseInt(item);
+			request.setAttribute("item", itemInt);
+			request.setAttribute("response", responses.get(indexInt).getFormattedDetailedRecipeAt(itemInt));
+			requestDispatcher.forward(request, response);
+		}else if(action.equals("restaurant")) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("DetailedRestaurantView.jsp");
+			int indexInt = Integer.parseInt(index);
+			String item = request.getParameter("item");
+			int itemInt = Integer.parseInt(item);
+			request.setAttribute("index", indexInt);
+			request.setAttribute("item", itemInt);
+			request.setAttribute("response", responses.get(indexInt).getFormattedDetailedRestaurantAt(itemInt));
+			requestDispatcher.forward(request, response);
+		}else if(action.equals("results")) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageView.jsp");
+			request.setAttribute("response", responses.get(Integer.parseInt(index)));
+			int indexInt = Integer.parseInt(index);
+			request.setAttribute("index", indexInt);
+			requestDispatcher.forward(request, response);
+		}else if(action.equals("erase")) {
+			int indexInt = Integer.parseInt(index);
+			RedirectionController.removeResponse(indexInt);
+		}
 	}
 	
 	public static synchronized int addResponse(ResponseModel rm) {
 		responses.put(++index, rm);
 		return index;
+	}
+	
+	public static synchronized void removeResponse(int index) {
+		responses.remove(index);
 	}
 	
 	

@@ -9,11 +9,29 @@
 <title>Results Page</title>
 </head>
 <body>
+
 	<%
 	ResponseModel rm = ((ResponseModel)request.getAttribute("response"));
 	String title = rm.getSearchTerm();
 	int index = (int)request.getAttribute("index");
 	%>
+	
+	<script>
+		function redirectToRecipe(link){
+			window.location = link;
+		}
+		
+		function redirectToRestaurant(link){
+			window.location = link;
+		}
+		
+		window.onbeforeunload = function () {
+			 var xhr = new XMLHttpRequest();
+	  	     xhr.open("GET",<%= " \" " + "/ImHungry/RedirectionController?action=erase&index=" +  index + " \" " %>, true);
+	  	    //xhr.send();
+		}
+	
+	</script>
 	
 	<h1>Results for: <%=title%></h1>
 
@@ -26,7 +44,8 @@
 		}
 	%>
 	
-		<div id=<%=Integer.toString(i)%> style=<%="background:" + color + ";"%>>
+		<div id=<%=Integer.toString(i)%> style=<%="background:" + color + ";"%>
+			onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=recipe&index=" + index + "&item=" + i + "\")"%>>
 			<p>Name of Recipe: <%=resultsFields.get("name")%>
 			</p>
 			
