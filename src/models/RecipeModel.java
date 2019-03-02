@@ -48,17 +48,17 @@ public class RecipeModel implements Comparable<RecipeModel>{
 		toReturn.put("name", name);
 		toReturn.put("prepTime", prepTime + " minutes");
 		toReturn.put("cookTime", cookTime + " minutes");
-		toReturn.put("picture", imageURL);
+		toReturn.put("imageUrl", imageURL);
 		
 		String ing = "";
 		for(int i = 0 ; i < ingredients.size() ; i++) {
-			ing += (i+1) + ". " + ingredients.get(i).formatIngredients() + "\n";
+			ing += (i+1) + ". " + ingredients.get(i).formatIngredients() + "SPLIT";
 		}
 		toReturn.put("ingredients", ing);
 		
 		String ins = "";
 		for(int i = 0 ; i < instructions.size() ; i++) {
-			ins += instructions.get(i) + "\n";
+			ins += instructions.get(i) + "SPLIT";
 		}
 		toReturn.put("instructions", ins);
 		
