@@ -39,7 +39,7 @@ Scenario: SPF3.3
 
 Scenario: SPF5
 
-	When I enter text
+	When I enter "Chinese" in the "Search" text box
 	And I click on the "Feed Me" button
 	Then I should be on the "Results" page 
 	

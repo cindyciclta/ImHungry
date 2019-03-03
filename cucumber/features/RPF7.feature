@@ -5,12 +5,14 @@ Feature:
 Background:
 
 	Given I searched for item "F" with "X" results and was redirected to the Results page
-	And I selected the third result, "Item3"
-	And I added "Item3" to the Favorite list
-	And I returned to the results page
-	And I selected the fourth result, "Item4"
-	And I added "Item4" to the Do Not Show list
-	And I returned to the "Search" page
+	And I clicked the link for "Item3"
+	And I selected "Favorites" from the drop down
+	And I clicked the "Add to List" button
+	And I clicked the "Return to Results" button
+	And I clicked the link for "Item4"
+	And I selected "Do Not Show" from the drop down
+	And I clicked the "Add to List" button
+	And I clicked the "Return to Search" button
 	And I searched for item "F" with "X" results and was redirected to the Results page
 	
 Scenario: RTPF7b
@@ -19,5 +21,5 @@ Scenario: RTPF7b
 
 Scenario: RTPF7c
 
-	Then I should not see "Item4"
+	Then I do not see "Item4"
 

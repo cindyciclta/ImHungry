@@ -50,6 +50,6 @@ Scenario: RSPF4
 	
 Scenario: RSPF5.1
 	
-	When I select list "Favorites"
+	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I should remain on the "Recipe" page
+	Then I be remain on the "Recipe" page
