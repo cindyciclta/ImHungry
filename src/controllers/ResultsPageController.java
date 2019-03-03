@@ -33,11 +33,11 @@ public class ResultsPageController extends HttpServlet {
 			
 			String term = request.getParameter("term");
 			String limit = request.getParameter("limit");
-			int limitInteger = Integer.parseInt(limit);
 			if(term == null || limit == null || term.isEmpty() || limit.isEmpty()) {
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 				requestDispatcher.forward(request, response);	
 			}else {
+				int limitInteger = Integer.parseInt(limit);
 				ResponseModel rm = new ResponseModel();
 				if(!rm.checkParameters(term, limitInteger) || !rm.getSearchResults()) {
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
