@@ -24,12 +24,22 @@
             height: 100vh;
         }
 
+        #collage-wrapper {
+            height: 50vh;
+            width: 60vw;
+        }
+
+        .overlays {
+            position: absolute;
+        } 
+
         /* For the tables within the tables (in the results listings)
             Keeps the tables from having stripes within stripes
          */
         .nested-tr {
             background-color: inherit;
         }
+
 
         /*.navbar.fixed-right {
             position: fixed;
@@ -39,14 +49,26 @@
         }*/
 
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
     <div id="outer-wrapper" class="container" style="height: 100vh">
         <div class="row my-5">
             <div class="col h-100">
-                <div id="collage-wrapper" class="container h-50 bg-secondary">
+                <div id="collage-wrapper" class="container my-5 mr-5 pr-5 pb-5 bg-secondary">
                     <!-- TODO Collage here -->
-                    <p>collage</p>
+                    <!-- <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid"> -->
+
                 </div>
 
                 <div id="title-wrapper" class="container my-5">
@@ -225,6 +247,71 @@
         
 
     </div>
+
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            console.log( "ready!" );
+            for (var i = 0; i < 10; i = i+1) {
+                showImage()
+            }
+            $('img').each(function() {
+                var deg = randomIntFromInterval(-45, 45);
+                console.log('rotated', deg)
+                var numberOfImages = $('img').length;
+                var rotate = 'rotate(' + deg + 'deg)';
+                //console.log($(this).height());
+                var width = (100-5)/((numberOfImages <= 10) ? numberOfImages : 10)*2;
+                $(this).css({ 
+                    '-webkit-transform': rotate,
+                    '-moz-transform': rotate,
+                    '-o-transform': rotate,
+                    '-ms-transform': rotate,
+                    'transform': rotate,
+                    //'width': width+'%'
+                    'width': 15+'vw'
+                });
+            });
+        });
+
+        // min = minimum rotation in degrees, max = maximum rotation in degrees
+        function randomIntFromInterval(min,max) {
+            return Math.floor(Math.random()*(max-min+1)+min);
+        }
+
+        function showImage() {
+            // myImage : ID of image on which to place new image
+
+            var destination = document.getElementById('collage-wrapper');
+            
+            console.log('here', $('#collage-wrapper').width());
+            
+            margin = 20;
+            
+            l = destination.offsetLeft + $('#collage-wrapper').width()/4;
+            t = destination.offsetTop + $('#collage-wrapper').height()/4;
+            //w = destination.width;
+            //h = destination.height;
+            w = $('#collage-wrapper').width()/2
+            h = $('#collage-wrapper').height()/2
+            
+            // Location inside the image
+            offX = parseInt(Math.random() * w);
+            offY = parseInt(Math.random() * h);
+            
+            if(offX > margin) offX -= margin;
+            if(offY > margin) offY -= margin;
+
+            l += offX;
+            t += offY;
+
+            var newImage = document.createElement("img");
+            newImage.setAttribute('src', 'https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg');
+            newImage.setAttribute('class', 'overlays');
+            newImage.style.left = l + "px";
+            newImage.style.top = t + "px";
+            console.log(document.body.appendChild(newImage));
+        }    
+    </script>
     
 
     <!-- Optional JavaScript -->
