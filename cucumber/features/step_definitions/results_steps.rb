@@ -2,7 +2,6 @@ Given(/^I searched for "([^"]*)"$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-
 When(/^I remain on the results page$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end

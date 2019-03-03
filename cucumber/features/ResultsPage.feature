@@ -4,7 +4,7 @@ Feature:
 
 Background:
 
-	Given I searched for item "F" with "X" results and was redirected to the Results page
+	Given I searched for item "F1" with "X" results and was redirected to the Results page
 
 Scenario: check background color
 
@@ -29,7 +29,7 @@ Scenario: RTPF1
 Scenario: RTPF2
 
 	When I remain on the results page
-	Then I should see the title "Results for F"
+	Then I should see the title "Results for F1"
 
 Scenario: RTPF3.1
 
