@@ -12,7 +12,7 @@ public class TestIngredientModel {
 	public void testIngredientModelValidFormat() {
 		IngredientModel i = new IngredientModel();
 		assertTrue(i.validateIngredients("oil", 10.5, "fluid ounces"));
-		assertEquals(i.formatIngredients(), "10.5 fluid ounces oil");
+		assertEquals(i.formatIngredients(), "oil");
 	}
 
 }

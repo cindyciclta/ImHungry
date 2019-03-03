@@ -6,7 +6,7 @@ Background:
 
 	Given I am on the "Results" page
 	And I select recipe, "R"
-	And I am redirected to the "Recipe" page
+	And I should be on the "Recipe" page
 
 Scenario: check background color
 
@@ -39,7 +39,7 @@ Scenario: RCPF5
 Scenario: RCPF6
 	
 	When I click the "Printable" button
-	Then I be able to print the recipe
+	Then I should be able to print the recipe
 	
 Scenario: RCPF7
 	
@@ -52,6 +52,6 @@ Scenario: RCPF8
 	
 Scenario: RCPF9.1
 	
-	When I select list "Favorites"
+	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I should remain on the "Recipe" page
+	Then I should be on the "Recipe" page

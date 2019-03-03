@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
@@ -83,12 +85,16 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 					restaurant.setName(name);
 					restaurant.setStars((int)rating);
 					
-					String dollarSigns = business.getString("price").trim();
-					
-					double lowEndPrice = dollarSigns.length() * 10;
-					double highEndPrice = dollarSigns.length() * 30;
-					
-					restaurant.setPriceRange(lowEndPrice, highEndPrice);
+					try {
+						String dollarSigns = business.getString("price").trim();
+						double lowEndPrice = dollarSigns.length() * 10;
+						double highEndPrice = dollarSigns.length() * 30;
+						restaurant.setPriceRange(lowEndPrice, highEndPrice);	
+					}catch(JSONException e){
+						double lowEndPrice = 1;
+						double highEndPrice = 100;
+						restaurant.setPriceRange(lowEndPrice, highEndPrice);
+					}
 					
 					JSONObject coordinates = business.getJSONObject("coordinates");
 					double lat = coordinates.getDouble("latitude");
@@ -114,8 +120,11 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 					results.add(restaurant);
 				}
 			}
+			
+			Collections.sort(results);
 		     
 		} catch (Exception e) {
+			e.printStackTrace();
 	        return ResponseCodeModel.INTERNAL_ERROR;
 	    }  
 		return ResponseCodeModel.OK;
@@ -148,6 +157,45 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 		}
 		
 		return results.get(i).getFormattedFieldsForDetailsPage();
+	}
+
+	@Override
+	public boolean setFavoriteResult(int i) {
+		if(i < 0) {
+			return false;
+		}
+		if(i >= results.size()) {
+			return false;
+		}
+		
+		results.get(i).setInFavorites(true);
+		return true;
+	}
+
+	@Override
+	public boolean setToExploreResult(int i) {
+		if(i < 0) {
+			return false;
+		}
+		if(i >= results.size()) {
+			return false;
+		}
+		
+		results.get(i).setInToExplore(true);
+		return true;
+	}
+
+	@Override
+	public boolean setDoNotShowResult(int i) {
+		if(i < 0) {
+			return false;
+		}
+		if(i >= results.size()) {
+			return false;
+		}
+		
+		results.get(i).setInDoNotShow(true);
+		return true;
 	}
 	
 	
