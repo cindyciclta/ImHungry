@@ -10,6 +10,8 @@
 </head>
 <body>
 
+	
+
 	<%
 	ResponseModel rm = ((ResponseModel)request.getAttribute("response"));
 	String title = rm.getSearchTerm();
@@ -32,6 +34,8 @@
 		}
 	
 	</script>
+	
+	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&index=" + index + "\")"%>>Back to search</h2>
 	
 	<h1>Results for: <%=title%></h1>
 
@@ -56,6 +60,38 @@
 			</p>
 			
 			<p>Stars of Recipe: <%=resultsFields.get("stars")%>
+			</p>
+		</div>
+	<%
+	}
+	%>
+	
+	<h2>Restaurants</h2>
+	
+	<%
+	for(int i = 0 ; i < rm.getNumberOfRestaurants() ; i++){
+		Map<String, String> resultsFields = rm.getFormattedRestaurantResultsAt(i);
+		String color = "#D3D3D3";
+		if(i % 2 == 0){
+			color = "#A9A9A9";
+		}
+	%>
+	
+		<div id=<%=Integer.toString(i)%> style=<%="background:" + color + ";"%>
+			onclick=<%="redirectToRestaurant(\"" + "/ImHungry/RedirectionController?action=restaurant&index=" + index + "&item=" + i + "\")"%>>
+			<p>Name of Restaurant: <%=resultsFields.get("name")%>
+			</p>
+			
+			<p>address of restaurant: <%=resultsFields.get("address")%>
+			</p>
+			
+			<p>driving time of restaurant: <%=resultsFields.get("drivingTime")%>
+			</p>
+			
+			<p>price range: <%=resultsFields.get("priceRange")%>
+			</p>
+			
+			<p>Stars of restaurant: <%=resultsFields.get("stars")%>
 			</p>
 		</div>
 	<%
