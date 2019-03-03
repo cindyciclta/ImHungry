@@ -94,4 +94,24 @@ public class ResponseModel {
 		return response;
 	}
 	
+	public boolean addToList(int i, String list, String type) {
+		if(type.equals("restaurant")) {
+			if(list.equals("donotshow")) {
+				return restaurants.setDoNotShowResult(i);
+			}else if(list.equals("favorites")) {
+				return restaurants.setFavoriteResult(i);
+			}else {
+				return restaurants.setToExploreResult(i);
+			}
+		}else {
+			if(list.equals("donotshow")) {
+				return recipes.setDoNotShowResult(i);
+			}else if(list.equals("favorites")) {
+				return recipes.setFavoriteResult(i);
+			}else {
+				return recipes.setToExploreResult(i);
+			}
+		}
+	}
+	
 }

@@ -78,12 +78,11 @@ body{
 							food" aria-label="Search">
 		  				</div>
 		  				<div id="numResults" class="form-group col-md-2">
-		  					<input class="form-control mr-sm-2" type="number" value="5" id="limitInput" title="Number of items to show in results">
+		  					<input class="form-control mr-sm-2" type="number" min="1" value="5" id="limitInput" title="Number of items to show in results">
 		  				</div>
 		  			</div>
 		  		</div>
 		  </div>
-		  
 		  
 		  <div class="container">
 		  	<div class="row justify-content-center align-items-center">

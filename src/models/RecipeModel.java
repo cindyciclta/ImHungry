@@ -2,7 +2,7 @@ package models;
 
 import java.util.*;
 
-public class RecipeModel implements Comparable<RecipeModel>{
+public class RecipeModel extends ListItemModel implements Comparable<RecipeModel>{
 	
 	private String name; // Deviation from plan
 	private String imageURL;
@@ -39,6 +39,13 @@ public class RecipeModel implements Comparable<RecipeModel>{
 		toReturn.put("stars", stars);
 		toReturn.put("prepTime", prepTime + " minutes");
 		toReturn.put("cookTime", cookTime + " minutes");
+		String modifier = "";
+		if(isInDoNotShow()) {
+			modifier = "donotshow";
+		}else if(isInFavorites()) {
+			modifier = "favorites";
+		}
+		toReturn.put("modifier", modifier);
 		
 		return toReturn;
 	}
@@ -127,6 +134,16 @@ public class RecipeModel implements Comparable<RecipeModel>{
 
 	@Override
 	public int compareTo(RecipeModel arg0) {
+		
+		// Puts favorites first
+		if(isInFavorites() && !arg0.isInFavorites()) {
+			return -1;
+		}
+		if(!isInFavorites() && arg0.isInFavorites()) {
+			return 1;
+		}
+		
+		
 		if(prepTime < arg0.prepTime) {
 			return -1;
 		}else if(prepTime == arg0.prepTime) {

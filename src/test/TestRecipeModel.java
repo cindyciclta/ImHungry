@@ -73,7 +73,6 @@ public class TestRecipeModel {
 	public void testFormattedResultsDetails() {
 		RecipeModel rm = new RecipeModel();
 		rm.setName("nameOfRecipe");
-		rm.addIngredient(new IngredientModel());
 		rm.addInstruction("make food");
 		Map<String, String> res = rm.getFormattedFieldsForDetailsPage();
 		assertEquals(res.get("name"), "nameOfRecipe");
