@@ -351,47 +351,52 @@ Then(/^I should be on the Recipe Details page$/) do
   pending # Write code here that turns the phrase above into concrete actions
 end
 
+
+
+# Search Page
+
 Given(/^I am on the search page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit "http://localhost:8080/ImHungry"
 end
 
 Then(/^I should see prompt text enter food$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_field("EnterFood")
 end
 
 Then(/^I should see a text box to enter number of results$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_field("NumResults")
 end
 
 Then(/^the default value should be (\d+)$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_field("NumResults", :value => arg1)
 end
 
 When(/^I enter a value less than (\d+)$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in 'NumResults', with: '-1'
+  click_button 'FeedMe'
 end
 
 Then(/^the text box should not accept the value$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_title("Search")
 end
 
 When(/^I hover over the text box$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  find('.NumResults').hover
 end
 
 Then(/^text should appear saying “Number of items to show in results”$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  page.find('div', text: 'Number of items to show in results')
 end
 
 Then(/^I should see a button labeled "([^"]*)"$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_field(arg1)
 end
 
 When(/^I enter text$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  fill_in('Search', with: 'Chinese')
 end
 
 When(/^I click on the "([^"]*)" button$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+  click_button(arg1)
 end
 
