@@ -5,10 +5,12 @@ Feature:
 Background:
 
 	Given I searched for "F"
-	And I selected "Item"
-	And I added it to the "Favorites" List
-	And I returned to the "Results" page
-	And I selected "Favorites"
+	And I clicked the link for "Item"
+	And I selected "Favorites" from the drop down
+	And I clicked the "Add to List" button
+	And I clicked the "Return to Results" button
+	And I selected "Favorites" from the drop down
+	And I clicked the "Add to List" button
 	And I clicked the "Manage List" button
 
 Scenario: check background color
@@ -37,10 +39,10 @@ Scenario: LMPF3.1
 Scenario: LMPF3.2, LMPF6, LMPF7
 
 	When I move "Item" to "To Explore"
-	And I select that "To Explore" from the drop down
+	And I select "To Explore" from the drop down
 	And I click the "Manage List" button
 	Then I am on the "Manage List" page for "To Explore"
-	And I see "Item" on the page
+	And I should see "Item"
 	
 Scenario: LMPF4
 
@@ -54,6 +56,6 @@ Scenario: LMPF5
 
 Scenario: LMPF7a
 
-	When I select the "Favorites" list
+	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I should remain on the "Manage List page" for "Favorites"
+	Then I am on the "Manage List page" for "Favorites"
