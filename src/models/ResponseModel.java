@@ -78,7 +78,16 @@ public class ResponseModel {
 		this.recipes = edamam;
 		
 		// TODO: add the yelp API here
-		
+		YelpRequestModel yelp = new YelpRequestModel();
+		response = yelp.checkParameters(term, limit);
+		if(!response) {
+			return false;
+		}
+		responseCode = yelp.completeTask();
+		if(!responseCode.equals(ResponseCodeModel.OK)) {
+			return false;
+		}
+		this.restaurants = yelp;
 		
 		// TODO: add the google images API here
 		

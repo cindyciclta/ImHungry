@@ -33,6 +33,11 @@ public class RestaurantModel {
 		return true;
 	}
 	
+	public boolean setAddress(String address) {
+		this.address = address;
+		return true;
+	}
+	
 	public boolean setStars(int stars) {
 		if(stars < 0) {
 			return false;
@@ -118,6 +123,11 @@ public class RestaurantModel {
 	public boolean setLatLong(double lat, double lon) {
 		this.lat = lat;
 		this.lon = lon;
+		
+		
+		GoogleMapsRequestModel gm = new GoogleMapsRequestModel();
+		gm.checkParameters(lat, lon);
+		this.drivingTime = gm.getDrivingTime();
 		return true;
 	}
 }

@@ -20,8 +20,13 @@ public class ResultsPageController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getParameter("action");
+		String index = request.getParameter("index");
 		
 		if(action == null || action.isEmpty() || action.equals("search")) {
+			if(index != null && !index.isEmpty()) {
+				RedirectionController.removeResponse(Integer.parseInt(index));
+			}
+			
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 			requestDispatcher.forward(request, response);
 		}else if(action.equals("results")) {
@@ -39,9 +44,9 @@ public class ResultsPageController extends HttpServlet {
 					requestDispatcher.forward(request, response);
 				}else {
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageView.jsp");
-					int index = RedirectionController.addResponse(rm);
+					int indexInt = RedirectionController.addResponse(rm);
 					request.setAttribute("response", rm);
-					request.setAttribute("index", index);
+					request.setAttribute("index", indexInt);
 					requestDispatcher.forward(request, response);
 				}
 			}
