@@ -15,8 +15,8 @@
 		}
 		
 		function addToList(link){
-			var xhr = new XmlHttpRequest();
-			xhr.open(link, true);
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", link, true);
 			xhr.send();
 		}
 	</script>

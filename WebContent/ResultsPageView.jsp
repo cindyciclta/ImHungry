@@ -28,9 +28,9 @@
 	</script>
 	
 	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&index=" + index + "\")"%>>Back to search</h2>
-	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=managelist&index=" + index + "&list=donotshow" + "\")"%>>Manage do not show</h2>
-	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=managelist&index=" + index + "&list=favorites" + "\")"%>>Manage favorites</h2>
-	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=managelist&index=" + index + "&list=toexplore" + "\")"%>>Manage to explore</h2>
+	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=managelist&index=" + index + "&list=donotshow" + "\")"%>>Manage do not show</h2>
+	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=managelist&index=" + index + "&list=favorites" + "\")"%>>Manage favorites</h2>
+	<h2 onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=managelist&index=" + index + "&list=toexplore" + "\")"%>>Manage to explore</h2>
 	
 	
 	<h1>Results for: <%=title%></h1>

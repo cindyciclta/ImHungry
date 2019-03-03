@@ -33,7 +33,7 @@ public class RedirectionController extends HttpServlet {
 			
 		}else if(action.equals("managelist")) {
 			String list = request.getParameter("list");
-			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ManageListView.jsp");
 			if(list.equals("donotshow")) {
 				request.setAttribute("title", "Do Not Show");
 			}else if(list.equals("favorites")) {
