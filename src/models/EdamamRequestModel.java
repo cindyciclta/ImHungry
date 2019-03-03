@@ -184,6 +184,45 @@ public class EdamamRequestModel implements ApiCallInterface<RecipeModel> {
 		
 		return results.get(i).getFormattedFieldsForDetailsPage();
 	}
+
+	@Override
+	public boolean setFavoriteResult(int i) {
+		if(i < 0) {
+			return false;
+		}
+		if(i >= results.size()) {
+			return false;
+		}
+		
+		results.get(i).setInFavorites(true);
+		return true;
+	}
+
+	@Override
+	public boolean setToExploreResult(int i) {
+		if(i < 0) {
+			return false;
+		}
+		if(i >= results.size()) {
+			return false;
+		}
+		
+		results.get(i).setInToExplore(true);
+		return true;
+	}
+
+	@Override
+	public boolean setDoNotShowResult(int i) {
+		if(i < 0) {
+			return false;
+		}
+		if(i >= results.size()) {
+			return false;
+		}
+		
+		results.get(i).setInDoNotShow(true);
+		return true;
+	}
 	
 
 }

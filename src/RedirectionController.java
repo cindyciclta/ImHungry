@@ -26,10 +26,24 @@ public class RedirectionController extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		String index = request.getParameter("index");
+		
 		if(action == null || action.isEmpty() || index == null || index.isEmpty()) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 			requestDispatcher.forward(request, response);
+			
 		}else if(action.equals("managelist")) {
+			String list = request.getParameter("list");
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
+			if(list.equals("donotshow")) {
+				request.setAttribute("title", "Do Not Show");
+			}else if(list.equals("favorites")) {
+				request.setAttribute("title", "Favorites");
+			}else {
+				request.setAttribute("title", "To Explore");
+			}
+			request.setAttribute("response", responses.get(Integer.parseInt(index)));
+			request.setAttribute("index", Integer.parseInt(index));
+			requestDispatcher.forward(request, response);
 			
 		}else if(action.equals("recipe")) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("DetailedRecipeView.jsp");
@@ -40,6 +54,7 @@ public class RedirectionController extends HttpServlet {
 			request.setAttribute("item", itemInt);
 			request.setAttribute("response", responses.get(indexInt).getFormattedDetailedRecipeAt(itemInt));
 			requestDispatcher.forward(request, response);
+			
 		}else if(action.equals("restaurant")) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("DetailedRestaurantView.jsp");
 			int indexInt = Integer.parseInt(index);
@@ -49,15 +64,27 @@ public class RedirectionController extends HttpServlet {
 			request.setAttribute("item", itemInt);
 			request.setAttribute("response", responses.get(indexInt).getFormattedDetailedRestaurantAt(itemInt));
 			requestDispatcher.forward(request, response);
+			
 		}else if(action.equals("results")) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageView.jsp");
 			request.setAttribute("response", responses.get(Integer.parseInt(index)));
 			int indexInt = Integer.parseInt(index);
 			request.setAttribute("index", indexInt);
 			requestDispatcher.forward(request, response);
+			
 		}else if(action.equals("erase")) {
 			int indexInt = Integer.parseInt(index);
 			RedirectionController.removeResponse(indexInt);
+			
+		}else if(action.equals("addtolist")) {
+			int indexInt = Integer.parseInt(index);
+			String item = request.getParameter("item");
+			int itemInt = Integer.parseInt(item);
+			
+			String list = request.getParameter("list");
+			String type = request.getParameter("type");
+			
+			responses.get(indexInt).addToList(itemInt, list, type);
 		}
 	}
 	

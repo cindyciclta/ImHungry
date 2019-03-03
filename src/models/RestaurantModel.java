@@ -3,7 +3,7 @@ package models;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RestaurantModel {
+public class RestaurantModel extends ListItemModel implements Comparable<RestaurantModel>{
 	
 	private String name;
 	private int stars;
@@ -62,6 +62,14 @@ public class RestaurantModel {
 		toReturn.put("stars", stars);
 		toReturn.put("drivingTime", this.drivingTime + " minutes of driving");
 		toReturn.put("priceRange", String.format( "%.2f", lowEndPrice ) + " to " + String.format( "%.2f", highEndPrice ));
+		
+		String modifier = "";
+		if(isInDoNotShow()) {
+			modifier = "donotshow";
+		}else if(isInFavorites()) {
+			modifier = "favorites";
+		}
+		toReturn.put("modifier", modifier);
 		
 		return toReturn;
 	}
@@ -129,5 +137,19 @@ public class RestaurantModel {
 		gm.checkParameters(lat, lon);
 		this.drivingTime = gm.getDrivingTime();
 		return true;
+	}
+
+	@Override
+	public int compareTo(RestaurantModel arg0) {
+		// Puts favorites first
+		if(isInFavorites() && !arg0.isInFavorites()) {
+			return -1;
+		}
+		if(!isInFavorites() && arg0.isInFavorites()) {
+			return 1;
+		}
+		
+		
+		return this.drivingTime - arg0.drivingTime;
 	}
 }
