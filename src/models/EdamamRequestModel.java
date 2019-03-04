@@ -7,18 +7,18 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class EdamamRequestModel implements ApiCallInterface<RecipeModel> {
 	
-	public final String APP_ID = "d7cba8e7";
-	public final String APP_KEY = "050d5e65923fd41dc3acb8003c1a1134";
-	public final String URL = "https://api.edamam.com/search?q=";
+	public final String URL_LINK = "https://www.allrecipes.com/search/results/?wt=";
 	
 	private List<RecipeModel> results;
 	
@@ -52,103 +52,199 @@ public class EdamamRequestModel implements ApiCallInterface<RecipeModel> {
 		return results;
 	}
 	
-	public List<String> parseInstructionsFromLink(String link){
-		
-		List<String> instructions = new ArrayList<>();
+	public String getHTMLLinks() throws IOException{
+		// Parse the links
+		StringBuilder contentBuilder = new StringBuilder();
+		URL url = new URL(URL_LINK + "&sort=re");
+	    BufferedReader in = new BufferedReader(
+	            new InputStreamReader(url.openStream()));
+	    String str;
+	    while ((str = in.readLine()) != null) {
+	        contentBuilder.append(str);
+	    }
+	    in.close();
+		String content = contentBuilder.toString();
+		return content;
+	}
+	
+	public String getParseRecipe(String link) throws IOException{
 		
 		StringBuilder contentBuilder = new StringBuilder();
-		try {
-			URL url = new URL(link);
-		    BufferedReader in = new BufferedReader(
-		            new InputStreamReader(url.openStream()));
-		    String str;
-		    while ((str = in.readLine()) != null) {
-		        contentBuilder.append(str);
-		    }
-		    in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		URL url = new URL(link);
+	    BufferedReader in = new BufferedReader(
+	            new InputStreamReader(url.openStream()));
+	    String str = "";
+	    while ((str = in.readLine()) != null) {
+	        contentBuilder.append(str);
+	    }
+	    in.close();
 		String content = contentBuilder.toString();
-		
-		// Parse instructions as good as possible
-		int index = content.indexOf("<script type=\"application/ld+json\">");
-		boolean completed= false;
-		if(index != -1) {
-			content = content.substring(index);
-			index = content.indexOf("</script>");
-			if(index != -1) {
-				content = content.substring(0, index);
-				index = content.indexOf("recipeInstructions");
-				if(index != -1) {
-					content = content.substring(index);
-					content = content.replace("{", "");
-					content = content.replace("}", "");
-					content = content.replace("\"@type\":\"HowToStep\",\"text\":", "");
-					String[] steps = content.split(",");
-					for(String step : steps) {
-						instructions.add(step);
-					}
-					completed = true;
-				}
-				
-			}
-		}
-		
-		if(!completed) {
-			instructions.add("mix ingredients in bowl");
-			instructions.add("heat in saucepan");
-			instructions.add("serve lightly warn");
-		}
-		return instructions;
+		return content;
 	}
-
+	
 	@Override
 	public ResponseCodeModel completeTask() {
-		ResponseCodeModel responseResult = ResponseCodeModel.OK;
+ 		ResponseCodeModel responseResult = ResponseCodeModel.OK;
 		try {
-			URL wikiRequest = new URL(URL + term +  "&app_id=" + APP_ID + "&app_key=" + APP_KEY);
-			Scanner scanner = new Scanner(wikiRequest.openStream());
-			String response = scanner.useDelimiter("\\Z").next();
-			JSONObject json = new JSONObject(response);
 			
-			// Parse into recipemodel objects
-			int count = json.getInt("count");
-			for(int i = 0 ; i < Math.min(count, limit) ; i++) {
+			String content = getHTMLLinks();
+			
+			Set<String> links = new HashSet<>();
+			int index = content.indexOf("://www.allrecipes.com/recipe/");
+			while(index != -1) {
+				content = content.substring(index);
+				int end_index = content.indexOf("\"");
+				if(end_index != -1) {
+					links.add("https" + content.substring(0, end_index));
+					content = content.substring(end_index);
+				}
+				index = content.indexOf("://www.allrecipes.com/recipe/");
+			}
+			List<String> linkReal = new ArrayList<>(links);
+			// Parse DA RECIPES from each of their links
+			for(int i = 0 ; i < Math.min(links.size(), limit) ; i++) {
+				Thread.sleep(500);
+				
+				String link = linkReal.get(i);
+				content = getParseRecipe(link);
 				RecipeModel added = new RecipeModel();
-				JSONObject recipe = json.getJSONArray("hits").getJSONObject(i).getJSONObject("recipe");
 				
-				String imageURL = recipe.getString("image");
-				String name = recipe.getString("label");
-				String url = recipe.getString("url");
-				added.setStars(((int)(Math.random() * 5)) + 1);
-				
-				added.setImageUrl(imageURL);
-				added.setName(name);
-				
-				JSONArray ingredients = recipe.getJSONArray("ingredientLines");
-				for(int j = 0 ; j < ingredients.length() ; j++) {
-					IngredientModel ingredient = new IngredientModel();
-					String raw = ingredients.getString(j);
-					ingredient.validateIngredients(raw, 0, "");
-					added.addIngredient(ingredient);
+				// Get name
+				String tag = " <meta property=\"og:title\" content=";
+				index = content.indexOf(tag);
+				if(index != -1) {
+					content = content.substring(index);
+					int end_index = content.indexOf("/>");
+					String title = content.substring(tag.length(), end_index);
+					title = title.replace("Recipe", "");
+					title = title.replace("\"", "");
+					content = content.substring(end_index);
+					added.setName(title);
+				}else {
+					added.setName("unknown");
 				}
 				
-				// Get prep and cook time
-				int totalTime = recipe.getInt("totalTime");
-				double fractionalPercent = Math.random();
-				added.setCookTime((int)(totalTime * fractionalPercent));
-				added.setPrepTime((int)(totalTime * (1 - fractionalPercent)));
+				// Get link
+				tag = "<section class=\"hero-photo hero-photo--downsized \">";
+				index = content.indexOf(tag);
+				if(index != -1) {
+					content = content.substring(index);
+					tag = "src=\"";
+					index = content.indexOf(tag);
+					if(index != -1) {
+						content = content.substring(index + tag.length());
+						int end_index = content.indexOf("\"");
+						String linkURL = content.substring(0, end_index);
+						content = content.substring(end_index);
+						added.setImageUrl(linkURL);
+					}
+				}else {
+					added.setImageUrl("unknown");
+				}
 				
-				// Get ingredients
-				List<String> instructions = parseInstructionsFromLink(url);
-				for(String instruction : instructions) {
-					added.addInstruction(instruction);
+				// Get rating
+				tag = " <meta property=\"og:rating\" content=";
+				index = content.indexOf(tag);
+				if(index != -1) {
+					content = content.substring(index);
+					int end_index = content.indexOf("/>");
+					String title = content.substring(tag.length(), end_index);
+					title = title.replace("Recipe", "");
+					title = title.trim();
+					if(title.length() > 5) {
+						title = title.substring(1, 6);
+					}
+					double rating = 3;
+					try {
+						
+						rating = Double.parseDouble(title);
+					}catch(Exception e) {
+					}
+					added.setStars((int)Math.round(rating));
+					content = content.substring(end_index);
+				}else {
+					added.setStars(3);
+				}
+				
+				
+				// Ingredients
+				tag = "<ul class=\"checklist dropdownwrapper list-ingredients-1\" ng-hide=\"reloaded\" id=\"lst_ingredients_1\">";
+				index = content.indexOf(tag);
+				if(index != -1) {
+					content = content.substring(index);
+					tag = "itemprop=\"recipeIngredient\">";
+					index = content.indexOf(tag);
+					while(index != -1) {
+						content = content.substring(index + tag.length());
+						
+						int end_index = content.indexOf("</span>");
+						if(end_index != -1) {
+							String ingredient = content.substring(0, end_index);
+							content = content.substring(end_index);
+							IngredientModel ing = new IngredientModel();
+							ing.validateIngredients(ingredient, 0, "");
+							added.addIngredient(ing);
+						}
+						index = content.indexOf(tag);
+					}	
+				}
+				
+				// Prep and cook time
+				tag = "<span class=\"prepTime__item--time\">";
+				index = content.indexOf(tag);
+				if(index != -1) {
+					content = content.substring(index);
+					int end_index = content.indexOf("</span>");
+					String title = content.substring(tag.length(), end_index);
+					int time = 30;
+					try {
+						time = Integer.parseInt(title);
+					}catch(Exception e) {
+					}
+					added.setPrepTime(time);
+					content = content.substring(end_index);
+				}else {
+					added.setPrepTime(30);
+				}
+				index = content.indexOf(tag);
+				if(index != -1) {
+					content = content.substring(index);
+					int end_index = content.indexOf("</span>");
+					String title = content.substring(tag.length(), end_index);
+					int time = 30;
+					try {
+						time = Integer.parseInt(title);
+					}catch(Exception e) {
+					}
+					added.setCookTime(time);
+					content = content.substring(end_index);
+				}else {
+					added.setCookTime(30);
+				}
+				
+				// Instructions
+				tag = "<ol class=\"list-numbers recipe-directions__list\" itemprop=\"recipeInstructions\">";
+				index = content.indexOf(tag);
+				if(index != -1) {
+					content = content.substring(index);
+					tag = "<span class=\"recipe-directions__list--item\">";
+					index = content.indexOf(tag);
+					while(index != -1) {
+						content = content.substring(index + tag.length());
+						int end_index = content.indexOf("</span>");
+						if(end_index != -1) {
+							String instruction = content.substring(0, end_index);
+							content = content.substring(end_index);
+							added.addInstruction(instruction.trim());
+							
+						}
+						index = content.indexOf(tag);	
+					}	
 				}
 				
 				results.add(added);
 			}
-		}catch(IOException e) {
+		}catch(IOException | InterruptedException e) {
 			responseResult = ResponseCodeModel.INTERNAL_ERROR;
 		}
 		Collections.sort(results);
