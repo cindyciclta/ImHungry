@@ -20,7 +20,7 @@ Scenario: check text size
 
 Scenario: RTPF1
 
-	Then I should see a collage image
+	Then I should see an image
 
 Scenario: RTPF2
 
@@ -64,7 +64,7 @@ Scenario: RTPF5b
 
 Scenario: RTPF5c
 
-	When I click on a restaurant result
+	When I click on restaurant result, "R1"
 	Then I should be on the "Restaurant Details" page
 	
 Scenario: RTPF6
@@ -82,11 +82,11 @@ Scenario: RPF6b
 Scenario: RTPF7a.1
 
 	When I add a result to a list
-	Then I should be on the Results page
+	Then I should be on the "ResultsPageView.jsp" page
 	
 Scenario: RTPF6c
 
-	When I click on a recipe result
+	When I click on recipe result, "R2"
 	Then I should be on the "Recipe Details" page
 	
 Scenario: RTPF8

@@ -39,7 +39,7 @@ Scenario: SPF3.3
 
 Scenario: SPF5
 
-	When I enter "Chinese" in the "Search" text box
-	And I click on the "Feed Me" button
+	When I enter "Chinese" in the "searchBar" text box
+	And I click on the "emojiButton" button
 	Then I should be on the "Results" page 
 	

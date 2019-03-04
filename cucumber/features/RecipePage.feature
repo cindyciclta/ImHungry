@@ -4,11 +4,11 @@ Feature:
 
 Background:
 
-	Given I am on the "Results" page
+	Given I am on the "ResultsPageView.jsp" page
 	And I select recipe, "R"
-	And I should be on the "Recipe" page
+	And I should be on the "RecipePageView.jsp" page
 
-Scenario: check background color
+Scenario: check for white smoke background color
 
 	Then I should see background color "white_smoke"
 	
@@ -22,7 +22,7 @@ Scenario: check text size
 	
 Scenario: RCPF2
 	
-	Then I should see an image of the dish
+	Then I should see an image
 	
 Scenario: RCPF3
 	
@@ -43,8 +43,8 @@ Scenario: RCPF6
 	
 Scenario: RCPF7
 	
-	When I click the "Return to Results" button
-	Then I should be on the "Results" page
+	When I click the "Back to results" button
+	Then I should be on the "ResultsPageView.jsp" page
 	
 Scenario: RCPF8
 	
@@ -54,4 +54,4 @@ Scenario: RCPF9.1
 	
 	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I should be on the "Recipe" page
+	Then I should be on the "DetailedRecipeView.jsp" page
