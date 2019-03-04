@@ -2,7 +2,7 @@
 # Manage List Page
 
 Given(/^I searched for "([^"]*)"$/) do |arg1|
-  visit "http://localhost:8080/ImHungry/SearchPageView.jsp/"
+  visit "http://localhost:8080/ImHungry/SearchPageController/"
   fill_in('searchBar', with: arg1)
   click_button('emojiButton')
 end
@@ -74,7 +74,7 @@ end
 # RPFF7
 
 Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected to the Results page$/) do |arg1, arg2|
-  visit "http://localhost:8080/ImHungry/SearchPageView.jsp/"
+  visit "http://localhost:8080/ImHungry/SearchPageController/"
   fill_in('searchBar', with: arg1)
   fill_in('numResults', with: arg2)
   click_button('emojiButton')
@@ -251,7 +251,7 @@ end
 # Search Page
 
 Given(/^I am on the search page$/) do
-  visit "http://localhost:8080/ImHungry/SearchPageView.jsp/"
+  visit "http://localhost:8080/ImHungry/SearchPageController/"
 end
 
 Then(/^I should see prompt text enter food$/) do
@@ -278,7 +278,7 @@ When(/^I enter a value less than (\d+)$/) do |arg1|
 end
 
 Then(/^the text box should not accept the value$/) do
-  expect(page).to current_path('/ImHungry/SearchPageView.jsp/')
+  expect(page).to current_path('/ImHungry/SearchPageController/')
 end
 
 When(/^I hover over the text box$/) do
