@@ -6,10 +6,10 @@ Background:
 
 	Given I searched for "F"
 	And I clicked the link for "Item"
-	And I selected "Favorites" from the drop down
+	And I selected "Manage favorites" from the drop down
 	And I clicked the "Add to List" button
-	And I clicked the "Return to Results" button
-	And I selected "Favorites" from the drop down
+	And I clicked the "Back to results" button
+	And I selected "Manage favorites" from the drop down
 	And I clicked the "Add to List" button
 	And I clicked the "Manage List" button
 
@@ -28,7 +28,7 @@ Scenario: RTPF7a.2 and LMPF1
 Scenario: LMPF2
 
 	When I click on "Item"
-	Then I am on the "Details" page for "Item"
+	Then I am on the "DetailedRestaurantView.jsp" page for "Item"
 	
 Scenario: LMPF3.1
 
@@ -46,13 +46,13 @@ Scenario: LMPF3.2, LMPF6, LMPF7
 	
 Scenario: LMPF4
 
-	When I click the "Results Page" button
-	Then I should be on the "Results" page
+	When I click the "Back to results" button
+	Then I should be on the "ResultsPageView.jsp" page
 
 Scenario: LMPF5
 
-	When I click the "Return to Search Page" button
-	Then I should be on the "Search" page
+	When I click the "Back to search" button
+	Then I should be on the "SearchPageView.jsp" page
 
 Scenario: LMPF7a
 

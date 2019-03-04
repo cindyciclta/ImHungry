@@ -4,9 +4,9 @@ Feature:
 
 Background:
 
-	Given I am on the "Results" page
+	Given I am on the "ResultsPageView.jsp" page
 	And I select restaurant, "R"
-	And I am redirected to the "Restaurant" page
+	And I am redirected to the "RestaurantPageView.jsp" page
 
 Scenario: check background color
 
@@ -37,12 +37,12 @@ Scenario: RSPF1b
 Scenario: RSPF2
 	
 	When I click the "Printable" button
-	Then I be able to print the restaurant page
+	Then I should be able to print the restaurant page
 	
 Scenario: RSPF3
 	
-	When I click the "Return to Results" button
-	Then I should be on the "Results" page
+	When I click the "Back to results" button
+	Then I should be on the "ResultsPageView.jsp" page
 	
 Scenario: RSPF4
 	
@@ -52,4 +52,4 @@ Scenario: RSPF5.1
 	
 	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I be remain on the "Recipe" page
+	Then I should be on the "Recipe" page
