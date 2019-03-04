@@ -121,7 +121,7 @@ public class EdamamRequestModel implements ApiCallInterface<RecipeModel> {
 				String imageURL = recipe.getString("image");
 				String name = recipe.getString("label");
 				String url = recipe.getString("url");
-				added.setStars(((int)Math.random() * 5) + 1);
+				added.setStars(((int)(Math.random() * 5)) + 1);
 				
 				added.setImageUrl(imageURL);
 				added.setName(name);
