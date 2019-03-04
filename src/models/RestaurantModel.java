@@ -68,6 +68,8 @@ public class RestaurantModel extends ListItemModel implements Comparable<Restaur
 			modifier = "donotshow";
 		}else if(isInFavorites()) {
 			modifier = "favorites";
+		}else if(isInToExplore()) {
+			modifier = "toexplore";
 		}
 		toReturn.put("modifier", modifier);
 		

@@ -36,6 +36,7 @@ public class RedirectionController extends HttpServlet {
 		}else if(action.equals("managelist")) {
 			String list = request.getParameter("list");
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ManageListView.jsp");
+			request.removeAttribute("title");
 			if(list.equals("donotshow")) {
 				request.setAttribute("title", "Do Not Show");
 			}else if(list.equals("favorites")) {
@@ -69,7 +70,9 @@ public class RedirectionController extends HttpServlet {
 			
 		}else if(action.equals("results")) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageView.jsp");
-			request.setAttribute("response", responses.get(Integer.parseInt(index)));
+			ResponseModel rm = responses.get(Integer.parseInt(index));
+			rm.sort();
+			request.setAttribute("response", rm);
 			int indexInt = Integer.parseInt(index);
 			request.setAttribute("index", indexInt);
 			requestDispatcher.forward(request, response);
@@ -78,7 +81,8 @@ public class RedirectionController extends HttpServlet {
 			int indexInt = Integer.parseInt(index);
 			RedirectionController.removeResponse(indexInt);
 			
-		}else if(action.equals("addtolist")) {
+		}else if(action.equals("addtolist") || action.equals("movetolist")) {
+			
 			int indexInt = Integer.parseInt(index);
 			String item = request.getParameter("item");
 			int itemInt = Integer.parseInt(item);
@@ -86,7 +90,15 @@ public class RedirectionController extends HttpServlet {
 			String list = request.getParameter("list");
 			String type = request.getParameter("type");
 			
-			responses.get(indexInt).addToList(itemInt, list, type);
+			responses.get(indexInt).addToList(itemInt, list, type, true);
+		}else if(action.equals("removefromlist")) {
+			int indexInt = Integer.parseInt(index);
+			String item = request.getParameter("item");
+			int itemInt = Integer.parseInt(item);
+			
+			String list = request.getParameter("list");
+			String type = request.getParameter("type");
+			responses.get(indexInt).addToList(itemInt, list, type, false);
 		}
 	}
 	

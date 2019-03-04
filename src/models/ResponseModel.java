@@ -1,5 +1,6 @@
 package models;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class ResponseModel {
@@ -20,6 +21,11 @@ public class ResponseModel {
 	
 	public String getCollageBase64String() {
 		return collage;
+	}
+	
+	public void sort() {
+		recipes.sort();
+		restaurants.sort();
 	}
 	
 	public Map<String, String> getFormattedDetailedRecipeAt(int i) {
@@ -94,22 +100,22 @@ public class ResponseModel {
 		return response;
 	}
 	
-	public boolean addToList(int i, String list, String type) {
+	public boolean addToList(int i, String list, String type, boolean value) {
 		if(type.equals("restaurant")) {
 			if(list.equals("donotshow")) {
-				return restaurants.setDoNotShowResult(i);
+				return restaurants.setDoNotShowResult(i, value);
 			}else if(list.equals("favorites")) {
-				return restaurants.setFavoriteResult(i);
+				return restaurants.setFavoriteResult(i, value);
 			}else {
-				return restaurants.setToExploreResult(i);
+				return restaurants.setToExploreResult(i, value);
 			}
 		}else {
 			if(list.equals("donotshow")) {
-				return recipes.setDoNotShowResult(i);
+				return recipes.setDoNotShowResult(i, value);
 			}else if(list.equals("favorites")) {
-				return recipes.setFavoriteResult(i);
+				return recipes.setFavoriteResult(i, value);
 			}else {
-				return recipes.setToExploreResult(i);
+				return recipes.setToExploreResult(i, value);
 			}
 		}
 	}

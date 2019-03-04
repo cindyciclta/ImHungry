@@ -14,8 +14,9 @@ public interface ApiCallInterface<T> {
 	
 	public Map<String, String> getFormattedDetailsFieldsAt(int i);
 	
-	public boolean setFavoriteResult(int i );
-	public boolean setToExploreResult(int i );
-	public boolean setDoNotShowResult(int i);
+	public boolean setFavoriteResult(int i, boolean value);
+	public boolean setToExploreResult(int i , boolean value);
+	public boolean setDoNotShowResult(int i, boolean value);
 	
+	public void sort();
 }

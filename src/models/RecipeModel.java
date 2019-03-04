@@ -44,7 +44,11 @@ public class RecipeModel extends ListItemModel implements Comparable<RecipeModel
 			modifier = "donotshow";
 		}else if(isInFavorites()) {
 			modifier = "favorites";
+		}else if(isInToExplore()) {
+			modifier = "toexplore";
 		}
+		
+		
 		toReturn.put("modifier", modifier);
 		
 		return toReturn;

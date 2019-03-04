@@ -4,23 +4,67 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<title>THREEEE TEEEEEEEEEEENNNNNNN</title>
+
+<style>
+	#wrapper {
+		margin-top: 20px !important;
+	}
+	.title {
+		margin-top: 1em;
+	}
+	#foodPic {
+		width: 380px;
+		height: 280px;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	td {
+		padding: 4px !important;
+	}
+	/* Numbers the instructions */
+	body {
+	     		counter-reset: h7counter;
+	 		}
+	   h7:before {
+	       content: counter(h7counter) ".\0000a0\0000a0";
+	       counter-increment: h7counter;
+	   }
+	   ol {
+	   	padding: 0 !important;
+	   }
+	   h {
+	   	font-size: 17px !important;
+	   }
+</style>
+		
 </head>
 <body>
-
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script>
+	
+		var list = "";
+	
 		function backToResults(link){
 			window.location = link;		
 		}
 		
-		function addToList(link){
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", link, true);
-			xhr.send();
+		function addToList(index, item, type){
+			var e = document.getElementById("managelistselect");
+			list = e.options[e.selectedIndex].value;
+			if(list != ""){
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "/ImHungry/RedirectionController?action=addtolist&index=" + index + "&list=" + list + "&item=" + item + "&type=" + type, true);
+				xhr.send();
+			}
 		}
 	</script>
-
+	
 	<%
 	Map<String, String> fields = ((Map<String, String>)request.getAttribute("response"));
 	int index = (int)request.getAttribute("index");
@@ -28,40 +72,123 @@
 	String link = fields.get("imageUrl");
 	%>
 
-	<h2 onclick=<%="backToResults(" + "\"" + "/ImHungry/RedirectionController?action=results&index=" + index + "\""  + ")"%>>Back to results</h2>
-	<h2 onclick=<%="addToList(\"" + "/ImHungry/RedirectionController?action=addtolist&index=" + index + "&item=" + item + "&type=recipe" + "&list=toexplore" + "\")"%>>Add to explore</h2>
-	<h2 onclick=<%="addToList(\"" + "/ImHungry/RedirectionController?action=addtolist&index=" + index + "&item=" + item + "&type=recipe" + "&list=donotshow" + "\")"%>>Add to do not show</h2>
-	<h2 onclick=<%="addToList(\"" + "/ImHungry/RedirectionController?action=addtolist&index=" + index + "&item=" + item + "&type=recipe" + "&list=favorites" + "\")"%>>Add to favorites</h2>
+	<div id="wrapper" class="container">
+		<div class="row">
+	    	<div class="col-md-8">
+	     		<div class="row">
+		        	<div class="col-md-12">
+		        		<div class="container">
+		        			<h1>Recipe for <%=fields.get("name")%></h1>
+		        		</div>
+		        		<div class="container">
+		        			<img id="foodPic" src=<%=link%> class="img-fluid" alt="Responsive image">
+		        		</div>
+		        	</div>
+	      		</div>
+	      		<div class="row">
+	        		<div class="col-lg-12">
+	        			<div class="container">
+	        				<br>
+	        				<h>Prep Time: <%=fields.get("prepTime")%></h>
+	        				<br>
+	        				<h>Cook Time: <%=fields.get("cookTime")%></h>
+        					<h5 class="title">Ingredients</h5>
+        					<div class="container-fluid">
+        						<!-- TODO make this table fill dynamically -->
+        						<table class="table table-borderless">
+        							<thead>
+        							</thead>
+        							<tbody>
+        							
+        							<%
+										String[] splitIngredients = fields.get("ingredients").split("SPLIT");
+										
+										int count = 0;
+										
+										for(String ing : splitIngredients){
+										%>
+										
+										<%
+											if(count % 3 == 0){
+										%>
+											<tr>
+										<%
+										}
+										%>
+										
+											<td>
+			        							<li>
+			        								<h><%=count+1%>. <%=ing %><h> 
+			        							</li>
+        									</td>
+										
+										<%
+											if(count % 3 == 2){
+										%>
+											</tr>
+										<%
+										}
+										%>
+										
+										<%
+											count += 1;
+										} %>
+        							</tbody>
+        						</table>
+        					</div>
+        					<h5 class="title">Instructions</h5>
+        					<div class="container-fluid">
+        						<!-- TODO make this table fill dynamically -->
+        						<table class="table table-borderless">
+        							<thead>
+        							</thead>
+        							<tbody>
+        							<%
+									String[] splitInstructions = fields.get("instructions").split("SPLIT");
+									
+									for(String ins : splitInstructions){
+									%>
+										<tr>
+        									<td>
+			        							<ol>
+			        								<h7><%=ins%></h7> 
+			        							</ol>
+        									</td>
+        								</tr>
+									<%}%>
+        							</tbody>
+        						</table>
+        					</div>
+	        			</div>
+	        		</div>
+	      		</div>
+	    	</div>
+  		</div>
+	</div>
 	
-	<h1>Name: <%=fields.get("name")%></h1>
-	<img src=<%=link%> > </img>
-	
-	
-	<p>Prep Time of Recipe: <%=fields.get("prepTime")%>
-	</p>
-	
-	<p>Cook Time of Recipe: <%=fields.get("cookTime")%>
-	</p>
-	
-	<%
-	String[] splitInstructions = fields.get("instructions").split("SPLIT");
-	
-	int count = 0;
-	
-	for(String instruction : splitInstructions){
-	%>
-		<p><%=count+1%>. <%=instruction %></p>
-	<%
-		count += 1;
-	} %>
-	
-	<%
-	String[] splitIngredients = fields.get("ingredients").split("SPLIT");
-	
-	for(String ingredient : splitIngredients){
-	%>
-		<p><%=ingredient%></p>
-	<%}%>
-
+	<div class="col-md-auto order-1">
+       <div id="sidebar-wrapper" class="navbar navbar-light">
+           <div class="navbar-nav" >
+               <ul class="navbar-nav">
+                   <li class="nav-item dropdown">
+                       <div class="form-group">
+                           <select required class="form-control" id="managelistselect">
+                               <option value=""><!-- None --></option>
+                               <option value="favorites">Favorites</option>
+                               <option value="toexplore">To Explore</option>
+                               <option value="donotshow">Do Not Show</option>
+                           </select>
+                       </div>
+                   </li>
+                   <li class="nav-item">
+                       <input class="btn btn-secondary" onclick=<%="addToList(" + index + "," + item + "," + "\"recipe\"" + ")"%> type="button" value="Add to List">
+                   </li>
+                   <li class="nav-item my-3">
+                       <a class="btn btn-secondary" onclick=<%="backToResults(\"" + "/ImHungry/RedirectionController?action=results&index=" + index + "\")"%>>Back to Results</a>
+                   </li>
+               </ul>
+           </div>
+       	</div>
+      </div>
 </body>
 </html>

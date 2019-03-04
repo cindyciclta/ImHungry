@@ -160,7 +160,7 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 	}
 
 	@Override
-	public boolean setFavoriteResult(int i) {
+	public boolean setFavoriteResult(int i, boolean value) {
 		if(i < 0) {
 			return false;
 		}
@@ -168,12 +168,12 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 			return false;
 		}
 		
-		results.get(i).setInFavorites(true);
+		results.get(i).setInFavorites(value);
 		return true;
 	}
 
 	@Override
-	public boolean setToExploreResult(int i) {
+	public boolean setToExploreResult(int i, boolean value) {
 		if(i < 0) {
 			return false;
 		}
@@ -181,12 +181,12 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 			return false;
 		}
 		
-		results.get(i).setInToExplore(true);
+		results.get(i).setInToExplore(value);
 		return true;
 	}
 
 	@Override
-	public boolean setDoNotShowResult(int i) {
+	public boolean setDoNotShowResult(int i, boolean value) {
 		if(i < 0) {
 			return false;
 		}
@@ -194,10 +194,13 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 			return false;
 		}
 		
-		results.get(i).setInDoNotShow(true);
+		results.get(i).setInDoNotShow(value);
 		return true;
 	}
 	
-	
-
+	@Override
+	public void sort() {
+		Collections.sort(results);
+		
+	}
 }
