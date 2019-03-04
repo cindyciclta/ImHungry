@@ -10,6 +10,14 @@
 <title>THREEEE TEEEEEEEEEEENNNNNNN</title>
 
 <style>
+		@media print {
+		  body {
+		    color: #000;
+		  }
+		  #foodPic{
+		  	display: None;
+		  }
+		}
 	#wrapper {
 		margin-top: 20px !important;
 	}
@@ -49,6 +57,10 @@
 	<script>
 	
 		var list = "";
+		
+		function printPage(){
+			window.print();
+		}
 	
 		function backToResults(link){
 			window.location = link;		
@@ -163,32 +175,38 @@
 	        		</div>
 	      		</div>
 	    	</div>
+	    	
+	    	<div class="col-md-auto order-1">
+		       <div id="sidebar-wrapper" class="navbar navbar-light">
+		           <div class="navbar-nav" >
+		               <ul class="navbar-nav">
+		                   <li class="nav-item dropdown">
+		                       <div class="form-group">
+		                           <select required class="form-control" id="managelistselect">
+		                               <option value=""><!-- None --></option>
+		                               <option value="favorites">Favorites</option>
+		                               <option value="toexplore">To Explore</option>
+		                               <option value="donotshow">Do Not Show</option>
+		                           </select>
+		                       </div>
+		                   </li>
+		                   <li class="nav-item">
+		                       <input class="btn btn-secondary" onclick=<%="addToList(" + index + "," + item + "," + "\"recipe\"" + ")"%> type="button" value="Add to List">
+		                   </li>
+		                   <li class="nav-item my-3">
+		                       <a class="btn btn-secondary" onclick=<%="backToResults(\"" + "/ImHungry/RedirectionController?action=results&index=" + index + "\")"%>>Back to Results</a>
+		                   </li>
+		                   <li class="nav-item">
+                                <a class="btn btn-secondary" onclick="printPage()">Printable Version</a>
+                            </li>
+		               </ul>
+		           </div>
+		       	</div>
+		      </div>
+	    	
   		</div>
 	</div>
 	
-	<div class="col-md-auto order-1">
-       <div id="sidebar-wrapper" class="navbar navbar-light">
-           <div class="navbar-nav" >
-               <ul class="navbar-nav">
-                   <li class="nav-item dropdown">
-                       <div class="form-group">
-                           <select required class="form-control" id="managelistselect">
-                               <option value=""><!-- None --></option>
-                               <option value="favorites">Favorites</option>
-                               <option value="toexplore">To Explore</option>
-                               <option value="donotshow">Do Not Show</option>
-                           </select>
-                       </div>
-                   </li>
-                   <li class="nav-item">
-                       <input class="btn btn-secondary" onclick=<%="addToList(" + index + "," + item + "," + "\"recipe\"" + ")"%> type="button" value="Add to List">
-                   </li>
-                   <li class="nav-item my-3">
-                       <a class="btn btn-secondary" onclick=<%="backToResults(\"" + "/ImHungry/RedirectionController?action=results&index=" + index + "\")"%>>Back to Results</a>
-                   </li>
-               </ul>
-           </div>
-       	</div>
-      </div>
+	
 </body>
 </html>
