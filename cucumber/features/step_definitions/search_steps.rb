@@ -293,3 +293,22 @@ When(/^I click on the "([^"]*)" button$/) do |arg1|
   click_button(arg1)
 end
 
+
+# Some more
+
+Then(/^I am on the "([^"]*)" for "([^"]*)"$/) do |arg1, arg2|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see "([^"]*)" on the page$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given(/^I am redirected to the "([^"]*)" page$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should remain on the "([^"]*)" page$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+

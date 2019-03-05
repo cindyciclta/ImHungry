@@ -23,9 +23,6 @@ public class CollageGenerationModel {
 		this.term = term;
 		return true;
 	}
-	
-	Base64 getResult() {
-		
-	}
+
 
 }
