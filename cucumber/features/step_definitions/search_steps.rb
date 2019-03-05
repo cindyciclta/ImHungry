@@ -3,7 +3,7 @@
 
 Given(/^I searched for "([^"]*)"$/) do |arg1|
   visit "http://localhost:8080/ImHungry/SearchPageController"
-  fill_in('Enter', with: arg1)
+  fill_in 'termInput', :with => arg1
   click_button('emojiButton')
 end
 
@@ -75,8 +75,8 @@ end
 
 Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected to the Results page$/) do |arg1, arg2|
   visit 'http://localhost:8080/ImHungry/SearchPageController'
-  fill_in('searchBar', with: arg1)
-  fill_in('numResults', with: arg2)
+  fill_in('termInput', with: arg1)
+  fill_in('limitInput', with: arg2)
   click_button('emojiButton')
   # add check that we are actually on results page?
 end
@@ -247,7 +247,7 @@ end
 # Search Page
 
 Given(/^I am on the search page$/) do
-  visit "http://localhost:8080/ImHungry/SearchPageController/"
+  visit "http://localhost:8080/ImHungry/SearchPageController"
 end
 
 Then(/^I should see prompt text enter food$/) do
