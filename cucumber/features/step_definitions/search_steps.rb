@@ -74,7 +74,7 @@ end
 # RPFF7
 
 Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected to the Results page$/) do |arg1, arg2|
-  visit "http://localhost:8080/ImHungry/SearchPageController/"
+  visit 'http://localhost:8080/ImHungry/SearchPageController/'
   fill_in('searchBar', with: arg1)
   fill_in('numResults', with: arg2)
   click_button('emojiButton')
@@ -89,10 +89,6 @@ end
 
 
 # Recipe and Restaurant Page
-
-Given(/^I am on the "([^"]*)" page$/) do |arg1|
-  visit "http://localhost:8080/ImHungry/" + arg1 + "/"
-end
 
 Given(/^I select recipe, "([^"]*)"$/) do |arg1|
   click_link arg1
