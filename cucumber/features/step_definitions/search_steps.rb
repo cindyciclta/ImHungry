@@ -2,8 +2,8 @@
 # Manage List Page
 
 Given(/^I searched for "([^"]*)"$/) do |arg1|
-  visit "http://localhost:8080/ImHungry/SearchPageController/"
-  fill_in('searchBar', with: arg1)
+  visit "http://localhost:8080/ImHungry/SearchPageController"
+  fill_in('Enter', with: arg1)
   click_button('emojiButton')
 end
 
@@ -74,7 +74,7 @@ end
 # RPFF7
 
 Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected to the Results page$/) do |arg1, arg2|
-  visit 'http://localhost:8080/ImHungry/SearchPageController/'
+  visit 'http://localhost:8080/ImHungry/SearchPageController'
   fill_in('searchBar', with: arg1)
   fill_in('numResults', with: arg2)
   click_button('emojiButton')
