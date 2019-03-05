@@ -4,7 +4,7 @@ Feature:
 
 Background:
 
-	Given I am on the "ResultsPageView.jsp" page
+	Given I searched for "Chinese"
 	And I select recipe, "R"
 	And I should be on the "RecipePageView.jsp" page
 

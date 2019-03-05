@@ -4,7 +4,7 @@ Feature:
 
 Background:
 
-	Given I am on the "ResultsPageView.jsp" page
+	Given I searched for "Chinese"
 	And I select restaurant, "R"
 	And I am redirected to the "RestaurantPageView.jsp" page
 
