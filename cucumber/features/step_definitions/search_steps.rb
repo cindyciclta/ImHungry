@@ -97,7 +97,7 @@ Given(/^I select recipe, "([^"]*)"$/) do |arg1|
 end
 
 Then(/^I should see "([^"]*)" as a title$/) do |arg1|
-  expect(page).to have_title(arg1)
+  expect(page).to have_content(arg1)
 end
 
 Then(/^I should see a result in default text size$/) do
@@ -266,7 +266,7 @@ Then(/^the default value should be (\d+)$/) do |arg1|
 end
 
 Then(/^I should see a button labeled "([^"]*)"$/) do |arg1|
-  page.should have_selector(:link_or_button, arg1)
+  expect(page).to have_content(arg1)
   # expect(page).to have_button
 end
 
