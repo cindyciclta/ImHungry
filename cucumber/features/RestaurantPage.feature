@@ -5,12 +5,11 @@ Feature:
 Background:
 
 	Given I searched for "Chinese"
-	And I select restaurant, "R"
-	And I am redirected to the "RestaurantPageView.jsp" page
+	And I select restaurant, "Northern Cafe"
 
 Scenario: check background color
 
-	Then I should see background color "white_smoke"
+	Then I should see background color "#f5f5f5"
 	
 Scenario: check title text size
 	
