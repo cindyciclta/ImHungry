@@ -46,7 +46,7 @@ public class ResultsPageController extends HttpServlet {
 				ResponseModel rm = new ResponseModel();
 				CollageGenerationModel collagemodel = new CollageGenerationModel();
 				GoogleImageRequestModel googleimagemodel = new GoogleImageRequestModel(collagemodel);
-				googleimagemodel.completeTasks(term);
+				googleimagemodel.APIImageSearch(term);
 				
 				if(!rm.checkParameters(term, limitInteger) || !rm.getSearchResults()) {
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");

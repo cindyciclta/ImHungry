@@ -86,7 +86,7 @@ public class RedirectionController extends HttpServlet {
 			//Call the request to pull data to go back to the results page
 			CollageGenerationModel collagemodel = new CollageGenerationModel();
 			GoogleImageRequestModel googleimagemodel = new GoogleImageRequestModel(collagemodel);
-			googleimagemodel.completeTasks(term);
+			googleimagemodel.APIImageSearch(term);
 			ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
 			JSONArray jsArray = new JSONArray (urllist);
 			String jsonToString = jsArray.toString();
