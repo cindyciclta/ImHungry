@@ -23,7 +23,7 @@ public class GoogleImageRequestModel {
 	
 	public ResponseCodeModel completeTasks(String imagesearch) {	
 		try {
-			System.out.println("inside completetasks()");
+
 			//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
 			URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyBn3V9GHx2KjGQTmeUPHFN2Nm0BGko-zJ4" + 
 					"&cx=018271258977134758236:ifnf_dla9yk&q=" + imagesearch + "&searchType=image");
@@ -52,7 +52,7 @@ public class GoogleImageRequestModel {
 			    	String string_urlimage = imageobj.getString("thumbnailLink");
 			    	if (string_urlimage != null || string_urlimage != "") {
 				    	allimageurl.add(string_urlimage);
-//				    	System.out.println(string_urlimage); 	
+	
 				    	actualsize++;
 		    		}
 		    	}
