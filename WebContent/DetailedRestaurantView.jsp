@@ -52,7 +52,7 @@
 			list = e.options[e.selectedIndex].value;
 			if(list != ""){
 				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "/ImHungry/RedirectionController?action=addtolist&index=" + index + "&list=" + list + "&item=" + item + "&type=" + type, true);
+				xhr.open("GET", "/ImHungry/RedirectionController?action=addtolist&term="+term +"&index=" + index + "&list=" + list + "&item=" + item + "&type=" + type, true);
 				xhr.send();
 			}
 		}	
@@ -63,6 +63,7 @@
 	int index = (int)request.getAttribute("index");
 	int item = (int)request.getAttribute("item");
 	String link = fields.get("imageUrl");
+	String term = (String) request.getAttribute("term");
 	%>
 	
     <div id="wrapper" class="container">
@@ -96,7 +97,7 @@
                                 <a class="btn btn-secondary" onclick="printPage()">Printable Version</a>
                             </li>
                             <li class="nav-item my-3">
-                                <a class="btn btn-secondary" onclick=<%="backToResults(" + "\"" + "/ImHungry/RedirectionController?action=results&index=" + index + "\""  + ")"%>>Return to Results</a>
+                                <a class="btn btn-secondary" onclick=<%="backToResults(" + "\"" + "/ImHungry/RedirectionController?action=results&term="+term +"&index=" + index + "\""  + ")"%>>Return to Results</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <div class="form-group">
@@ -109,7 +110,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-		                       <input class="btn btn-secondary" onclick=<%="addToList(" + index + "," + item + "," + "\"restaurant\"" + ")"%> type="button" value="Add to List">
+		                       <input class="btn btn-secondary" onclick=<%="addToList("+term +"," + index + "," + item + "," + "\"restaurant\"" + ")"%> type="button" value="Add to List">
 		                    </li>
                         </ul>
                     </div>
