@@ -8,7 +8,7 @@ Background:
 
 Scenario: check background color
 
-	Then I should see background color "#f5f5f5"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: check title text size
 	
@@ -91,5 +91,5 @@ Scenario: RTPF6c
 	
 Scenario: RTPF8
 
-	When I click the "Return to Search Page" button
-	Then I should be on the "Search" page
+	When I click the "Return to Search" button
+	Then I should be on the "/ImHungry/RedirectionController?action=search&index=16" page

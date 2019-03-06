@@ -5,11 +5,11 @@ Feature:
 Background:
 
 	Given I searched for "Chinese"
-	And I select recipe, "Fluffy Pancakes"
+	And I clicked the link for "Fluffy Pancakes"
 
 Scenario: check for white smoke background color
 
-	Then I should see background color "#f5f5f5"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: RCF1 and check title text size
 	
