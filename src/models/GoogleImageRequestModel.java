@@ -47,7 +47,6 @@ public class GoogleImageRequestModel {
 		    	ArrayList <String> allimageurl = new ArrayList<String>();
 				int actualsize = 0;
 		    	for (int i = 0; i < 10 ; i ++) {
-		    		System.out.println(items.length());
 		    		JSONObject item_i = items.getJSONObject(i);
 			    	JSONObject imageobj = item_i.getJSONObject("image");
 			    	String string_urlimage = imageobj.getString("thumbnailLink");
