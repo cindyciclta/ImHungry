@@ -5,11 +5,11 @@ Feature:
 Background:
 
 	Given I searched for "Chinese"
-	And I select restaurant, "Northern Cafe"
+	And I clicked the link for "Northern Cafe"
 
 Scenario: check background color
 
-	Then I should see background color "#f5f5f5"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: check title text size
 	

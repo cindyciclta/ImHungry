@@ -15,7 +15,7 @@ Background:
 
 Scenario: check background color
 
-	Then I should see background color "white_smoke"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: check title text size
 	
