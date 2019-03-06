@@ -1,5 +1,6 @@
 package controllers;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+
+import models.CollageGenerationModel;
+import models.GoogleImageRequestModel;
 import models.ResponseModel;
 
 public class ResultsPageController extends HttpServlet {
@@ -39,14 +44,25 @@ public class ResultsPageController extends HttpServlet {
 			}else {
 				int limitInteger = Integer.parseInt(limit);
 				ResponseModel rm = new ResponseModel();
+				CollageGenerationModel collagemodel = new CollageGenerationModel();
+				GoogleImageRequestModel googleimagemodel = new GoogleImageRequestModel(collagemodel);
+				googleimagemodel.completeTasks(term);
+				
 				if(!rm.checkParameters(term, limitInteger) || !rm.getSearchResults()) {
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 					requestDispatcher.forward(request, response);
 				}else {
 					RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageView.jsp");
 					int indexInt = RedirectionController.addResponse(rm);
+					
+					ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
+					JSONArray jsArray = new JSONArray (urllist);
+					String jsonToString = jsArray.toString();
+
 					request.setAttribute("response", rm);
 					request.setAttribute("index", indexInt);
+					request.setAttribute("length", urllist.size());
+					request.setAttribute("jsonarray", jsArray);
 					requestDispatcher.forward(request, response);
 				}
 			}
