@@ -33,6 +33,7 @@ public class CollageGenerationModel {
 		this.term = term;
 		return true;
 	}
+
 	public void setListofImages (ArrayList<String> iList, int size) {
 		System.out.println("size is " + iList.size());
 		this.list = iList;
@@ -45,5 +46,6 @@ public class CollageGenerationModel {
 	Base64 getResult() {
 		return null;	
 	}
+
 
 }

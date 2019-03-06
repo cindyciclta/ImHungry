@@ -4,18 +4,18 @@ Feature:
 
 Background:
 
-	Given I searched for "F"
-	And I clicked the link for "Item"
-	And I selected "Manage favorites" from the drop down
+	Given I searched for "Chinese"
+	And I clicked the link for "Northern Cafe"
+	And I selected "Favorites" from the drop down
 	And I clicked the "Add to List" button
 	And I clicked the "Back to results" button
-	And I selected "Manage favorites" from the drop down
+	And I selected "Favorites" from the drop down
 	And I clicked the "Add to List" button
 	And I clicked the "Manage List" button
 
 Scenario: check background color
 
-	Then I should see background color "white_smoke"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: check title text size
 	

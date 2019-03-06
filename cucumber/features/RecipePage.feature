@@ -4,17 +4,16 @@ Feature:
 
 Background:
 
-	Given I am on the "ResultsPageView.jsp" page
-	And I select recipe, "R"
-	And I should be on the "RecipePageView.jsp" page
+	Given I searched for "Chinese"
+	And I clicked the link for "Fluffy Pancakes"
 
 Scenario: check for white smoke background color
 
-	Then I should see background color "white_smoke"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: RCF1 and check title text size
 	
-	Then I should see "R" as a title
+	Then I should see "Fluffy Pancakes" as a title
 
 Scenario: check text size
 	
@@ -43,8 +42,8 @@ Scenario: RCPF6
 	
 Scenario: RCPF7
 	
-	When I click the "Back to results" button
-	Then I should be on the "ResultsPageView.jsp" page
+	When I click the "Back to Results" button
+	Then I should be on the "/ImHungry/RedirectionController?action=results&index=15" page
 	
 Scenario: RCPF8
 	
@@ -54,4 +53,4 @@ Scenario: RCPF9.1
 	
 	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I should be on the "DetailedRecipeView.jsp" page
+	Then I should be on the "/ImHungry/RedirectionController?action=recipe&index=15&item=2" page

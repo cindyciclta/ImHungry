@@ -63,7 +63,7 @@ public class RecipeModel extends ListItemModel implements Comparable<RecipeModel
 		
 		String ing = "";
 		for(int i = 0 ; i < ingredients.size() ; i++) {
-			ing += (i+1) + ". " + ingredients.get(i).formatIngredients() + "SPLIT";
+			ing += ingredients.get(i).formatIngredients() + "SPLIT";
 		}
 		toReturn.put("ingredients", ing);
 		

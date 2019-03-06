@@ -2,9 +2,9 @@
 # Manage List Page
 
 Given(/^I searched for "([^"]*)"$/) do |arg1|
-  visit "http://localhost:8080/ImHungry/SearchPageView.jsp/"
-  fill_in('searchBar', with: arg1)
-  click_button('emojiButton')
+  visit "http://localhost:8080/ImHungry/SearchPageController"
+  fill_in 'termInput', :with => arg1
+  page.find('div#emojiButton.img-container').click
 end
 
 Given(/^I clicked the link for "([^"]*)"$/) do |arg1|
@@ -74,10 +74,10 @@ end
 # RPFF7
 
 Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected to the Results page$/) do |arg1, arg2|
-  visit "http://localhost:8080/ImHungry/SearchPageView.jsp/"
-  fill_in('searchBar', with: arg1)
-  fill_in('numResults', with: arg2)
-  click_button('emojiButton')
+  visit 'http://localhost:8080/ImHungry/SearchPageController'
+  fill_in('termInput', with: arg1)
+  fill_in('limitInput', with: arg2)
+  page.find('div#emojiButton.img-container').click
   # add check that we are actually on results page?
 end
 
@@ -89,10 +89,6 @@ end
 
 
 # Recipe and Restaurant Page
-
-Given(/^I am on the "([^"]*)" page$/) do |arg1|
-  visit "http://localhost:8080/ImHungry/" + arg1 + "/"
-end
 
 Given(/^I select recipe, "([^"]*)"$/) do |arg1|
   click_link arg1
@@ -251,7 +247,7 @@ end
 # Search Page
 
 Given(/^I am on the search page$/) do
-  visit "http://localhost:8080/ImHungry/SearchPageView.jsp/"
+  visit "http://localhost:8080/ImHungry/SearchPageController"
 end
 
 Then(/^I should see prompt text enter food$/) do
@@ -278,7 +274,7 @@ When(/^I enter a value less than (\d+)$/) do |arg1|
 end
 
 Then(/^the text box should not accept the value$/) do
-  expect(page).to current_path('/ImHungry/SearchPageView.jsp/')
+  expect(page).to current_path('/ImHungry/SearchPageController/')
 end
 
 When(/^I hover over the text box$/) do
@@ -295,5 +291,24 @@ end
 
 When(/^I click on the "([^"]*)" button$/) do |arg1|
   click_button(arg1)
+end
+
+
+# Some more
+
+Then(/^I am on the "([^"]*)" for "([^"]*)"$/) do |arg1, arg2|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see "([^"]*)" on the page$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given(/^I am redirected to the "([^"]*)" page$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should remain on the "([^"]*)" page$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
 end
 

@@ -4,13 +4,12 @@ Feature:
 
 Background:
 
-	Given I am on the "ResultsPageView.jsp" page
-	And I select restaurant, "R"
-	And I am redirected to the "RestaurantPageView.jsp" page
+	Given I searched for "Chinese"
+	And I clicked the link for "Northern Cafe"
 
 Scenario: check background color
 
-	Then I should see background color "white_smoke"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: check title text size
 	

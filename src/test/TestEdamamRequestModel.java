@@ -2,22 +2,35 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import models.EdamamRequestModel;
 import models.ResponseCodeModel;
 
-public class TestEdamamRequestModel {
+public class TestEdamamRequestModel extends Mockito{
 	
 	private static EdamamRequestModel cached;
+	
+	@Mock
+	private EdamamRequestModel ed;
+	
+	@Before
+    public void setUpMock() throws Exception {
+        MockitoAnnotations.initMocks(this);
+    }
 	
 	@BeforeClass
 	public static void setUp() {
 		cached = new EdamamRequestModel();
-		assertTrue(cached.checkParameters("chicken", 5));
+		assertTrue(cached.checkParameters("coffee", 5));
 		assertEquals(ResponseCodeModel.OK, cached.completeTask());
 	}
 	

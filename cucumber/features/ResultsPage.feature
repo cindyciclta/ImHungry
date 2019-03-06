@@ -4,11 +4,11 @@ Feature:
 
 Background:
 
-	Given I searched for item "F" with "X" results and was redirected to the Results page
+	Given I searched for item "Indian" with "10" results and was redirected to the Results page
 
 Scenario: check background color
 
-	Then I should see background color "white_smoke"
+	Then I should see background color "rgba(245, 245, 245, 1)"
 	
 Scenario: check title text size
 	
@@ -24,7 +24,7 @@ Scenario: RTPF1
 
 Scenario: RTPF2
 
-	Then I should see the title "Results for F1"
+	Then I should see the title "Results for Indian"
 
 Scenario: RTPF3.1
 
@@ -32,7 +32,7 @@ Scenario: RTPF3.1
 
 Scenario: RTPF4.1
 
-	Then I should see a "Manage List" button
+	Then I should see a "Manage Lists" button
 
 Scenario: RTPF3.2
 
@@ -41,14 +41,14 @@ Scenario: RTPF3.2
 
 Scenario: RTPF4.2
 
-	When I click the "Manage List" button with "Favorite" selected
-	Then I should be on the "Manage List" page
-	And I should be viewing the "Favorite" list
+	When I click the "Manage Lists" button with "Favorites" selected
+	Then I should be on the "/ImHungry/RedirectionController?action=managelist&index=16&list=favorites" page
+	And I should be viewing the "Favorites" list
 
 Scenario: RTPF4a
 
-	When I click the "Manage List" button with nothing selected
-	Then I should remain on the "Results" page
+	When I click the "Manage Lists" button with nothing selected
+	Then I should remain on the "/ImHungry/RedirectionController?action=results&index=15" page
 
 Scenario: RTPF5
 
@@ -56,7 +56,7 @@ Scenario: RTPF5
 
 Scenario: RTPF5a
 
-	Then I should see "X" restaurants
+	Then I should see "10" restaurants
 
 Scenario: RTPF5b
 
@@ -64,8 +64,8 @@ Scenario: RTPF5b
 
 Scenario: RTPF5c
 
-	When I click on restaurant result, "R1"
-	Then I should be on the "Restaurant Details" page
+	When I click on restaurant result, "Manas Indian Cuisine"
+	Then I should be on the "/ImHungry/RedirectionController?action=restaurant&index=16&item=1" page
 	
 Scenario: RTPF6
 
@@ -73,7 +73,7 @@ Scenario: RTPF6
 
 Scenario: RTPF6a
 
-	Then I should see "X" recipes
+	Then I should see "10" recipes
 
 Scenario: RPF6b
 
@@ -82,7 +82,7 @@ Scenario: RPF6b
 Scenario: RTPF7a.1
 
 	When I add a result to a list
-	Then I should be on the "ResultsPageView.jsp" page
+	Then I should be on the "/ImHungry/RedirectionController?action=results&index=15" page
 	
 Scenario: RTPF6c
 
@@ -91,5 +91,5 @@ Scenario: RTPF6c
 	
 Scenario: RTPF8
 
-	When I click the "Return to Search Page" button
-	Then I should be on the "Search" page
+	When I click the "Return to Search" button
+	Then I should be on the "/ImHungry/RedirectionController?action=search&index=16" page
