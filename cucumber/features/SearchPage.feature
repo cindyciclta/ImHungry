@@ -25,11 +25,11 @@ Scenario: SPF3.1
 	
 Scenario: SPF4
 
-	Then I should see a button labeled "Feed Me"
+	Then I should see a button labeled "Feed me!"
 
 Scenario: SPF3.2
 
-	When I enter a value less than 1
+	When I enter a negative value
 	Then the text box should not accept the value
 	
 Scenario: SPF3.3
@@ -40,5 +40,5 @@ Scenario: SPF3.3
 Scenario: SPF5
 
 	When I searched for "Chinese"
-	Then I should be on the "/ImHungry/RedirectionController?action=results&index=1" page 
+	Then I should be on the "//ImHungry/RedirectionController?action=results&index=1" page 
 	
