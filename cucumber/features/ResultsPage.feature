@@ -6,33 +6,23 @@ Background:
 
 	Given I searched for item "Indian" with "10" results and was redirected to the Results page
 
-Scenario: check background color
+Scenario: check background color, title size
 
 	Then I should see background color "rgba(245, 245, 245, 1)"
-	
-Scenario: check title text size
-	
-	Then I should see a title
+	And I should see a title
 
 Scenario: check text size
 	
 	Then I should see a result in default text size
 
-Scenario: RTPF1
+Scenario: RTPF1, RTPF2
 
 	Then I should see an image
-
-Scenario: RTPF2
-
-	Then I should see the title "Results for Indian"
+	And I should see the title "Results for Indian"
 
 Scenario: RTPF3.1
 
 	Then I should see a drop down box with nothing selected
-
-Scenario: RTPF4.1
-
-	Then I should see a "Manage Lists" button
 
 Scenario: RTPF3.2
 
@@ -41,53 +31,42 @@ Scenario: RTPF3.2
 
 Scenario: RTPF4.2
 
-	When I click the "Manage Lists" button with "Favorites" selected
-	Then I should be on the "/ImHungry/RedirectionController?action=managelist&index=16&list=favorites" page
+	When I click the "Manage Lists" button with "favorites" selected
+	Then I am the "Favorites" page
 	And I should be viewing the "Favorites" list
 
 Scenario: RTPF4a
 
 	When I click the "Manage Lists" button with nothing selected
-	Then I should remain on the "/ImHungry/RedirectionController?action=results&index=15" page
+	Then I am on the "Results for Indian" page
 
-Scenario: RTPF5
+Scenario: RTPF5 a, b
 
 	Then I should see a column with title "Restaurants"
-
-Scenario: RTPF5a
-
-	Then I should see "10" restaurants
-
-Scenario: RTPF5b
-
-	Then I should see the name, address, stars, driving minutes, and price range for the restaurants
+	And I should see "10" restaurants
+	And I should see the name, address, stars, driving minutes, and price range for the restaurants
 
 Scenario: RTPF5c
 
-	When I click on restaurant result, "Manas Indian Cuisine"
-	Then I should be on the "/ImHungry/RedirectionController?action=restaurant&index=16&item=1" page
+	When I clicked the link for "House of Curry"
+	Then I am on the "/ImHungry/RedirectionController?action=restaurant&index=16&item=1" page
 	
-Scenario: RTPF6
+Scenario: RTPF6a,b
 
 	Then I should see a column with title "Recipes"
-
-Scenario: RTPF6a
-
-	Then I should see "10" recipes
-
-Scenario: RPF6b
-
-	Then I should see the name, stars, and prep time for the recipes
+	And I should see "10" recipes
+	And I should see the name, stars, and prep time for the recipes
 
 Scenario: RTPF7a.1
 
-	When I add a result to a list
-	Then I should be on the "/ImHungry/RedirectionController?action=results&index=15" page
+	When I clicked the link for "Indian Chai Hot Chocolate"
+	And I add it to the "favorites" list
+	Then I am on the "Indian Chai Hot Chocolate" page
 	
 Scenario: RTPF6c
 
-	When I click on recipe result, "R2"
-	Then I should be on the "Recipe Details" page
+	When I clicked the link for "Indian Chai Hot Chocolate"
+	Then I am on the "Indian Chai Hot Chocolate" page
 	
 Scenario: RTPF8
 

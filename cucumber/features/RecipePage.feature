@@ -4,8 +4,8 @@ Feature:
 
 Background:
 
-	Given I searched for "Chinese"
-	And I clicked the link for "Fluffy Pancakes"
+	Given I searched for "Indian"
+	And I clicked the link for "Indian Relish"
 
 Scenario: check for white smoke background color
 
@@ -13,7 +13,7 @@ Scenario: check for white smoke background color
 	
 Scenario: RCF1 and check title text size
 	
-	Then I should see "Fluffy Pancakes" as a title
+	Then I should see "Indian Relish" as a title
 
 Scenario: check text size
 	
@@ -26,7 +26,7 @@ Scenario: RCPF2
 Scenario: RCPF3
 	
 	Then I should see the prep and cook time of the dish
-	
+
 Scenario: RCPF4
 	
 	Then I should see the ingredients of the dish
@@ -37,7 +37,7 @@ Scenario: RCPF5
 	
 Scenario: RCPF6
 	
-	When I click the "Printable" button
+	When I click the "Printable Version" button
 	Then I should be able to print the recipe
 	
 Scenario: RCPF7

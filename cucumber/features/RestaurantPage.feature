@@ -35,13 +35,13 @@ Scenario: RSPF1b
 	
 Scenario: RSPF2
 	
-	When I click the "Printable" button
+	When I click the "Printable Version" button
 	Then I should be able to print the restaurant page
 	
 Scenario: RSPF3
 	
 	When I click the "Back to results" button
-	Then I should be on the "ResultsPageView.jsp" page
+	Then I should be on the "/ImHungry/RedirectionController?action=results&index=15" page
 	
 Scenario: RSPF4
 	

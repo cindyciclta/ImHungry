@@ -26,7 +26,8 @@ Then(/^I should see background color "([^"]*)"$/) do |arg1|
 end
 
 Then(/^I should see a title$/) do
-  pending # these are very much guesses -- fill in based on implementation
+  find('h1')
+  # these are very much guesses -- fill in based on implementation
   # expect(page).to have_title
   # expect(first('title').native.text).to exist
 end
@@ -69,7 +70,7 @@ When(/^I click the "([^"]*)" button$/) do |arg1|
 end
 
 Then(/^I should be on the "([^"]*)" page$/) do |arg1|
-  expect(page).to have_current_path("/"+arg1+"/")
+  expect(page).to have_current_path(arg1)
 end
 
 
@@ -101,7 +102,8 @@ Then(/^I should see "([^"]*)" as a title$/) do |arg1|
 end
 
 Then(/^I should see a result in default text size$/) do
-  pending # Write code here that checks that the font is default
+  pending # check font size?
+  # expect('td')[font-size].to eq(12)
 end
 
 Then(/^I should see an image$/) do
@@ -112,14 +114,17 @@ end
 Then(/^I should see the prep and cook time of the dish$/) do
   expect(page).to have_content('Prep Time')
   expect(page).to have_content('Cook Time')
+  pending # make specific to the prep and cook time thank you
 end
 
 Then(/^I should see the ingredients of the dish$/) do
   expect(page).to have_content('Ingredients')
+  pending # check first ingredient
 end
 
 Then(/^I should see instructions for the dish$/) do
   expect(page).to have_content('Instructions')
+  pending # check first instruction
 end
 
 Then(/^I should be able to print the recipe$/) do
@@ -170,34 +175,36 @@ end
 # Results Page
 
 Then(/^I should see the title "([^"]*)"$/) do |arg1|
-  expect(page).to have_title(arg1)
+  expect(page).to have_css('h1', text: arg1)
 end
 
 Then(/^I should see a drop down box with nothing selected$/) do
-  expect(page).to have_selector('dropDownList', text: '')
+  expect(page).to have_selector('.form-control', text: '')
 end
 
 Then(/^I should see a "([^"]*)" button$/) do |arg1|
-  expect(page).to have_button(arg1)
+  # expect(page).to have_button(arg1)
+  find(arg1)
 end
 
 When(/^I click the drop down box$/) do
-  click_on 'dropDownList'
+  find('.form-control').click
 end
 
 Then(/^I should be able to select one of the predefined lists$/) do
-  expect(page).to have_field("Manage favorites")
-  expect(page).to have_field("Manage do not show")
-  expect(page).to have_field("Manage to explore")
+  expect(page).to have_field("Favorites")
+  expect(page).to have_field("Do Not Show")
+  expect(page).to have_field("To Explore")
 end
 
 When(/^I click the "([^"]*)" button with "([^"]*)" selected$/) do |arg1, arg2|
+  find('.form-control').click
   select arg2
   click_on arg1
 end
 
 Then(/^I should be viewing the "([^"]*)" list$/) do |arg1|
-  expect(page).to have_path('ImHungry/ManageListView.jsp/')
+  expect(page).to have_css('h1', text: arg1)
 end
 
 When(/^I click the "([^"]*)" button with nothing selected$/) do |arg1|
@@ -214,7 +221,7 @@ Then(/^I should see "([^"]*)" restaurants$/) do |arg1|
 end
 
 Then(/^I should see the name, address, stars, driving minutes, and price range for the restaurants$/) do
-  expect(page).to have_content('Name')
+  # expect(page).to have_content('Name')
   expect(page).to have_content('address')
   expect(page).to have_content('stars')
   expect(page).to have_content('driving time')
@@ -231,7 +238,8 @@ Then(/^I should see "([^"]*)" recipes$/) do |arg1|
 end
 
 Then(/^I should see the name, stars, and prep time for the recipes$/) do
-  expect(page).to have_content('Name')
+  pending # check for the actual names and such
+  #expect(page).to have_content('Name')
   expect(page).to have_content('stars')
   expect(page).to have_content('prep time')
 end
@@ -266,7 +274,6 @@ end
 
 Then(/^I should see a button labeled "([^"]*)"$/) do |arg1|
   expect(page).to have_content(arg1)
-  # expect(page).to have_button
 end
 
 When(/^I enter a negative value$/) do
@@ -275,15 +282,16 @@ When(/^I enter a negative value$/) do
 end
 
 Then(/^the text box should not accept the value$/) do
-  expect(page).to current_path('/ImHungry/SearchPageController', wait: 10)
+  expect(page).to have_current_path('/ImHungry/SearchPageController', wait: 10)
 end
 
 When(/^I hover over the text box$/) do
-  find('.numResults').hover
+  find(:css, '#numResults').hover
 end
 
 Then(/^text should appear saying “Number of items to show in results”$/) do
-  page.find('div', text: 'Number of items to show in results')
+  page.find('#limitInput')[ 'Number of items to show in results']
+  # expect(page).to have_content('Number of items to show in results')
 end
 
 When(/^I enter "([^"]*)" in the "([^"]*)" text box$/) do |arg1, arg2|
@@ -297,19 +305,20 @@ end
 
 # Some more
 
-Then(/^I am on the "([^"]*)" for "([^"]*)"$/) do |arg1, arg2|
-  expect(page).to have_current_path('ImHungry/RedirectionController/?action='+arg1+'&index=16')
+Then(/^I am on the "([^"]*)" page$/) do |arg1|
+  expect(page).to have_css('h1', text: arg1)
 end
 
 Then(/^I should see "([^"]*)" on the page$/) do |arg1|
+  expect(page).to have_content(arg1)
+end
+
+Then(/^I am the "([^"]*)" page$/) do |arg1|
+  expect(page).to have_css('h1', text: arg1)
+end
+
+When(/^I add it to the "([^"]*)" list$/) do |arg1|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given(/^I am redirected to the "([^"]*)" page$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Then(/^I should remain on the "([^"]*)" page$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
 

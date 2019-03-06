@@ -40,5 +40,5 @@ Scenario: SPF3.3
 Scenario: SPF5
 
 	When I searched for "Chinese"
-	Then I should be on the "//ImHungry/RedirectionController?action=results&index=1" page 
+	Then I should be on the "/ImHungry/SearchPageController?action=search&term=Chinese&limit=5" page 
 	
