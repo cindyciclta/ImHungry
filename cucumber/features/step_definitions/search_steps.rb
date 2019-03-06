@@ -14,11 +14,15 @@ Given(/^I clicked the link for "([^"]*)"$/) do |arg1|
 end
 
 Given(/^I selected "([^"]*)" from the drop down$/) do |arg1|
-  select arg1, :from => "listDropDown"
+  select arg1, :from => "managelistselect"
 end
 
 Given(/^I clicked the "([^"]*)" button$/) do |arg1|
-  click_button(arg1)
+  click_on(arg1)
+end
+
+Given(/^I clicks the "([^"]*)" button$/) do |arg1|
+  page.find('a.btn.btn-secondary', text: arg1).click
 end
 
 Then(/^I should see background color "([^"]*)"$/) do |arg1|
@@ -62,11 +66,11 @@ When(/^I move "([^"]*)" to "([^"]*)"$/) do |arg1, arg2|
 end
 
 When(/^I select "([^"]*)" from the drop down$/) do |arg1|
-  select arg1, :from => "listDropDown"
+  select arg1, :from => "managelistselect"
 end
 
 When(/^I click the "([^"]*)" button$/) do |arg1|
-  click_button(arg1)
+  click_on(arg1)
 end
 
 Then(/^I should be on the "([^"]*)" page$/) do |arg1|
@@ -127,12 +131,13 @@ Then(/^I should see instructions for the dish$/) do
   pending # check first instruction
 end
 
-Then(/^I should be able to print the recipe$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^I should be able to print$/) do
+  page.find('a.btn.btn-secondary', text: 'Printable Version')
+  # use above with .click to click, but capybara can not navigate the popup
 end
 
 Then(/^I should see a drop down box for lists$/) do
-  expect(page).to have_selector('listDropDown')
+  expect(page).to have_selector('managelistselect')
 end
 
 Given(/^I select restaurant, "([^"]*)"$/) do |arg1|
@@ -164,10 +169,6 @@ end
 
 Then(/^I should be on the restaurant's home page$/) do
   expect(page).not_to have_path('/DetailedRestaurantView.jsp/')
-end
-
-Then(/^I should be able to print the restaurant page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
 end
 
 
