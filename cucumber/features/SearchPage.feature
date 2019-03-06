@@ -39,7 +39,6 @@ Scenario: SPF3.3
 
 Scenario: SPF5
 
-	When I enter "Chinese" in the "searchBar" text box
-	And I click on the "emojiButton" button
-	Then I should be on the "Results" page 
+	When I searched for "Chinese"
+	Then I should be on the "/ImHungry/RedirectionController?action=results&index=15" page 
 	
