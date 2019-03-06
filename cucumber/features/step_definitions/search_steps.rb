@@ -8,7 +8,9 @@ Given(/^I searched for "([^"]*)"$/) do |arg1|
 end
 
 Given(/^I clicked the link for "([^"]*)"$/) do |arg1|
-  click_link(arg1)
+  #page.find(:text=> arg1).click
+  #click_link(arg1)
+  page.find('td', :text=> arg1, match: :first).click
 end
 
 Given(/^I selected "([^"]*)" from the drop down$/) do |arg1|
@@ -144,7 +146,7 @@ Then(/^I should see the name, address, phone number, and link for the restaurant
 end
 
 When(/^I click on the address$/) do
-  click "Address:"
+  click_on "Address:"
 end
 
 Then(/^I should be on a Google Maps directions page$/) do
@@ -152,7 +154,7 @@ Then(/^I should be on a Google Maps directions page$/) do
 end
 
 When(/^I click on the website link$/) do
-  click 'Website link'
+  click_on 'Website link'
 end
 
 Then(/^I should be on the restaurant's home page$/) do
@@ -180,7 +182,7 @@ Then(/^I should see a "([^"]*)" button$/) do |arg1|
 end
 
 When(/^I click the drop down box$/) do
-  click 'dropDownList'
+  click_on 'dropDownList'
 end
 
 Then(/^I should be able to select one of the predefined lists$/) do
@@ -191,7 +193,7 @@ end
 
 When(/^I click the "([^"]*)" button with "([^"]*)" selected$/) do |arg1, arg2|
   select arg2
-  click arg1
+  click_on arg1
 end
 
 Then(/^I should be viewing the "([^"]*)" list$/) do |arg1|
@@ -199,7 +201,7 @@ Then(/^I should be viewing the "([^"]*)" list$/) do |arg1|
 end
 
 When(/^I click the "([^"]*)" button with nothing selected$/) do |arg1|
-  click arg1
+  click_on arg1
 end
 
 Then(/^I should see a column with title "([^"]*)"$/) do |arg1|
@@ -220,7 +222,7 @@ Then(/^I should see the name, address, stars, driving minutes, and price range f
 end
 
 When(/^I click on restaurant result, "([^"]*)"$/) do |arg1|
-  click arg1
+  click_on arg1
 end
 
 Then(/^I should see "([^"]*)" recipes$/) do |arg1|
@@ -239,7 +241,7 @@ When(/^I add a result to a list$/) do
 end
 
 When(/^I click on recipe result, "([^"]*)"$/) do |arg1|
-  click arg1
+  click_on arg1
 end
 
 
@@ -256,11 +258,11 @@ Then(/^I should see prompt text enter food$/) do
 end
 
 Then(/^I should see a text box to enter number of results$/) do
-  page.should have_field('numResults')
+  page.should have_field('limitInput')
 end
 
 Then(/^the default value should be (\d+)$/) do |arg1|
-  page.should have_field('numResults', with: arg1)
+  page.should have_field('limitInput', with: arg1)
 end
 
 Then(/^I should see a button labeled "([^"]*)"$/) do |arg1|
@@ -269,16 +271,16 @@ Then(/^I should see a button labeled "([^"]*)"$/) do |arg1|
 end
 
 When(/^I enter a value less than (\d+)$/) do |arg1|
-  fill_in 'numResults', with: '-1'
+  fill_in 'limitInput', with: '-1'
   click_button 'FeedMe'
 end
 
 Then(/^the text box should not accept the value$/) do
-  expect(page).to current_path('/ImHungry/SearchPageController/')
+  expect(page).to current_path('/ImHungry/SearchPageController', wait: 10)
 end
 
 When(/^I hover over the text box$/) do
-  find('.numResults').hover
+  find('.limitInput').hover
 end
 
 Then(/^text should appear saying “Number of items to show in results”$/) do
