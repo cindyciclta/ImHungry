@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="models.ResponseModel"%>   
+<%@page import="models.CollageGenerationModel"%>   
+<%@page import="models.GoogleImageRequestModel"%> 
 <%@page import="java.util.Map"%>  
+<%@page import="java.util.ArrayList"%> 
+<%@page import="org.json.JSONArray"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,6 +67,9 @@
 	ResponseModel rm = ((ResponseModel)request.getAttribute("response"));
 	String title = rm.getSearchTerm();
 	int index = (int)request.getAttribute("index");
+	
+	JSONArray jsArray = (JSONArray) request.getAttribute("jsonarray");
+	int length = (int) request.getAttribute("length");
 	%>
 	
 	<script>
@@ -76,9 +83,16 @@
 		}
 		$( document ).ready(function() {
 	        console.log( "ready!" );
+	        var js = <%= jsArray %>;
+	      	var size = <%= length %>;
 	        for (var i = 0; i < 10; i = i+1) {
-	            showImage()
-	        }
+	        	if (i < size) {
+		        	var string = JSON.stringify(js[i]);
+		        	var refactorstring = string.substr(1).slice(0,-1);
+		        	showImage(refactorstring);
+	        	}
+			}
+
 	        $('img').each(function() {
 	            var deg = randomIntFromInterval(-45, 45);
 	            console.log('rotated', deg)
@@ -103,7 +117,7 @@
 	        return Math.floor(Math.random()*(max-min+1)+min);
 	    }
 	
-	    function showImage() {
+	    function showImage(url) {
 	        // myImage : ID of image on which to place new image
 	
 	        var destination = document.getElementById('collage-wrapper');
@@ -130,7 +144,9 @@
 	        t += offY;
 	
 	        var newImage = document.createElement("img");
-	        newImage.setAttribute('src', 'https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg');
+	        //newImage.setAttribute('src', 'https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg');
+	        
+	        newImage.setAttribute('src', url);
 	        newImage.setAttribute('class', 'overlays');
 	        newImage.style.left = l + "px";
 	        newImage.style.top = t + "px";
@@ -152,6 +168,10 @@
             <div class="col h-100">
                 <div id="collage-wrapper" class="container my-6 mr-5 pr-5 pb-5">
                     <!-- TODO Collage here -->
+                    <%-- <% 
+                    for (int i = 0; i < 10; i++) { %>
+                    	<img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
+                    <% } %> --%>
                     <!-- <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
                     <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
                     <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
