@@ -61,6 +61,7 @@ public class ResultsPageController extends HttpServlet {
 
 					request.setAttribute("response", rm);
 					request.setAttribute("index", indexInt);
+					request.setAttribute("term", term);
 					request.setAttribute("length", urllist.size());
 					request.setAttribute("jsonarray", jsArray);
 					requestDispatcher.forward(request, response);

@@ -1,7 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+
+import models.CollageGenerationModel;
+import models.GoogleImageRequestModel;
 import models.ResponseModel;
 
 public class RedirectionController extends HttpServlet {
@@ -28,7 +32,7 @@ public class RedirectionController extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		String index = request.getParameter("index");
-		
+		String term = request.getParameter("term");
 		if(action == null || action.isEmpty() || index == null || index.isEmpty()) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 			requestDispatcher.forward(request, response);
@@ -75,6 +79,17 @@ public class RedirectionController extends HttpServlet {
 			request.setAttribute("response", rm);
 			int indexInt = Integer.parseInt(index);
 			request.setAttribute("index", indexInt);
+			
+			//Call the request to pull data to go back to the results page
+			CollageGenerationModel collagemodel = new CollageGenerationModel();
+			GoogleImageRequestModel googleimagemodel = new GoogleImageRequestModel(collagemodel);
+			googleimagemodel.completeTasks(term);
+			ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
+			JSONArray jsArray = new JSONArray (urllist);
+			String jsonToString = jsArray.toString();
+			request.setAttribute("length", urllist.size());
+			request.setAttribute("jsonarray", jsArray);
+			
 			requestDispatcher.forward(request, response);
 			
 		}else if(action.equals("erase")) {

@@ -208,9 +208,10 @@
 										if(resultsFields.get("modifier").equals("donotshow")){
 											continue;
 										}
+									String term = (String) request.getAttribute("term");
 									%>
                                 
-                                    <tr onclick=<%="redirectToRestaurant(\"" + "/ImHungry/RedirectionController?action=restaurant&index=" + index + "&item=" + i + "\")"%>>
+                                    <tr onclick=<%="redirectToRestaurant(\"" + "/ImHungry/RedirectionController?action=restaurant&term="+term +"&index=" + index + "&item=" + i + "\")"%>>
                                         <td class="col">
                                             <table class="table">
                                                 <tbody>
@@ -250,8 +251,9 @@
 									if(resultsFields.get("modifier").equals("donotshow")){
 										continue;
 									}
+								String term = (String) request.getAttribute("term");
 								%>
-                                    <tr onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=recipe&index=" + index + "&item=" + i + "\")"%>>
+                                    <tr onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=recipe&term="+term +"&index=" + index + "&item=" + i + "\")"%>>
                               
                                         <td class="col">
                                             <table class="table">
@@ -294,11 +296,12 @@
                                     </select>
                                 </div>
                             </li>
+                            <% String term = (String) request.getAttribute("term"); %>
                             <li class="nav-item">
 		                       <input class="btn btn-secondary" onclick=<%="redirectToManageList(" + index + ")"%> type="button" value="Manage Lists">
 		                   </li>
                             <li class="nav-item">
-                                <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&index=" + index + "\")"%>>Return to Search</a>
+                                <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&term="+ term +"&index=" + index + "\")"%>>Return to Search</a>
                             </li>
                         </ul>
                     </div>
