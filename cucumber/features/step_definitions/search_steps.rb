@@ -77,9 +77,7 @@ Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected 
   visit 'http://localhost:8080/ImHungry/SearchPageController'
   fill_in('termInput', with: arg1)
   fill_in('limitInput', with: arg2)
-  click(class:'img-container')
-  click('emojiImage')
-  click('emojiButton')
+  page.find('div#emojiButton.img-container').click
   # add check that we are actually on results page?
 end
 
