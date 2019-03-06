@@ -4,7 +4,7 @@
 Given(/^I searched for "([^"]*)"$/) do |arg1|
   visit "http://localhost:8080/ImHungry/SearchPageController"
   fill_in 'termInput', :with => arg1
-  click_button('emojiButton')
+  page.find('div#emojiButton.img-container').click
 end
 
 Given(/^I clicked the link for "([^"]*)"$/) do |arg1|
@@ -77,7 +77,9 @@ Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected 
   visit 'http://localhost:8080/ImHungry/SearchPageController'
   fill_in('termInput', with: arg1)
   fill_in('limitInput', with: arg2)
-  click_button('emojiButton')
+  click(class:'img-container')
+  click('emojiImage')
+  click('emojiButton')
   # add check that we are actually on results page?
 end
 
