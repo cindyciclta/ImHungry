@@ -29,15 +29,18 @@ public class RedirectionController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//This servlet handles redirection from one page to another. 
 		
 		String action = request.getParameter("action");
 		String index = request.getParameter("index");
 		String term = request.getParameter("term");
+		
+		request.setAttribute("term", term);
 		if(action == null || action.isEmpty() || index == null || index.isEmpty()) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 			requestDispatcher.forward(request, response);
 			
-		}else if(action.equals("managelist")) {
+		}else if(action.equals("managelist")) { //If it is redirecting to the manage list page, set the attributes accordingly
 			String list = request.getParameter("list");
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ManageListView.jsp");
 			request.removeAttribute("title");
@@ -52,7 +55,7 @@ public class RedirectionController extends HttpServlet {
 			request.setAttribute("index", Integer.parseInt(index));
 			requestDispatcher.forward(request, response);
 			
-		}else if(action.equals("recipe")) {
+		}else if(action.equals("recipe")) { //If it is redirecting to the recipe page, set the attributes accordingly
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("DetailedRecipeView.jsp");
 			int indexInt = Integer.parseInt(index);
 			request.setAttribute("index", indexInt);
@@ -62,7 +65,7 @@ public class RedirectionController extends HttpServlet {
 			request.setAttribute("response", responses.get(indexInt).getFormattedDetailedRecipeAt(itemInt));
 			requestDispatcher.forward(request, response);
 			
-		}else if(action.equals("restaurant")) {
+		}else if(action.equals("restaurant")) { //If it is redirecting to the restaurant page,  set the attributes accordingly
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("DetailedRestaurantView.jsp");
 			int indexInt = Integer.parseInt(index);
 			String item = request.getParameter("item");
@@ -72,7 +75,7 @@ public class RedirectionController extends HttpServlet {
 			request.setAttribute("response", responses.get(indexInt).getFormattedDetailedRestaurantAt(itemInt));
 			requestDispatcher.forward(request, response);
 			
-		}else if(action.equals("results")) {
+		}else if(action.equals("results")) { //If it is redirecting to the results page,  set the attributes accordingly
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageView.jsp");
 			ResponseModel rm = responses.get(Integer.parseInt(index));
 			rm.sort();
@@ -92,11 +95,11 @@ public class RedirectionController extends HttpServlet {
 			
 			requestDispatcher.forward(request, response);
 			
-		}else if(action.equals("erase")) {
+		}else if(action.equals("erase")) { //If the erase button is clicked, update database
 			int indexInt = Integer.parseInt(index);
 			RedirectionController.removeResponse(indexInt);
 			
-		}else if(action.equals("addtolist") || action.equals("movetolist")) {
+		}else if(action.equals("addtolist") || action.equals("movetolist")) { //If the addtolist or movetolist button is clicked, update database
 			
 			int indexInt = Integer.parseInt(index);
 			String item = request.getParameter("item");
@@ -106,7 +109,7 @@ public class RedirectionController extends HttpServlet {
 			String type = request.getParameter("type");
 			
 			responses.get(indexInt).addToList(itemInt, list, type, true);
-		}else if(action.equals("removefromlist")) {
+		}else if(action.equals("removefromlist")) { // If the removefromlist button is clicked, update database
 			int indexInt = Integer.parseInt(index);
 			String item = request.getParameter("item");
 			int itemInt = Integer.parseInt(item);
