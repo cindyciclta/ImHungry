@@ -27,6 +27,8 @@
         #collage-wrapper {
             height: 40vh;
             width: 50vw;
+            /* for keeping images within the box */
+            position: relative;
         }
 
         .overlays {
@@ -40,13 +42,17 @@
             background-color: inherit;
         }
 
+        img {
+            width: 40%;
+        }
 
-        /*.navbar.fixed-right {
-            position: fixed;
-            top: 0;
-            right: 0;
-            z-index: 0;
-        }*/
+        @media only screen and (max-width: 990px) {
+          /* For mobile phones: */
+          img {
+            width: 60%;
+          }
+        }
+
 
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -56,19 +62,7 @@
     <div id="outer-wrapper" class="container" style="height: 100vh">
         <div class="row my-5">
             <div class="col h-100">
-                <div id="collage-wrapper" class="container my-6 mr-5 pr-5 pb-5">
-                    <!-- TODO Collage here -->
-                    <!-- <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid"> -->
-
+                <div id="collage-wrapper" class="container w-50 my-6">
                 </div>
 
                 <div id="title-wrapper" class="container my-5">
@@ -214,15 +208,6 @@
                         <ul class="navbar-nav">
                             <form class="form-group" action="" method="post">
                                 <li class="nav-item dropdown">
-                                    <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" type="button" href="#">Action</a>
-                                        <a class="dropdown-item" type="button" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" type="button" href="#">Something else here</a>
-                                    </div> -->
                                     <div class="form-group">
                                         <select required class="form-control">
                                             <option value=""><!-- None --></option>
@@ -250,10 +235,7 @@
 
     <script type="text/javascript">
         $( document ).ready(function() {
-            console.log( "ready!" );
-            for (var i = 0; i < 10; i = i+1) {
-                showImage()
-            }
+            showImages();
             $('img').each(function() {
                 var deg = randomIntFromInterval(-45, 45);
                 console.log('rotated', deg)
@@ -267,8 +249,6 @@
                     '-o-transform': rotate,
                     '-ms-transform': rotate,
                     'transform': rotate,
-                    //'width': width+'%'
-                    'width': 15+'vw'
                 });
             });
         });
@@ -277,40 +257,19 @@
         function randomIntFromInterval(min,max) {
             return Math.floor(Math.random()*(max-min+1)+min);
         }
-
-        function showImage() {
-            // myImage : ID of image on which to place new image
-
-            var destination = document.getElementById('collage-wrapper');
-            
-            console.log('here', $('#collage-wrapper').width());
-            
-            margin = 20;
-            
-            l = destination.offsetLeft + $('#collage-wrapper').width()/4;
-            t = destination.offsetTop + $('#collage-wrapper').height()/4;
-            //w = destination.width;
-            //h = destination.height;
-            w = $('#collage-wrapper').width()/2
-            h = $('#collage-wrapper').height()/2
-            
-            // Location inside the image
-            offX = parseInt(Math.random() * w);
-            offY = parseInt(Math.random() * h);
-            
-            if(offX > margin) offX -= margin;
-            if(offY > margin) offY -= margin;
-
-            l += offX;
-            t += offY;
-
-            var newImage = document.createElement("img");
-            newImage.setAttribute('src', 'https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg');
-            newImage.setAttribute('class', 'overlays');
-            newImage.style.left = l + "px";
-            newImage.style.top = t + "px";
-            console.log(document.body.appendChild(newImage));
-        }    
+        function showImages() {
+            for (var i = 0; i < 10; i++) {
+                Left = Math.floor(Math.random() * 80) + 10;
+                Top = Math.floor(Math.random() * 20) + 5;
+                var url = "https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg";
+                $("#collage-wrapper").append("<img src=" + url + " class=\"recpie-img\" + id=" + i + ">");
+                $("#" + i).css({
+                    "position": "absolute",
+                    "top": Top + "%",
+                    "left": Left + "%",
+                });
+            };
+        }
     </script>
     
 
