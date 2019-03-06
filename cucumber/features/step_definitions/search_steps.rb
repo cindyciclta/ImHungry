@@ -110,8 +110,8 @@ Then(/^I should see an image$/) do
 end
 
 Then(/^I should see the prep and cook time of the dish$/) do
-  expect(page).to have_content('Prep Time of Recipe')
-  expect(page).to have_content('Cook Time of Recipe')
+  expect(page).to have_content('Prep Time')
+  expect(page).to have_content('Cook Time')
 end
 
 Then(/^I should see the ingredients of the dish$/) do
