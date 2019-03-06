@@ -253,8 +253,7 @@ Given(/^I am on the search page$/) do
 end
 
 Then(/^I should see prompt text enter food$/) do
-  page.should have_field("termInput", :with=> "Enter food")
-  # page.should have_field("termInput", :value=> "Enter food")
+  page.should have_field("termInput")
 end
 
 Then(/^I should see a text box to enter number of results$/) do
@@ -270,9 +269,9 @@ Then(/^I should see a button labeled "([^"]*)"$/) do |arg1|
   # expect(page).to have_button
 end
 
-When(/^I enter a value less than (\d+)$/) do |arg1|
+When(/^I enter a negative value$/) do
   fill_in 'limitInput', with: '-1'
-  click_button 'FeedMe'
+  page.find('div#emojiButton.img-container').click
 end
 
 Then(/^the text box should not accept the value$/) do
@@ -280,7 +279,7 @@ Then(/^the text box should not accept the value$/) do
 end
 
 When(/^I hover over the text box$/) do
-  find('.limitInput').hover
+  find('.numResults').hover
 end
 
 Then(/^text should appear saying “Number of items to show in results”$/) do
@@ -299,7 +298,7 @@ end
 # Some more
 
 Then(/^I am on the "([^"]*)" for "([^"]*)"$/) do |arg1, arg2|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).to have_current_path('ImHungry/RedirectionController/?action='+arg1+'&index=16')
 end
 
 Then(/^I should see "([^"]*)" on the page$/) do |arg1|
