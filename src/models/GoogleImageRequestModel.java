@@ -21,7 +21,7 @@ public class GoogleImageRequestModel {
 		this.results = collageModel;
 	}
 	
-	public ResponseCodeModel completeTasks(String imagesearch) {	
+	public ResponseCodeModel APIImageSearch(String imagesearch) {	
 		try {
 
 			//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
