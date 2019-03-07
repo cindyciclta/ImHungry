@@ -101,7 +101,7 @@ Then(/^I should see "([^"]*)" as a title$/) do |arg1|
 end
 
 Then(/^I should see a result in default text size$/) do
-  page.find('div', wait: 10)[0]
+  page.find('div', wait: 10, match: :first)
 end
 
 Then(/^I should see an image$/) do
@@ -205,10 +205,11 @@ Then(/^I should be viewing the "([^"]*)" list$/) do |arg1|
 end
 
 When(/^I click the "([^"]*)" button with nothing selected$/) do |arg1|
-  click_on arg1
+  page.find('a.btn.btn-secondary', text: arg1).click
 end
 
 Then(/^I should see a column with title "([^"]*)"$/) do |arg1|
+  page.evaluate_script("window.location.reload()")
   expect(page).to have_content(arg1, wait: 10)
 end
 
