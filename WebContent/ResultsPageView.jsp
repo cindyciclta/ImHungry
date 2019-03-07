@@ -194,7 +194,8 @@
                 </div>
 
                 <div id="title-wrapper" class="container my-5">
-                    <h1 class="mx-auto display-4">Results for <%=title%></h1>
+                	<% String trimmed = term.replaceAll("\\_", " "); %>
+                    <h1 class="mx-auto display-4">Results for <%=trimmed%></h1>
                 </div>
 
                 <div id="results-wrapper" class="container">
@@ -311,7 +312,7 @@
 		                   </li>
                             <li class="nav-item">
                             	
-                                <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&term="+ ecodedValue +"&index=" + index + "\")"%>>Return to Search</a>
+                                <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&term="+ term +"&index=" + index + "\")"%>>Return to Search</a>
                             </li>
                         </ul>
                     </div>
