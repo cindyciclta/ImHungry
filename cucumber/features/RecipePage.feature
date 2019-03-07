@@ -7,21 +7,12 @@ Background:
 	And I clicked the link for "Indian Relish"
 	#Given I begin at Indian Relish 
 
-Scenario: check for white smoke background color
+Scenario: check for background color, text size, title text size, RCPF1, RCPF2
 
 	Then I should see background color "rgba(245, 245, 245, 1)"
-	
-Scenario: RCF1 and check title text size
-	
-	Then I should see "Indian Relish" as a title
-
-Scenario: check text size
-	
-	Then I should see a result in default text size
-	
-Scenario: RCPF2
-	
-	Then I should see an image
+	And I should see "Indian Relish" as a title
+	And I should see a result in default text size
+	And I should see an image
 	
 Scenario: RCPF3, RCPF4, RCPF5
 	

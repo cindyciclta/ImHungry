@@ -5,23 +5,13 @@ Feature:
 Background:
 	Given I searched for "chinese"
 	And I clicked the link for "Northern Cafe"
-	#Given I begin at Northern Cafe
 
-Scenario: check background color
+Scenario: check background color, text size, title text size, RSPF1
 
 	Then I should see background color "rgba(245, 245, 245, 1)"
-	
-Scenario: check title text size
-	
-	Then I should see "Northern Cafe" as a title
-
-Scenario: check text size
-	
-	Then I should see a results in default text size
-	
-Scenario: RSPF1
-	
-	Then I should see the name, address, phone number, and link for the restaurant
+	And I should see "Northern Cafe" as a title
+	And I should see a result in default text size
+	And I should see the name, address, phone number, and link for the restaurant
 	
 Scenario: RSPF1a
 
@@ -34,7 +24,7 @@ Scenario: RSPF1b
 	Then I should be on the restaurant's home page
 	
 Scenario: RSPF2
-	
+
 	Then I should be able to print
 	
 Scenario: RSPF3
