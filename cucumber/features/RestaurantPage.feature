@@ -3,9 +3,9 @@ Feature:
 	Restaurant Page
 
 Background:
-
-	Given I searched for "Chinese"
+	Given I searched for "chinese"
 	And I clicked the link for "Northern Cafe"
+	#Given I begin at Northern Cafe
 
 Scenario: check background color
 
@@ -13,7 +13,7 @@ Scenario: check background color
 	
 Scenario: check title text size
 	
-	Then I should see "R" as a title
+	Then I should see "Northern Cafe" as a title
 
 Scenario: check text size
 	
@@ -26,7 +26,7 @@ Scenario: RSPF1
 Scenario: RSPF1a
 
 	When I click on the address
-	Then I should be on a Google Maps directions page
+	Then I should be on Google Maps directions page for Northern Cafe
 	
 Scenario: RSPF1b
 
@@ -39,8 +39,8 @@ Scenario: RSPF2
 	
 Scenario: RSPF3
 	
-	When I clicks the "Back to results" button
-	Then I am on the "Results for Chinese" page
+	When I clicks the "Back to Results" button
+	Then I am on the "Results for chinese" page
 	
 Scenario: RSPF4
 	

@@ -31,7 +31,7 @@ Scenario: RTPF3.2
 
 Scenario: RTPF4.2
 
-	When I click the "Manage Lists" button with "favorites" selected
+	When I click the "Manage Lists" button with "Favorites" selected
 	Then I am the "Favorites" page
 	And I should be viewing the "Favorites" list
 
@@ -49,7 +49,7 @@ Scenario: RTPF5 a, b
 Scenario: RTPF5c
 
 	When I clicked the link for "House of Curry"
-	Then I am on the "/ImHungry/RedirectionController?action=restaurant&index=16&item=1" page
+	Then I am on the "House of Curry" page
 	
 Scenario: RTPF6a,b
 
@@ -70,5 +70,5 @@ Scenario: RTPF6c
 	
 Scenario: RTPF8
 
-	When I click the "Return to Search" button
-	Then I should be on the "/ImHungry/RedirectionController?action=search&index=16" page
+	When I clicks the "Return to Search" button
+	Then I am on the "I'm Hungry" page
