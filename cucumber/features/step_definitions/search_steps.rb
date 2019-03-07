@@ -45,7 +45,7 @@ Then(/^I am on the "([^"]*)" page for "([^"]*)"$/) do |arg1, arg2|
 end
 
 When(/^I remove "([^"]*)"$/) do |arg1|
-  pending # Write code here that selects the remove option on arg1
+  page.find('i.fas.fa-sign-out-alt', match: :first).click
 end
 
 When(/^I refresh the page$/) do
@@ -81,7 +81,7 @@ Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected 
   fill_in('termInput', with: arg1)
   fill_in('limitInput', with: arg2)
   page.find('div#emojiButton.img-container').click
-  # expect(page).to have_css('h1', text: arg1)
+  expect(page).to have_css('h1', text: arg1, wait: 50)
 end
 
 Then(/^I should see "([^"]*)" as the first result for "([^"]*)"$/) do |arg1, arg2|
@@ -132,10 +132,6 @@ end
 
 Given(/^I select restaurant, "([^"]*)"$/) do |arg1|
   click arg1
-end
-
-Then(/^I should see a results in default text size$/) do
-  pending # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^I should see the name, address, phone number, and link for the restaurant$/) do
@@ -201,7 +197,8 @@ Then(/^I should be viewing the "([^"]*)" list$/) do |arg1|
 end
 
 When(/^I click the "([^"]*)" button with nothing selected$/) do |arg1|
-  page.find('a.btn.btn-secondary', text: arg1).click
+  #page.find('a.btn.btn-secondary', text: arg1).click
+  click_on arg1
 end
 
 Then(/^I should see a column with title "([^"]*)"$/) do |arg1|
@@ -210,16 +207,15 @@ Then(/^I should see a column with title "([^"]*)"$/) do |arg1|
 end
 
 Then(/^I should see "([^"]*)" restaurants$/) do |arg1|
-  pending # Write code here based on html ids
-  # expect(page).to have_field('restaurantResults', count: arg1)
+  expect(page).to have_content('driving', count: arg1)
 end
 
 Then(/^I should see the name, address, stars, driving minutes, and price range for the restaurants$/) do
   # expect(page).to have_content('Name')
-  expect(page).to have_content('address')
-  expect(page).to have_content('stars')
-  expect(page).to have_content('driving time')
-  expect(page).to have_content('price range')
+  # expect(page).to have_content('address')
+  expect(page).to have_content('★')
+  expect(page).to have_content('minutes of driving')
+  expect(page).to have_content(' to ')
 end
 
 When(/^I click on restaurant result, "([^"]*)"$/) do |arg1|
@@ -227,13 +223,14 @@ When(/^I click on restaurant result, "([^"]*)"$/) do |arg1|
 end
 
 Then(/^I should see "([^"]*)" recipes$/) do |arg1|
-  pending # Write code here based on html ids
-  # expect(page).to have_field('recipeResults', count: arg1)
+  expect(page).to have_content('Prep', count: arg1)
 end
 
 Then(/^I should see the name, stars, and prep time for the recipes$/) do
-  expect(page).to have_content('stars')
-  expect(page).to have_content('prep time')
+  # expect(page).to have_content('Name')
+  expect(page).to have_content('★')
+  expect(page).to have_content('Prep:')
+  expect(page).to have_content('Cook:')
 end
 
 When(/^I add a result to a list$/) do
