@@ -18,6 +18,7 @@ Scenario: check background color, check title text size
 	And I should see a title
 	
 Scenario: RTPF7a.1, LMPF1, LMPF2, 
+	
 	Then I should see "Chinese Chicken Fried Rice II" on the page
 	When I clicked the link for "name: Chinese Chicken Fried Rice II"
 	Then I am on the "Chinese Chicken Fried Rice II" page
@@ -25,16 +26,24 @@ Scenario: RTPF7a.1, LMPF1, LMPF2,
 Scenario: LMPF3.1
 
 	When I remove "Chinese Chicken Fried Rice II"
-	And I refresh the page
-	Then I do not see "Chinese Chicken Fried Rice II"
+	Then I selected "To Explore" from the drop down
+	And I clicked the "Manage Lists" button
+	And I selected "Favorites" from the drop down
+	And I clicked the "Manage Lists" button
+	And I do not see "Chinese Chicken Fried Rice II"
 	
 Scenario: LMPF3.2, LMPF6, LMPF7
-
-	When I move "Chinese Chicken Fried Rice IIe" to "To Explore"
+	
+	When I selected "To Explore" from the drop down
+	And I move "Chinese Chicken Fried Rice II"
 	And I selected "To Explore" from the drop down
 	And I clicked the "Manage Lists" button
 	And I am on the "To Explore" page
 	And I should see "Chinese Chicken Fried Rice II" on the page
+	And I selected "Favorites" from the drop down
+	And I clicked the "Manage Lists" button
+	And I am on the "Favorites" page
+	And I do not see "Chinese Chicken Fried Rice II"
 	
 Scenario: LMPF4
 
