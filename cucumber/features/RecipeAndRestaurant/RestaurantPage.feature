@@ -22,7 +22,7 @@ Scenario: Address redirection (RSPF1a)
 Scenario: Website link redirection (RSPF1b)
 
 	When I click on the website link
-	Then I should be on the restaurant's home page
+	Then I should be on the restaurant's home page, "/biz/northern-cafe-los-angeles-6?adjust_creative=kOJ4-HptgaXNFbfpVFbrJg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=kOJ4-HptgaXNFbfpVFbrJg"
 	
 Scenario: Check for printable version (RSPF2)
 
