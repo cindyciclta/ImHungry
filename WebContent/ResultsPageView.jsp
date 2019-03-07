@@ -70,17 +70,12 @@
 	
 	JSONArray jsArray = (JSONArray) request.getAttribute("jsonarray");
 	int length = (int) request.getAttribute("length");
+	String term = (String) request.getAttribute("term");
 	%>
 	
 	<script>
-		var list = "";
-		function redirectToManageList(index){
-			var e = document.getElementById("managelistselect");
-			list = e.options[e.selectedIndex].value;
-			if(list != ""){
-				window.location.replace("/ImHungry/RedirectionController?action=managelist&index=" + index + "&list=" + list);
-			}
-		}
+		
+
 		$( document ).ready(function() {
 	        console.log( "ready!" );
 	        var js = <%= jsArray %>;
@@ -160,6 +155,22 @@
 		function redirectToRestaurant(link){
 			window.location = link;
 		}
+		
+		function redirectToResult(link) {
+			var term ="<%= term %>";
+			alert(term);
+			window.location = link+"&term=" +term;
+		}
+		function redirectManageList(index){
+			var list = "";
+			alert("ey");
+			var e = document.getElementById("managelistselect");
+			list = e.options[e.selectedIndex].value;
+			if(list != ""){
+				//window.location.replace("/ImHungry/RedirectionController?action=managelist" +"&index=" + index + "&list=" + list+ "&=term" + term);
+				redirectToResult("/ImHungry/RedirectionController?action=managelist" +"&index=" + index + "&list=" + list);
+			}
+		}
 	
 	</script>
 	
@@ -168,10 +179,7 @@
             <div class="col h-100">
                 <div id="collage-wrapper" class="container my-6 mr-5 pr-5 pb-5">
                     <!-- TODO Collage here -->
-                    <%-- <% 
-                    for (int i = 0; i < 10; i++) { %>
-                    	<img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
-                    <% } %> --%>
+
                     <!-- <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
                     <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
                     <img src="https://res.cloudinary.com/teepublic/image/private/s--fX47AfFz--/t_Preview/b_rgb:0f7b47,c_limit,f_jpg,h_630,q_90,w_630/v1465397214/production/designs/536781_1.jpg" class="img-fluid">
@@ -208,7 +216,7 @@
 										if(resultsFields.get("modifier").equals("donotshow")){
 											continue;
 										}
-									String term = (String) request.getAttribute("term");
+									
 									%>
                                 
                                     <tr onclick=<%="redirectToRestaurant(\"" + "/ImHungry/RedirectionController?action=restaurant&term="+term +"&index=" + index + "&item=" + i + "\")"%>>
@@ -251,7 +259,7 @@
 									if(resultsFields.get("modifier").equals("donotshow")){
 										continue;
 									}
-								String term = (String) request.getAttribute("term");
+								
 								%>
                                     <tr onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=recipe&term="+term +"&index=" + index + "&item=" + i + "\")"%>>
                               
@@ -296,9 +304,9 @@
                                     </select>
                                 </div>
                             </li>
-                            <% String term = (String) request.getAttribute("term"); %>
+                           
                             <li class="nav-item">
-		                       <input class="btn btn-secondary" onclick=<%="redirectToManageList(" + index + ")"%> type="button" value="Manage Lists">
+		                       <input class="btn btn-secondary" onclick=<%="redirectManageList("+ index +")"%> type="button" value="Manage Lists">
 		                   </li>
                             <li class="nav-item">
                                 <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&term="+ term +"&index=" + index + "\")"%>>Return to Search</a>

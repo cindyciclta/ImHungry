@@ -35,12 +35,14 @@ public class RedirectionController extends HttpServlet {
 		String index = request.getParameter("index");
 		String term = request.getParameter("term");
 		
+
 		request.setAttribute("term", term);
 		if(action == null || action.isEmpty() || index == null || index.isEmpty()) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 			requestDispatcher.forward(request, response);
 			
 		}else if(action.equals("managelist")) { //If it is redirecting to the manage list page, set the attributes accordingly
+			System.out.println("managing list section");
 			String list = request.getParameter("list");
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("ManageListView.jsp");
 			request.removeAttribute("title");
@@ -53,6 +55,17 @@ public class RedirectionController extends HttpServlet {
 			}
 			request.setAttribute("response", responses.get(Integer.parseInt(index)));
 			request.setAttribute("index", Integer.parseInt(index));
+			
+			//Call the request to pull data to go back to the results page
+			CollageGenerationModel collagemodel = new CollageGenerationModel();
+			GoogleImageRequestModel googleimagemodel = new GoogleImageRequestModel(collagemodel);
+			googleimagemodel.APIImageSearch(term);
+			ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
+			JSONArray jsArray = new JSONArray (urllist);
+			String jsonToString = jsArray.toString();
+			request.setAttribute("length", urllist.size());
+			request.setAttribute("jsonarray", jsArray);
+			
 			requestDispatcher.forward(request, response);
 			
 		}else if(action.equals("recipe")) { //If it is redirecting to the recipe page, set the attributes accordingly
