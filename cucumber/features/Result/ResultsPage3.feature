@@ -1,10 +1,10 @@
 Feature:
 
-	Results Page with search for Green Beans and 20 results
+	Results Page with search for Green Beans and 12 results
 
 Background:
 
-	Given I searched for item "Green Beans" with "20" results and was redirected to the Results page
+	Given I searched for item "Green Beans" with "12" results and was redirected to the Results page
 
 Scenario: Check background color, text size, title text size, collage, title, drop down (F1, F2, RTPF1, RTPF2, RTPF3.1)
 
@@ -35,10 +35,10 @@ Scenario: Check title, column titles, number of results, appropriate fields (RTP
 
 	Then I am on the "Results for Green Beans" page
 	And I should see a column with title "Recipes"
-	And I should see "20" recipes
+	And I should see "12" recipes
 	And I should see the name, stars, and prep time for the recipes
 	And I should see a column with title "Restaurants"
-	And I should see "20" restaurants
+	And I should see "12" restaurants
 	And I should see the name, address, stars, driving minutes, and price range for the restaurants
 
 Scenario: Select a restaurant (RTPF5c)

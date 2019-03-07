@@ -1,11 +1,11 @@
 Feature:
 
-	Manage List Page with search for Korean Food and add/move/remove Seongbukong
+	Manage List Page with search for Korean Food and add/move/remove Seongbukdong
 
 Background:
 
 	Given I searched for "Korean Food"
-	And I clicked the link for "Seongbukong"
+	And I clicked the link for "Seongbukdong"
 	And I selected "To Explore" from the drop down
 	And I clicked the "Add to List" button
 	And I clicks the "Back to Results" button
@@ -20,31 +20,31 @@ Scenario: Check background color, text size, title text size (F1, F2)
 	
 Scenario: Select a list item (RTPF7a.1, LMPF1, LMPF2)
 	
-	Then I should see "Seongbukong" on the page
-	When I clicked the link for "name: Seongbukong"
-	Then I am on the "Seongbukong" page
+	Then I should see "Seongbukdong" on the page
+	When I clicked the link for "name: Seongbukdong"
+	Then I am on the "Seongbukdong" page
 	
 Scenario: Remove an item (LMPF3.1)
 
-	When I remove "Seongbukong"
+	When I remove "Seongbukdong"
 	Then I selected "Do Not Show" from the drop down
 	And I clicked the "Manage Lists" button
 	And I selected "To Explore" from the drop down
 	And I clicked the "Manage Lists" button
-	And I do not see "Seongbukong"
+	And I do not see "Seongbukdong"
 	
 Scenario: Move an item (LMPF3.2, LMPF6, LMPF7)
 	
 	When I selected "Favorite" from the drop down
-	And I move "Seongbukong"
+	And I move "Seongbukdong"
 	And I selected "Favorite" from the drop down
 	And I clicked the "Manage Lists" button
 	And I am on the "Favorite" page
-	And I should see "Seongbukong" on the page
+	And I should see "Seongbukdong" on the page
 	And I selected "To Explore" from the drop down
 	And I clicked the "Manage Lists" button
 	And I am on the "To Explore" page
-	And I do not see "Seongbukong"
+	And I do not see "Seongbukdong"
 	
 Scenario: Go back to results page (LMPF4)
 
