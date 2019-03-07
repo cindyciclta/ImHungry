@@ -35,6 +35,11 @@ body{
 	left: 50%;
 	transform: translate(-50%, 50%);
 }
+
+#feed-me {
+	color: blue;
+}
+
 </style>
 </head>
 
@@ -92,7 +97,7 @@ body{
 						https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/320/apple/155/pouting-face_1f621.png"
 						class="img-fluid" alt="Responsive image">
 					  		<div class="overlay">
-					  			<span>Feed me!</span>
+					  			<span id="feed-me">Feed me!</span>
 					  		</div>
 		  				</div>
 		  			</div>
