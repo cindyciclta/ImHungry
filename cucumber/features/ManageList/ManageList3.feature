@@ -49,7 +49,7 @@ Scenario: Move an item (LMPF3.2, LMPF6, LMPF7)
 Scenario: Go back to results page (LMPF4)
 
 	When I clicks the "Back to Results" button
-	Then I am on the "Results for Chinese" page
+	Then I am on the "Results for Burgers" page
 
 Scenario: Go back to search page (LMPF5)
 

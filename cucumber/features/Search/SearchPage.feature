@@ -35,12 +35,12 @@ Scenario: Redirect to results page for Chinese (SPF5)
 	
 Scenario: Redirect to results page for Pancakes (SPF5)
 
-	When I searched for "Chinese"
+	When I searched for "Pancakes"
 	Then I should be on the "/ImHungry/SearchPageController?action=search&term=Pancakes&limit=5" page 
 	
 	Scenario: Redirect to results page for Noodles (SPF5)
 
-	When I searched for "Chinese"
+	When I searched for "Noodles"
 	Then I should be on the "/ImHungry/SearchPageController?action=search&term=Noodles&limit=5" page 
 	
 	
