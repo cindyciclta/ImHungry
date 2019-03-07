@@ -37,13 +37,12 @@ Scenario: RCPF5
 	
 Scenario: RCPF6
 	
-	When I click the "Printable Version" button
-	Then I should be able to print the recipe
+	Then I should be able to print
 	
 Scenario: RCPF7
 	
-	When I click the "Back to Results" button
-	Then I should be on the "/ImHungry/RedirectionController?action=results&index=15" page
+	When I clicks the "Back to Results" button
+	Then I am on the "Results for Indian" page
 	
 Scenario: RCPF8
 	
@@ -53,4 +52,4 @@ Scenario: RCPF9.1
 	
 	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I should be on the "/ImHungry/RedirectionController?action=recipe&index=15&item=2" page
+	Then I am on the "Indian Relish" page

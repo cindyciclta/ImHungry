@@ -35,13 +35,12 @@ Scenario: RSPF1b
 	
 Scenario: RSPF2
 	
-	When I click the "Printable Version" button
-	Then I should be able to print the restaurant page
+	Then I should be able to print
 	
 Scenario: RSPF3
 	
-	When I click the "Back to results" button
-	Then I should be on the "/ImHungry/RedirectionController?action=results&index=15" page
+	When I clicks the "Back to results" button
+	Then I am on the "Results for Chinese" page
 	
 Scenario: RSPF4
 	
@@ -51,4 +50,4 @@ Scenario: RSPF5.1
 	
 	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I should be on the "Recipe" page
+	Then I am on the "Northern Cafe" page
