@@ -3,6 +3,7 @@ Feature:
 	Restaurant Page with search for chinese and details for Northern Cafe
 
 Background:
+
 	Given I searched for "chinese"
 	And I clicked the link for "Northern Cafe"
 
