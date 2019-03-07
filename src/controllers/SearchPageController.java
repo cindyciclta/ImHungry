@@ -1,5 +1,7 @@
 package controllers;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +32,11 @@ public class SearchPageController extends HttpServlet {
 				RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 				requestDispatcher.forward(request, response);	
 			}else {
-				RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageController?action=results&term=" + term + "&limit=" + limit);
+				String decodedValue = URLDecoder.decode(term, "UTF-8");
+				term.trim();
+				System.out.println(term);
+				System.out.println(decodedValue);
+				RequestDispatcher requestDispatcher = request.getRequestDispatcher("ResultsPageController?action=results&term=" +term+ "&limit=" + limit);
 				requestDispatcher.forward(request, response);
 			}
 		}

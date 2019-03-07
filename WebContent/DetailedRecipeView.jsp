@@ -74,7 +74,8 @@
 			if(list != ""){
 				var xhr = new XMLHttpRequest();
 				var searchterm = "<%= term%>";
-				xhr.open("GET", "/ImHungry/RedirectionController?action=addtolist&term="+ searchterm +"&index=" + index + "&list=" + list + "&item=" + item + "&type=" + type, true);
+				var trimmed = searchterm.replace(" ", "_");
+				xhr.open("GET", "/ImHungry/RedirectionController?action=addtolist&term="+ trimmed +"&index=" + index + "&list=" + list + "&item=" + item + "&type=" + type, true);
 				xhr.send();
 			}
 		}

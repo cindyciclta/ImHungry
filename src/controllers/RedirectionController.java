@@ -62,7 +62,7 @@ public class RedirectionController extends HttpServlet {
 			googleimagemodel.APIImageSearch(term);
 			ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
 			JSONArray jsArray = new JSONArray (urllist);
-			String jsonToString = jsArray.toString();
+
 			request.setAttribute("length", urllist.size());
 			request.setAttribute("jsonarray", jsArray);
 			
@@ -102,7 +102,7 @@ public class RedirectionController extends HttpServlet {
 			googleimagemodel.APIImageSearch(term);
 			ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
 			JSONArray jsArray = new JSONArray (urllist);
-			String jsonToString = jsArray.toString();
+
 			request.setAttribute("length", urllist.size());
 			request.setAttribute("jsonarray", jsArray);
 			

@@ -1,5 +1,6 @@
 package controllers;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -46,6 +47,7 @@ public class ResultsPageController extends HttpServlet {
 				ResponseModel rm = new ResponseModel();
 				CollageGenerationModel collagemodel = new CollageGenerationModel();
 				GoogleImageRequestModel googleimagemodel = new GoogleImageRequestModel(collagemodel);
+				System.out.println("not encioded yet "+ term);
 				googleimagemodel.APIImageSearch(term);
 				
 				if(!rm.checkParameters(term, limitInteger) || !rm.getSearchResults()) {
@@ -57,7 +59,7 @@ public class ResultsPageController extends HttpServlet {
 					
 					ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
 					JSONArray jsArray = new JSONArray (urllist);
-					String jsonToString = jsArray.toString();
+
 
 					request.setAttribute("response", rm);
 					request.setAttribute("index", indexInt);

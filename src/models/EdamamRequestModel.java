@@ -55,7 +55,10 @@ public class EdamamRequestModel implements ApiCallInterface<RecipeModel> {
 	public String getHTMLLinks() throws IOException{
 		// Parse the links
 		StringBuilder contentBuilder = new StringBuilder();
-		URL url = new URL(URL_LINK + term + "&sort=re");
+		term.trim();
+		System.out.println("term in recipe "+ term);
+		String trimmed = term.replaceAll("\\_", "+");
+		URL url = new URL(URL_LINK + trimmed + "&sort=re");
 	    BufferedReader in = new BufferedReader(
 	            new InputStreamReader(url.openStream()));
 	    String str;
