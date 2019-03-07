@@ -19,4 +19,4 @@ Background:
 Scenario: RCPF9.2, RCPF5.2
 
 	Then I should see "Harvest Salad" on the page
-	Then I should see "Everytable"
+	Then I should see "Everytable" on the page

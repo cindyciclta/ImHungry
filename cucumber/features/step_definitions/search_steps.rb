@@ -181,7 +181,7 @@ Then(/^I should see a "([^"]*)" button$/) do |arg1|
 end
 
 When(/^I click the drop down box$/) do
-  find('.form-control').click
+  find('.form-control', match: :first).click
 end
 
 Then(/^I should be able to select one of the predefined lists$/) do
