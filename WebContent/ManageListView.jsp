@@ -44,21 +44,21 @@
 			window.location = link;
 		}
 		
-		function redirectToManageList(index){
+		function redirectToManageList(term, index){
 			var e = document.getElementById("managelistselect");
 			list = e.options[e.selectedIndex].value;
 			if(list != ""){
-				window.location.replace("/ImHungry/RedirectionController?action=managelist&index=" + index + "&list=" + list);
+				window.location.replace("/ImHungry/RedirectionController?action=managelist&term="+term + "&index=" + index + "&list=" + list);
 			}
 		}
 		
-		function moveToList(index, item, type){
+		function moveToList(term, index, item, type){
 			console.log("blah");
 			var e = document.getElementById("managelistselect");
 			list = e.options[e.selectedIndex].value;
 			if(list != ""){
 				var xhr = new XMLHttpRequest();
-				xhr.open("GET", "/ImHungry/RedirectionController?action=movetolist&index=" + index + "&list=" + list + "&item=" + item + "&type=" + type, true);
+				xhr.open("GET", "/ImHungry/RedirectionController?action=movetolist&term="+term + "&index=" + index + "&list=" + list + "&item=" + item + "&type=" + type, true);
 				xhr.send();
 			}
 		}
@@ -66,7 +66,7 @@
 		function removeFromList(index, item, originalList, type){
 			var e = document.getElementById("managelistselect");
 			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "/ImHungry/RedirectionController?action=removefromlist&index=" + index + "&list=" + originalList + "&item=" + item + "&type=" + type, true);
+			xhr.open("GET", "/ImHungry/RedirectionController?action=removefromlist&term="+term + "&index=" + index + "&list=" + originalList + "&item=" + item + "&type=" + type, true);
 			xhr.send();
 		}
 		
@@ -169,10 +169,11 @@
 									%>
 									
 									<%
+									String term = (String) request.getAttribute("term");
 									for(int i = 0 ; i < rm.getNumberOfRestaurants() ; i++){
 										count += 1; 
 										Map<String, String> resultsFields = rm.getFormattedRestaurantResultsAt(i);
-										
+					
 										// Skip do not show results
 										if(title.equals("Do Not Show") && !resultsFields.get("modifier").equals("donotshow")){
 											continue;
@@ -222,7 +223,7 @@
 	                                                           <tr style="background-color:inherit">
 	                                                               <td>
 	                                                                   <button type="button" class="btn btn-default btn-sm"
-	                                                                   		onclick=<%= "removeFromList(" + index + "," + i + "," + "\"" + resultsFields.get("modifier") + "\"" + ",\"restaurant\")"%>>
+	                                                                  		onclick=<%= "removeFromList(" + term + "," + index + "," + i + "," + "\"" + resultsFields.get("modifier") + "\"" + ",\"restaurant\")"%>>
 	                                                                       <i class="fas fa-times"></i>
 	                                                                   </button>
 	                                                               </td>
@@ -230,7 +231,7 @@
 	                                                           <tr style="background-color:inherit">
 	                                                               <td>
 	                                                                   <button type="button" class="btn btn-default btn-sm"
-	                                                                   		onclick=<%= "moveToList(" + index + "," + i + ",\"restaurant\")"%>>
+	                                                                  		onclick=<%= "moveToList(" + term + ","+ index + "," + i + ",\"restaurant\")"%>>
 	                                                                       <i class="fas fa-sign-out-alt"></i>
 	                                                                   </button>
 	                                                               </td>
@@ -268,13 +269,13 @@
                        </div>
                    </li>
                    <li class="nav-item">
-                       <input class="btn btn-secondary" onclick=<%="redirectToManageList(" + index + ")"%> type="button" value="Manage Lists">
+                       <input class="btn btn-secondary" onclick=<%="redirectToManageList("+ term +"," + index + ")"%> type="button" value="Manage Lists">
                    </li>
                    <li class="nav-item">
-                       <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&index=" + index + "\")"%>>Back to Search</a>
+                       <a class="btn btn-secondary" onclick=<%= "redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&term="+ term + "&index=" + index + "\")" %>>Back to Search</a>
                    </li>
                    <li class="nav-item my-3">
-                       <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=results&index=" + index + "\")"%>>Back to Results</a>
+                       <a class="btn btn-secondary" onclick=<%= "redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=results&term="+ term +"&index=" + index + "\")" %>>Back to Results</a>
                    </li>
                </ul>
            </div>
