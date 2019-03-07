@@ -35,6 +35,7 @@
 	}
 	/* Numbers the instructions */
 	body {
+		background-color: #f5f5f5;
 	     		counter-reset: h7counter;
 	 		}
 	   h7:before {
