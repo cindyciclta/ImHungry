@@ -8,8 +8,6 @@ Given(/^I searched for "([^"]*)"$/) do |arg1|
 end
 
 Given(/^I clicked the link for "([^"]*)"$/) do |arg1|
-  #page.find(:text=> arg1).click
-  #click_link(arg1)
   page.find('tr', :text=> arg1, match: :first, wait:30).click
 end
 
@@ -31,9 +29,6 @@ end
 
 Then(/^I should see a title$/) do
   find('h1')
-  # these are very much guesses -- fill in based on implementation
-  # expect(page).to have_title
-  # expect(first('title').native.text).to exist
 end
 
 When(/^I click on "([^"]*)"$/) do |arg1|
@@ -49,7 +44,6 @@ When(/^I remove "([^"]*)"$/) do |arg1|
 end
 
 When(/^I refresh the page$/) do
-  # driver.navigate.refresh # try this if below doesn't work
   page.evaluate_script("window.location.reload()")
 end
 
@@ -72,6 +66,7 @@ end
 Then(/^I should be on the "([^"]*)" page$/) do |arg1|
   expect(page).to have_current_path(arg1)
 end
+
 
 
 # RPFF7
@@ -108,17 +103,14 @@ end
 Then(/^I should see the prep and cook time of the dish$/) do
   expect(page).to have_content('Prep Time')
   expect(page).to have_content('Cook Time')
-  # pending # make specific to the prep and cook time thank you
 end
 
 Then(/^I should see the ingredients of the dish$/) do
   expect(page).to have_content('Ingredients')
-  # pending # check first ingredient
 end
 
 Then(/^I should see instructions for the dish$/) do
   expect(page).to have_content('Instructions')
-  # pending # check first instruction
 end
 
 Then(/^I should be able to print$/) do
@@ -146,17 +138,15 @@ When(/^I click on the address$/) do
 end
 
 Then(/^I should be on Google Maps directions page for Northern Cafe$/) do
-  # find(
   expect(page).to have_current_path("/maps/search/?api=1&query=34.0255178,-118.2775239")
-  #expect(page).to have_path("https://www.google.com/maps/place/34%C2%B001'31.9%22N+118%C2%B016'39.1%22W/@34.0255178,-118.2775239,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d34.0255178!4d-118.2775239")
 end
 
 When(/^I click on the website link$/) do
   page.all('h7.description')[2].click
 end
 
-Then(/^I should be on the restaurant's home page$/) do
-  expect(page).to have_current_path("/biz/northern-cafe-los-angeles-6?adjust_creative=kOJ4-HptgaXNFbfpVFbrJg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=kOJ4-HptgaXNFbfpVFbrJg")
+Then(/^I should be on the restaurant's home page, "([^"]*)"$/) do |arg1|
+  expect(page).to have_current_path(arg1)
 end
 
 
@@ -172,7 +162,6 @@ Then(/^I should see a drop down box with nothing selected$/) do
 end
 
 Then(/^I should see a "([^"]*)" button$/) do |arg1|
-  # expect(page).to have_button(arg1)
   find(arg1)
 end
 
@@ -197,7 +186,6 @@ Then(/^I should be viewing the "([^"]*)" list$/) do |arg1|
 end
 
 When(/^I click the "([^"]*)" button with nothing selected$/) do |arg1|
-  #page.find('a.btn.btn-secondary', text: arg1).click
   click_on arg1
 end
 
@@ -232,16 +220,6 @@ Then(/^I should see the name, stars, and prep time for the recipes$/) do
   expect(page).to have_content('Prep:')
   expect(page).to have_content('Cook:')
 end
-
-When(/^I add a result to a list$/) do
-  pending # Write code here based on the implementation
-end
-
-When(/^I click on recipe result, "([^"]*)"$/) do |arg1|
-  click_on arg1
-end
-
-
 
 # Search Page
 
@@ -280,7 +258,6 @@ end
 
 Then(/^text should appear saying “Number of items to show in results”$/) do
   page.find('#limitInput')[ 'Number of items to show in results']
-  # expect(page).to have_content('Number of items to show in results')
 end
 
 When(/^I enter "([^"]*)" in the "([^"]*)" text box$/) do |arg1, arg2|
@@ -304,18 +281,6 @@ end
 
 Then(/^I am the "([^"]*)" page$/) do |arg1|
   expect(page).to have_css('h1', text: arg1)
-end
-
-When(/^I add it to the "([^"]*)" list$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Given(/^I begin at Indian Relish$/) do
-  visit('http://localhost:8080/ImHungry/RedirectionController?action=recipe&term=Indian&index=395&item=0')
-end
-
-Given(/^I begin at Northern Cafe$/) do
-  visit('http://localhost:8080/ImHungry/RedirectionController?action=restaurant&term=chinese&index=385&item=0')
 end
 
 
