@@ -1,40 +1,39 @@
 Feature:
 
-	Recipe Page
+	Recipe Page with search for Indian and details for Indian Style Sheekh Kabab
 
 Background:
 	Given I searched for "Indian"
-	And I clicked the link for "Indian Relish"
-	#Given I begin at Indian Relish 
+	And I clicked the link for "Indian Style Sheekh Kabab"
 
-Scenario: check for background color, text size, title text size, RCPF1, RCPF2
+Scenario: Check background color, text size, title text size, image, title (F1, F2, RCPF1, RCPF2)
 
 	Then I should see background color "rgba(245, 245, 245, 1)"
-	And I should see "Indian Relish" as a title
+	And I should see "Indian Style Sheekh Kabab" as a title
 	And I should see a result in default text size
 	And I should see an image
 	
-Scenario: RCPF3, RCPF4, RCPF5
+Scenario: Check prep time, cook time, ingredients, instructions (RCPF3, RCPF4, RCPF5)
 	
 	Then I should see the prep and cook time of the dish
 	And I should see the ingredients of the dish
 	And I should see instructions for the dish
 	
-Scenario: RCPF6
+Scenario: Check for printable version (RCPF6)
 	
 	Then I should be able to print
 	
-Scenario: RCPF7
+Scenario: Go to results page (RCPF7)
 	
 	When I clicks the "Back to Results" button
 	Then I am on the "Results for Indian" page
 	
-Scenario: RCPF8
+Scenario: Check for drop down option (RCPF8)
 	
 	Then I should see a drop down box for lists
 	
-Scenario: RCPF9.1
+Scenario: Add an option to a list (RCPF9.1)
 	
 	When I select "Favorites" from the drop down
 	And I click the "Add to List" button
-	Then I am on the "Indian Relish" page
+	Then I am on the "Indian Style Sheekh Kabab" page
