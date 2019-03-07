@@ -46,12 +46,12 @@ Scenario: LMPF3.2, LMPF6, LMPF7
 	
 Scenario: LMPF4
 
-	When I click the "Back to results" button
+	When I clicks the "Back to Results" button
 	Then I should be on the "ResultsPageView.jsp" page
 
 Scenario: LMPF5
 
-	When I click the "Back to search" button
+	When I clicks the "Back to Search" button
 	Then I should be on the "SearchPageView.jsp" page
 
 Scenario: LMPF7a

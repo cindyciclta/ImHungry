@@ -3,9 +3,9 @@ Feature:
 	Recipe Page
 
 Background:
-
 	Given I searched for "Indian"
 	And I clicked the link for "Indian Relish"
+	#Given I begin at Indian Relish 
 
 Scenario: check for white smoke background color
 
@@ -23,17 +23,11 @@ Scenario: RCPF2
 	
 	Then I should see an image
 	
-Scenario: RCPF3
+Scenario: RCPF3, RCPF4, RCPF5
 	
 	Then I should see the prep and cook time of the dish
-
-Scenario: RCPF4
-	
-	Then I should see the ingredients of the dish
-	
-Scenario: RCPF5
-	
-	Then I should see instructions for the dish
+	And I should see the ingredients of the dish
+	And I should see instructions for the dish
 	
 Scenario: RCPF6
 	
