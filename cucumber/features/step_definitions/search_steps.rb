@@ -36,10 +36,6 @@ Then(/^I should see a title$/) do
   # expect(first('title').native.text).to exist
 end
 
-Then(/^I should see "([^"]*)"$/) do |arg1|
-  page.find('div', text: arg1)
-end
-
 When(/^I click on "([^"]*)"$/) do |arg1|
   click_link_or_button arg1
 end
@@ -58,7 +54,7 @@ When(/^I refresh the page$/) do
 end
 
 Then(/^I do not see "([^"]*)"$/) do |arg1|
-  expect(page).to have_no_link(arg1)
+  expect(page).to have_no_content(arg1)
 end
 
 When(/^I move "([^"]*)" to "([^"]*)"$/) do |arg1, arg2|
@@ -88,8 +84,8 @@ Given(/^I searched for item "([^"]*)" with "([^"]*)" results and was redirected 
   # expect(page).to have_css('h1', text: arg1)
 end
 
-Then(/^I should see "([^"]*)" as the first result$/) do |arg1|
-  expect(page).to have_content(arg1)
+Then(/^I should see "([^"]*)" as the first result for "([^"]*)"$/) do |arg1, arg2|
+  expect(page).to have_content(arg2 + ' ' + arg1)
 end
 
 
@@ -325,13 +321,4 @@ Given(/^I begin at Northern Cafe$/) do
   visit('http://localhost:8080/ImHungry/RedirectionController?action=restaurant&term=chinese&index=385&item=0')
 end
 
-
-
-# Background for Recipe
-#Given I searched for "Indian"
-#	And I clicked the link for "Indian Relish"
-
-# Background for Restaurant
-#Given I searched for "Chinese"
-#	And I clicked the link for "Northern Cafe"
 

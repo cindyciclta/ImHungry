@@ -8,54 +8,45 @@ Background:
 	And I clicked the link for "Northern Cafe"
 	And I selected "Favorites" from the drop down
 	And I clicked the "Add to List" button
-	And I clicked the "Back to results" button
+	And I clicks the "Back to Results" button
 	And I selected "Favorites" from the drop down
-	And I clicked the "Add to List" button
-	And I clicked the "Manage List" button
+	And I clicked the "Manage Lists" button
 
-Scenario: check background color
+Scenario: check background color, check title text size
 
 	Then I should see background color "rgba(245, 245, 245, 1)"
+	And I should see a title
 	
-Scenario: check title text size
-	
-	Then I should see a title
-
-Scenario: RTPF7a.2 and LMPF1
-
-	Then I should see "Item"
-	
-Scenario: LMPF2
-
-	When I click on "Item"
-	Then I am on the "DetailedRestaurantView.jsp" page for "Item"
+Scenario: RTPF7a.2 and LMPF1, LMPF2
+	Then I should see "Northern Cafe" on the page
+	When I click on "Northern Cafe"
+	Then I am on the "Northern Cafe" page for "Item"
 	
 Scenario: LMPF3.1
 
-	When I remove "Item"
+	When I remove "Northern Cafe"
 	And I refresh the page
-	Then I do not see "Item"
+	Then I do not see "Northern Cafe"
 	
 Scenario: LMPF3.2, LMPF6, LMPF7
 
-	When I move "Item" to "To Explore"
-	And I select "To Explore" from the drop down
-	And I click the "Manage List" button
-	Then I am on the "Manage List" page for "To Explore"
-	And I should see "Item"
+	When I move "Northern Cafe" to "To Explore"
+	And I selected "To Explore" from the drop down
+	And I clicked the "Manage Lists" button
+	And I am on the "To Explore" page
+	And I should see "Northern Cafe" on the page
 	
 Scenario: LMPF4
 
 	When I clicks the "Back to Results" button
-	Then I should be on the "ResultsPageView.jsp" page
+	Then I am on the "Results for Chinese" page
 
 Scenario: LMPF5
 
 	When I clicks the "Back to Search" button
-	Then I should be on the "SearchPageView.jsp" page
+	Then I am on the "I'm Hungry" page
 
 Scenario: LMPF7a
 
-	When I select "Favorites" from the drop down
-	And I click the "Add to List" button
-	Then I am on the "Manage List page" for "Favorites"
+	And I click the "Manage Lists" button with nothing selected
+	Then I am on the "Favorites" page
