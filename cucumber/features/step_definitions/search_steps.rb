@@ -45,7 +45,7 @@ Then(/^I am on the "([^"]*)" page for "([^"]*)"$/) do |arg1, arg2|
 end
 
 When(/^I remove "([^"]*)"$/) do |arg1|
-  page.find('i.fas.fa-sign-out-alt', match: :first).click
+  page.find('i.fas.fa-times', match: :first).click
 end
 
 When(/^I refresh the page$/) do
@@ -57,8 +57,8 @@ Then(/^I do not see "([^"]*)"$/) do |arg1|
   expect(page).to have_no_content(arg1)
 end
 
-When(/^I move "([^"]*)" to "([^"]*)"$/) do |arg1, arg2|
-  pending # Write code here that selects the move option on arg1 and puts it in list arg2
+When(/^I move "([^"]*)"$/) do |arg1|
+  page.find('i.fas.fa-sign-out-alt', match: :first).click
 end
 
 When(/^I select "([^"]*)" from the drop down$/) do |arg1|
