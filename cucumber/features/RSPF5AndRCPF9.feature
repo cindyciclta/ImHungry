@@ -4,22 +4,19 @@ Feature:
 
 Background:
 
-	Given I searched for item "F" with "X" results and was redirected to the Results page
-	And I clicked the link for "Recipe1"
+	Given I searched for item "Salad" with "4" results and was redirected to the Results page
+	And I clicked the link for "Everytable"
 	And I selected "Favorites" from the drop down
 	And I clicked the "Add to List" button
-	And I clicked the "Return to Results" button
-	And I clicked the link for "Restaurant1"
+	And I clicks the "Back to Results" button
+	And I clicked the link for "Harvest Salad"
 	And I selected "Favorites" from the drop down
 	And I clicked the "Add to List" button
-	And I clicked the "Return to Results" button
+	And I clicks the "Back to Results" button
 	And I select "Favorites" from the drop down
-	And I click the "Manage List" button
+	And I clicked the "Manage Lists" button
 	
-Scenario: RCPF9.2
+Scenario: RCPF9.2, RCPF5.2
 
-	Then I should see "Recipe1" on the page
-
-Scenario: RCPF5.2
-
-	Then I should see "Restaurant1"
+	Then I should see "Harvest Salad" on the page
+	Then I should see "Everytable"
