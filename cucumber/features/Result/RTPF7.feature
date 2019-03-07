@@ -1,6 +1,6 @@
 Feature:
 
-	Results Page Functionality 7
+	Results Page Functionality 7 with search for Pizza and addition of Pizza Studio to Do Not Show and Hummus Pizza to Favorites
 
 Background:
 
@@ -14,7 +14,7 @@ Background:
 	And I clicked the "Add to List" button
 	And I clicks the "Back to Results" button
 	
-Scenario: RTPF7b, RTPF7c, RTPF7a
+Scenario: Add items to lists and have results change appropriately (RTPF7b, RTPF7c, RTPF7a)
 
 	Then I should see "Hummus Pizza" as the first result for "Recipes"
 	And I do not see "Pizza Studio"

@@ -1,6 +1,6 @@
 Feature:
 
-	Restaurant Page Functionality 5 and Recipe Page Functionality 9
+	Restaurant Page Functionality 5 and Recipe Page Functionality 9 with search for Salad and selection of for Everytable and Harvest Salad
 
 Background:
 
@@ -16,7 +16,7 @@ Background:
 	And I select "Favorites" from the drop down
 	And I clicked the "Manage Lists" button
 	
-Scenario: RCPF9.2, RCPF5.2
+Scenario: Add to favorites list (RCPF9.2, RCPF5.2)
 
 	Then I should see "Harvest Salad" on the page
 	Then I should see "Everytable" on the page
