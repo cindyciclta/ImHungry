@@ -6,6 +6,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -23,10 +24,12 @@ public class GoogleImageRequestModel {
 	
 	public ResponseCodeModel APIImageSearch(String imagesearch) {	
 		try {
-
+			System.out.println("went apiimage "+ imagesearch);
+			imagesearch.trim();
+			String trimmed = imagesearch.replaceAll("\\_", "+");
 			//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
 			URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyBn3V9GHx2KjGQTmeUPHFN2Nm0BGko-zJ4" + 
-					"&cx=018271258977134758236:ifnf_dla9yk&q=" + imagesearch + "&searchType=image");
+					"&cx=018271258977134758236:ifnf_dla9yk&q=" + trimmed + "&searchType=image");
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 		    con.setRequestProperty("User-Agent", "Chrome");
 			con.addRequestProperty("Referer", "localhost:8080");
@@ -38,6 +41,7 @@ public class GoogleImageRequestModel {
 			//Get all data from API
 			while((line = reader.readLine()) != null) {
 				response += line;
+//				System.out.println(line);
 			}
 
 		    if (!response.isEmpty()) {
@@ -63,5 +67,11 @@ public class GoogleImageRequestModel {
 	    }  
 		return ResponseCodeModel.OK;
 	}
+
+//	public static void main(String[] args) {
+//		CollageGenerationModel collage = new CollageGenerationModel();
+//		GoogleImageRequestModel api = new GoogleImageRequestModel(collage);
+//		api.APIImageSearch("why hey");
+//	}
 
 }

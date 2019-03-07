@@ -6,6 +6,7 @@
 <%@page import="java.util.Map"%>  
 <%@page import="java.util.ArrayList"%> 
 <%@page import="org.json.JSONArray"%> 
+<%@page import="java.net.URLEncoder"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -158,12 +159,11 @@
 		
 		function redirectToResult(link) {
 			var term ="<%= term %>";
-			alert(term);
-			window.location = link+"&term=" +term;
+			var trimmed = term.replace(" ", "_");
+			window.location = link+"&term=" +trimmed;
 		}
 		function redirectManageList(index){
 			var list = "";
-			alert("ey");
 			var e = document.getElementById("managelistselect");
 			list = e.options[e.selectedIndex].value;
 			if(list != ""){
@@ -252,6 +252,7 @@
                                 </thead>
                                 <tbody>
                                 <%
+                                String ecodedValue = URLEncoder.encode(term, "UTF-8");
 								for(int i = 0 ; i < rm.getNumberOfRecipes() ; i++){
 									Map<String, String> resultsFields = rm.getFormattedRecipeResultsAt(i);
 									
@@ -261,7 +262,7 @@
 									}
 								
 								%>
-                                    <tr onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=recipe&term="+term +"&index=" + index + "&item=" + i + "\")"%>>
+                                    <tr onclick=<%="redirectToRecipe(\"" + "/ImHungry/RedirectionController?action=recipe&term="+ecodedValue +"&index=" + index + "&item=" + i + "\")"%>>
                               
                                         <td class="col">
                                             <table class="table">
@@ -309,7 +310,8 @@
 		                       <input class="btn btn-secondary" onclick=<%="redirectManageList("+ index +")"%> type="button" value="Manage Lists">
 		                   </li>
                             <li class="nav-item">
-                                <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&term="+ term +"&index=" + index + "\")"%>>Return to Search</a>
+                            	
+                                <a class="btn btn-secondary" onclick=<%="redirectToRecipe(\"" + "/ImHungry/ResultsPageController?action=search&term="+ ecodedValue +"&index=" + index + "\")"%>>Return to Search</a>
                             </li>
                         </ul>
                     </div>
