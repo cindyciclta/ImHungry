@@ -103,6 +103,8 @@ public class TestRedirectionController extends Mockito{
         when(request.getParameter("action")).thenReturn( "managelist" );
         when(request.getParameter("index")).thenReturn( "0" );
         when(request.getParameter("list")).thenReturn( "favorites" );
+        when(request.getParameter("length")).thenReturn( "10" );
+        when(request.getParameter("jsonarray")).thenReturn( "jsarray" );
         when(request.getRequestDispatcher("ManageListView.jsp")).thenReturn(rd);
         new RedirectionController().service(request, response);
         verify(rd).forward(request, response);
@@ -143,7 +145,12 @@ public class TestRedirectionController extends Mockito{
         when(request.getParameter("action")).thenReturn( "results" );
         when(request.getParameter("index")).thenReturn( "0" );
         when(request.getRequestDispatcher("ResultsPageView.jsp")).thenReturn(rd);
-        new RedirectionController().service(request, response);
+        when(request.getParameter("term")).thenReturn( "chicken" );
+        when(request.getParameter("length")).thenReturn( "10" );
+        when(request.getParameter("jsonarray")).thenReturn( "jsarray" );
+        RedirectionController r = new RedirectionController();
+        RedirectionController.responses.put(0, new ResponseModel());
+        r.service(request, response);
         verify(rd).forward(request, response);
     }
 	
@@ -161,8 +168,32 @@ public class TestRedirectionController extends Mockito{
         when(request.getParameter("item")).thenReturn( "0" );
         when(request.getParameter("list")).thenReturn( "donotshow" );
         when(request.getParameter("type")).thenReturn( "restaurant" );
+        when(request.getParameter("term")).thenReturn( "chicken" );
         new RedirectionController().service(request, response);
     }
+	
+	@Test
+    public void testRemoveFromList() throws Exception {
+        when(request.getParameter("action")).thenReturn( "removefromlist" );
+        when(request.getParameter("index")).thenReturn( "1" );
+        when(request.getParameter("item")).thenReturn( "0" );
+        when(request.getParameter("list")).thenReturn( "donotshow" );
+        when(request.getParameter("type")).thenReturn( "restaurant" );
+        when(request.getParameter("term")).thenReturn( "chicken" );
+        new RedirectionController().service(request, response);
+    }
+	
+	@Test
+    public void testResultsList() throws Exception {
+        when(request.getParameter("action")).thenReturn( "results" );
+        when(request.getParameter("term")).thenReturn( "chicken" );
+        when(request.getParameter("index")).thenReturn( "1" );
+        when(request.getParameter("item")).thenReturn( "0" );
+        when(request.getParameter("list")).thenReturn( "donotshow" );
+        when(request.getParameter("type")).thenReturn( "restaurant" );
+    
+    }
+	
 	
 	
 	

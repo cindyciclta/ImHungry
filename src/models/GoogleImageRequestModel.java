@@ -17,14 +17,14 @@ public class GoogleImageRequestModel {
 	private CollageGenerationModel results;
 	private String term;
 	private int limit;
-	
+	ArrayList <String> allimageurl;
 	public GoogleImageRequestModel(CollageGenerationModel collageModel) {
 		this.results = collageModel;
 	}
 	
 	public ResponseCodeModel APIImageSearch(String imagesearch) {	
 		try {
-			System.out.println("went apiimage "+ imagesearch);
+
 			imagesearch.trim();
 			String trimmed = imagesearch.replaceAll("\\_", "+");
 			//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
@@ -41,14 +41,14 @@ public class GoogleImageRequestModel {
 			//Get all data from API
 			while((line = reader.readLine()) != null) {
 				response += line;
-//				System.out.println(line);
+				System.out.println(line);
 			}
 
 		    if (!response.isEmpty()) {
 		    	//Parses the JSON object to get the image and store the url link to an ArrayList
 		    	JSONObject json = new JSONObject(response);
 		    	JSONArray items = json.getJSONArray("items");
-		    	ArrayList <String> allimageurl = new ArrayList<String>();
+		    	allimageurl = new ArrayList<String>();
 				int actualsize = 0;
 		    	for (int i = 0; i < 10 ; i ++) {
 		    		JSONObject item_i = items.getJSONObject(i);

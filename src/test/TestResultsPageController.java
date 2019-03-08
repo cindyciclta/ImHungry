@@ -111,6 +111,17 @@ public class TestResultsPageController extends Mockito{
         verify(rd).forward(request, response);
     }
 	
+	@Test
+    public void invalidParamValid() throws Exception {
+        when(request.getParameter("action")).thenReturn( "results" );
+        when(request.getParameter("term")).thenReturn( "chicken" );
+        when(request.getParameter("limit")).thenReturn( "-5" );
+        when(request.getRequestDispatcher("ResultsPageView.jsp")).thenReturn(rd);
+        when(request.getRequestDispatcher("SearchPageView.jsp")).thenReturn(rd);
+        new ResultsPageController().service(request, response);
+        verify(rd).forward(request, response);
+    }
+	
 	
 	
 

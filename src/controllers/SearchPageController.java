@@ -24,7 +24,7 @@ public class SearchPageController extends HttpServlet {
 		if(action == null || action.isEmpty() || action.equals("redirect")) {
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("SearchPageView.jsp");
 			requestDispatcher.forward(request, response);
-		}else if(action.equals("search")) {
+		} else if(action.equals("search")) {
 			// Results action
 			String term = request.getParameter("term");
 			String limit = request.getParameter("limit");
