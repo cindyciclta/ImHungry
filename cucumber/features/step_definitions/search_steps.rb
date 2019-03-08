@@ -5,6 +5,7 @@ Given(/^I searched for "([^"]*)"$/) do |arg1|
   visit "http://localhost:8080/ImHungry/SearchPageController"
   fill_in 'termInput', :with => arg1
   page.find('div#emojiButton.img-container').click
+  expect(page).to have_css('h1', text: arg1, wait: 50)
 end
 
 Given(/^I clicked the link for "([^"]*)"$/) do |arg1|
@@ -67,7 +68,13 @@ Then(/^I should be on the "([^"]*)" page$/) do |arg1|
   expect(page).to have_current_path(arg1)
 end
 
+Then(/^I should be on Google Maps directions page for Maccheroni Republic$/) do
+  expect(page).to have_current_path("/maps/search/?api=1&query=34.050039,-118.248552")
+end
 
+Then(/^I should be on Google Maps directions page for Dulce$/) do
+  expect(page).to have_current_path("/maps/search/?api=1&query=34.025354,-118.285446")
+end
 
 # RPFF7
 
@@ -134,7 +141,7 @@ Then(/^I should see the name, address, phone number, and link for the restaurant
 end
 
 When(/^I click on the address$/) do
-  page.find('h7.description', match: :first).click
+  page.find('h7.description', match: :first, wait: 20).click
 end
 
 Then(/^I should be on Google Maps directions page for Northern Cafe$/) do
@@ -142,7 +149,7 @@ Then(/^I should be on Google Maps directions page for Northern Cafe$/) do
 end
 
 When(/^I click on the website link$/) do
-  page.all('h7.description')[2].click
+  page.all('h7.description', wait: 20)[2].click
 end
 
 Then(/^I should be on the restaurant's home page, "([^"]*)"$/) do |arg1|

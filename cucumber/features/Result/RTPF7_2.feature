@@ -1,10 +1,10 @@
 Feature:
 
-	Results Page Functionality 2 with search for Pizza and addition of Ultimate Twice Baked Potatoes to Do Not Show and Humble Potato to Favorites
+	Results Page Functionality 7 with search for Potato and addition of Ultimate Twice Baked Potatoes to Do Not Show and Humble Potato to Favorites
 
 Background:
 
-	Given I searched for item "Potato" with "2" results and was redirected to the Results page
+	Given I searched for item "Potato" with "6" results and was redirected to the Results page
 	And I clicked the link for "Ultimate Twice Baked Potatoes"
 	And I selected "Do Not Show" from the drop down
 	And I clicked the "Add to List" button
