@@ -42,10 +42,5 @@ public class CollageGenerationModel {
 	public ArrayList<String> getList() {
 		return this.list;
 	}
-	
-	Base64 getResult() {
-		return null;	
-	}
-
 
 }

@@ -78,5 +78,43 @@ private static MockYelpRequestModel cached;
 	public void testNotNullResults() {
 		assertNotNull(cached.yelp.getResults());
 	}
-
+	
+	@Test
+	public void testSetFavorites() {
+		//assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertTrue(cached.yelp.setFavoriteResult(0, true));
+		assertFalse(cached.yelp.setFavoriteResult(-1, true));
+		assertFalse(cached.yelp.setFavoriteResult(100, true));
+	}
+	
+	@Test
+	public void testSetToExplore() {
+		//assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertTrue(cached.yelp.setToExploreResult(0, true));
+		assertFalse(cached.yelp.setToExploreResult(-1, true));
+		assertFalse(cached.yelp.setToExploreResult(100, true));
+	}
+	
+	
+	@Test
+	public void testSetDoNotShow() {
+		//assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertTrue(cached.yelp.setDoNotShowResult(0, true));
+		assertFalse(cached.yelp.setDoNotShowResult(-1, true));
+		assertFalse(cached.yelp.setDoNotShowResult(100, true));
+		cached.yelp.sort();
+	}
+	@Test
+	public void testExistingResults() {
+		assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertNotNull(cached.yelp.getResults());
+	}	
+	@Test
+	public void testBadRequest() {
+		cached.yelp.responseCode = 300;
+		assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertNotNull(cached.yelp.getResults());
+	}
+	
+	
 }

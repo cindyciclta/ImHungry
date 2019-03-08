@@ -29,8 +29,9 @@ public class MockYelpRequestModel {
 			term = "";
 			limit = 5;	
 			return responseResult;
-		}
+		} 
 		yelp.checkParameters(term, limit);
+		this.mockStorage.put(term, yelp.getResults());
 		return yelp.completeTask();	
 	}
 }

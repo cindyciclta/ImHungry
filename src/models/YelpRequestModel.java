@@ -21,6 +21,7 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 	private String term;
 	private int limit;
 	private List<RestaurantModel> results;
+	public int responseCode;
 	public YelpRequestModel() {
 		results = new ArrayList<>();
 	}
@@ -57,8 +58,8 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 			con.setRequestProperty("grant_type", "client_credentials");
 			con.setRequestProperty ("Authorization", "Bearer " + API_KEY);
 			con.setDoOutput(true);
-			int responseCode = con.getResponseCode();
-			if(con.getResponseCode() < 200 || con.getResponseCode() > 299) {
+			responseCode = con.getResponseCode();
+			if(responseCode  < 200 || responseCode > 299) {
 				return ResponseCodeModel.AUTH_UNAUTHORIZED;
 			}
 			BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()));
