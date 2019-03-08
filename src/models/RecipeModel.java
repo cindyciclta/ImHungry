@@ -37,8 +37,8 @@ public class RecipeModel extends ListItemModel implements Comparable<RecipeModel
 			stars += "&#9733";
 		}
 		toReturn.put("stars", stars);
-		toReturn.put("prepTime", prepTime + " minutes");
-		toReturn.put("cookTime", cookTime + " minutes");
+		toReturn.put("prepTime", prepTime + "");
+		toReturn.put("cookTime", cookTime + "");
 		String modifier = "";
 		if(isInDoNotShow()) {
 			modifier = "donotshow";
@@ -55,7 +55,7 @@ public class RecipeModel extends ListItemModel implements Comparable<RecipeModel
 	}
 	
 	public Map<String, String> getFormattedFieldsForDetailsPage(){
-		Map<String, String> toReturn = new HashMap<>();
+		Map<String, String> toReturn = new HashMap<>();		
 		toReturn.put("name", name);
 		toReturn.put("prepTime", prepTime + " minutes");
 		toReturn.put("cookTime", cookTime + " minutes");
