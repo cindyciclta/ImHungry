@@ -40,14 +40,14 @@ public class GoogleImageRequestModel {
 		String response = "";
 		while((line = reader.readLine()) != null) {
 			response += line;
-			System.out.println(line);
+			//System.out.println(line);
 		}
 		return response;
 	}
 	
 	public ResponseCodeModel APIImageSearch(String imagesearch) {	
 		try {
-			System.out.println("went apiimage "+ imagesearch);
+			//System.out.println("went apiimage "+ imagesearch);
 			imagesearch.trim();
 			String trimmed = imagesearch.replaceAll("\\_", "+");
 			//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
