@@ -21,7 +21,6 @@ public class YelpRequestModel implements ApiCallInterface<RestaurantModel>{
 	private String term;
 	private int limit;
 	private List<RestaurantModel> results;
-	
 	public YelpRequestModel() {
 		results = new ArrayList<>();
 	}

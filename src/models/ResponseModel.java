@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class ResponseModel {
@@ -10,9 +11,9 @@ public class ResponseModel {
 	private String term;
 	private ApiCallInterface<RestaurantModel> restaurants;
 	private ApiCallInterface<RecipeModel> recipes;
-	
+	private MockRecipeRequestModel mock;
 	public ResponseModel() {
-		
+		mock = new MockRecipeRequestModel();
 	}
 	
 	public String getSearchTerm() {
