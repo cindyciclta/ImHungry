@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,11 +27,6 @@ public class TestResponseModel {
 	}
 	
 	@Test
-	public void testGetCollageString() {
-		assertNotNull(rm.getCollageBase64String());
-	}
-	
-	@Test
 	public void testGetFormattedDetailedRecipeAt() {
 		assertNotNull(rm.getFormattedDetailedRecipeAt(1));
 	}
@@ -38,6 +35,64 @@ public class TestResponseModel {
 	public void testGetFormattedDetailedRestaurantAt() {
 		assertNotNull(rm.getFormattedDetailedRestaurantAt(1));
 	}
+	
+	@Test
+	public void testSort() {
+		rm.sort();
+
+		// check sorting
+		int oldPrep = -1;
+		for(int i = 0 ; i < rm.getNumberOfRecipes() ; i++) {
+			Map<String, String> words = rm.getFormattedDetailedRecipeAt(i);
+			int newPrep = Integer.parseInt(words.get("prepTime").split(" ")[0]);
+			assert oldPrep <= newPrep;
+			oldPrep = newPrep;
+		}
+	}
+	
+	@Test
+	public void testRestaurantDoNotShow() {
+		rm.addToList(0, "donotshow", "restaurant", true);
+		Map<String, String> modifiers = rm.getFormattedRestaurantResultsAt(0);
+		assertEquals("donotshow", modifiers.get("modifier"));
+	}
+	
+	@Test
+	public void testRestaurantFavorites() {
+		rm.addToList(0, "favorites", "restaurant", true);
+		Map<String, String> modifiers = rm.getFormattedRestaurantResultsAt(0);
+		assertEquals("favorites", modifiers.get("modifier"));
+	}
+	
+	@Test
+	public void testRestaurantToExplore() {
+		rm.addToList(0, "toexplore", "restaurant", true);
+		Map<String, String> modifiers = rm.getFormattedRestaurantResultsAt(0);
+		assertEquals("toexplore", modifiers.get("modifier"));
+	}
+	
+	@Test
+	public void testRecipeDoNotShow() {
+		rm.addToList(0, "donotshow", "recipe", true);
+		Map<String, String> modifiers = rm.getFormattedRecipeResultsAt(0);
+		assertEquals("donotshow", modifiers.get("modifier"));
+	}
+	
+	@Test
+	public void testRecipeFavorites() {
+		rm.addToList(0, "favorites", "recipe", true);
+		Map<String, String> modifiers = rm.getFormattedRecipeResultsAt(0);
+		assertEquals("favorites", modifiers.get("modifier"));
+	}
+	
+	@Test
+	public void testRecipeToExplore() {
+		rm.addToList(0, "toexplore", "recipe", true);
+		Map<String, String> modifiers = rm.getFormattedRecipeResultsAt(0);
+		assertEquals("toexplore", modifiers.get("modifier"));
+	}
+	
+	
 	
 	@Test
 	public void testGetFormattedRecipeResultsAt() {
