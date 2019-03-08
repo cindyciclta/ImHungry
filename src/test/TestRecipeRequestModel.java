@@ -88,5 +88,36 @@ public class TestRecipeRequestModel{
 	public void testNotNullResults() {
 		assertNotNull(cached.edamam.getResults());
 	}
+	
+	@Test
+	public void testExistingResults() {
+		assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertNotNull(cached.edamam.getResults());
+	}
+	@Test
+	public void testSetFavorites() {
+		//assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertTrue(cached.edamam.setFavoriteResult(0, true));
+		assertFalse(cached.edamam.setFavoriteResult(-1, true));
+		assertFalse(cached.edamam.setFavoriteResult(100, true));
+	}
+	
+	@Test
+	public void testSetToExplore() {
+		//assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertTrue(cached.edamam.setToExploreResult(0, true));
+		assertFalse(cached.edamam.setToExploreResult(-1, true));
+		assertFalse(cached.edamam.setToExploreResult(100, true));
+	}
+	
+	
+	@Test
+	public void testSetDoNotShow() {
+		//assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
+		assertTrue(cached.edamam.setDoNotShowResult(0, true));
+		assertFalse(cached.edamam.setDoNotShowResult(-1, true));
+		assertFalse(cached.edamam.setDoNotShowResult(100, true));
+		cached.edamam.sort();
+	}
 
 }

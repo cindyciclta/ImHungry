@@ -3,6 +3,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -53,6 +54,7 @@ public class TestGoogleImageRequestModel extends Mockito{
 	@Test
 	public void testBadResponse() throws Exception{
 		when(googleMock.getResponse("pasta")).thenThrow(new IOException());
+		assertTrue(collage.checkParameters("pasta", 5));
 		assertEquals(null, googleMock.APIImageSearch("pasta"));
 	}
 	
@@ -60,6 +62,34 @@ public class TestGoogleImageRequestModel extends Mockito{
 	public void testEmptyResponse() throws Exception{
 		when(googleMock.getResponse("pasta")).thenReturn("");
 		assertEquals(null, googleMock.APIImageSearch("pasta"));
+	}
+	
+	@Test
+	public void testEmptyTermCollageParm() throws Exception{
+		assertFalse(collage.checkParameters("", 5));
+	}
+	
+	
+	@Test
+	public void testNegativeLimitCollageParm() throws Exception{
+		assertFalse(collage.checkParameters("Pasta", -1));
+	}
+	
+	@Test
+	public void testNulltermCollageParm() throws Exception{
+		assertFalse(collage.checkParameters(null, 3));
+	}
+	
+	@Test
+	public void testCollageGetArray() throws Exception{
+		ArrayList<String> s = collage.getList();
+		assertNotEquals(null, s);
+	}
+	
+	@Test
+	public void testCollageGetSize() throws Exception{
+		int size = collage.getActualSize();
+		assertEquals(10, size);
 	}
 
 }

@@ -46,7 +46,8 @@ public class MockRecipeRequestModel{
 			return responseResult;
 		}
 		edamam.checkParameters(term, limit);
-		return edamam.completeTask();	
+		mockStorage.put(term, edamam.getResults());
+		return edamam.completeTask();
 	}
 
 	
