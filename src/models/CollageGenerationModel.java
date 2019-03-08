@@ -14,8 +14,10 @@ public class CollageGenerationModel {
 	private int actualsize = 0;
 	private ArrayList<String> list;
 	public CollageGenerationModel() {
+		list = new ArrayList<String>();
 	}
 	public int getActualSize() {
+
 		return actualsize;
 	}
 	public boolean checkParameters(String term, int limit) {
@@ -42,10 +44,5 @@ public class CollageGenerationModel {
 	public ArrayList<String> getList() {
 		return this.list;
 	}
-	
-	Base64 getResult() {
-		return null;	
-	}
-
 
 }

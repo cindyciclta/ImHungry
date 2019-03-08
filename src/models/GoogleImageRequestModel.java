@@ -17,7 +17,7 @@ public class GoogleImageRequestModel {
 	private CollageGenerationModel results;
 	private String term;
 	private int limit;
-	
+	ArrayList <String> allimageurl;
 	public GoogleImageRequestModel(CollageGenerationModel collageModel) {
 		this.results = collageModel;
 	}

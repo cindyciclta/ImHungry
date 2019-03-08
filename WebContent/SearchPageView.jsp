@@ -80,8 +80,7 @@ body{
 		  		<div class="row justify-content-center align-items-center">
 		  			<div class="form-row">
 		  				<div id="searchBar" class="form-group col-md-10">
-		  					<input class="form-control mr-sm-2" type="search" id="termInput" placeholder="Enter
-							food" aria-label="Search">
+		  					<input class="form-control mr-sm-2" type="search" id="termInput" placeholder="Enter food" aria-label="Search">
 		  				</div>
 		  				<div id="numResults" class="form-group col-md-2">
 		  					<input class="form-control mr-sm-2" type="number" min="1" value="5" id="limitInput" title="Number of items to show in results">

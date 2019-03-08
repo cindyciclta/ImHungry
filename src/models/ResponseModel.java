@@ -8,8 +8,8 @@ public class ResponseModel {
 	private int limit;
 	
 	private String term;
-	private ApiCallInterface<RestaurantModel> restaurants;
-	private ApiCallInterface<RecipeModel> recipes;
+	private ApiCallInterface<RestaurantModel> restaurants  = new YelpRequestModel();
+	private ApiCallInterface<RecipeModel> recipes = new EdamamRequestModel();
 	private MockRecipeRequestModel mock;
 	public ResponseModel() {
 		mock = new MockRecipeRequestModel();

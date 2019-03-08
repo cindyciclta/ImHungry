@@ -23,7 +23,7 @@ public class RedirectionController extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static Map<Integer, ResponseModel> responses = new HashMap<>();
+	public static Map<Integer, ResponseModel> responses = new HashMap<>();
 	private static int index = 0;
 	
 	private static final long serialVersionUID = 1L;
@@ -62,12 +62,11 @@ public class RedirectionController extends HttpServlet {
 			googleimagemodel.APIImageSearch(term);
 			ArrayList<String> urllist = (ArrayList<String>) collagemodel.getList();
 			JSONArray jsArray = new JSONArray (urllist);
-
+			System.out.println("usjdof "+ urllist.size() );
 			request.setAttribute("length", urllist.size());
 			request.setAttribute("jsonarray", jsArray);
 			
 			requestDispatcher.forward(request, response);
-			
 		}else if(action.equals("recipe")) { //If it is redirecting to the recipe page, set the attributes accordingly
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher("DetailedRecipeView.jsp");
 			int indexInt = Integer.parseInt(index);
