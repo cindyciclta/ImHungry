@@ -73,9 +73,36 @@ public class TestRecipeModel {
 	public void testFormattedResultsDetails() {
 		RecipeModel rm = new RecipeModel();
 		rm.setName("nameOfRecipe");
+		IngredientModel i = new IngredientModel();
+		i.validateIngredients("ingredient", 10, "");
+		rm.addIngredient(i);
 		rm.addInstruction("make food");
 		Map<String, String> res = rm.getFormattedFieldsForDetailsPage();
 		assertEquals(res.get("name"), "nameOfRecipe");
+	}
+	
+	@Test
+	public void testModifierDoNotShow() {
+		RecipeModel rm = new RecipeModel();
+		rm.setInDoNotShow(true);
+		Map<String, String> res = rm.getFormattedFieldsForResults();
+		assertEquals("donotshow", res.get("modifier"));
+	}
+	
+	@Test
+	public void testModifierFavorites() {
+		RecipeModel rm = new RecipeModel();
+		rm.setInFavorites(true);
+		Map<String, String> res = rm.getFormattedFieldsForResults();
+		assertEquals("favorites", res.get("modifier"));
+	}
+	
+	@Test
+	public void testToExplore() {
+		RecipeModel rm = new RecipeModel();
+		rm.setInToExplore(true);
+		Map<String, String> res = rm.getFormattedFieldsForResults();
+		assertEquals("toexplore", res.get("modifier"));
 	}
 	
 	@Test
@@ -86,6 +113,15 @@ public class TestRecipeModel {
 		rm.addInstruction("make food");
 		rm.setName("nameOfRecipe");
 		Map<String, String> res = rm.getFormattedFieldsForResults();
+		assertEquals(res.get("name"), "nameOfRecipe");
+	}
+	
+	@Test
+	public void testFormattedNoIngreidnets() {
+		RecipeModel rm = new RecipeModel();
+		rm.setStars(3);
+		rm.setName("nameOfRecipe");
+		Map<String, String> res = rm.getFormattedFieldsForDetailsPage();
 		assertEquals(res.get("name"), "nameOfRecipe");
 	}
 	
@@ -148,6 +184,87 @@ public class TestRecipeModel {
 		assertEquals("test2", rms.get(1).getFormattedFieldsForResults().get("name"));
 		assertEquals("test1", rms.get(0).getFormattedFieldsForResults().get("name"));
 		
+	}
+	
+	@Test
+	public void testLowerThan() {
+		RecipeModel rm = new RecipeModel();
+		rm.setPrepTime(5);
+		
+		RecipeModel rmLarger = new RecipeModel();
+		rmLarger.setPrepTime(10);
+		
+		assertEquals(-1, rm.compareTo(rmLarger));
+	}
+	
+	@Test
+	public void testHigherThan() {
+		RecipeModel rm = new RecipeModel();
+		rm.setPrepTime(5);
+		
+		RecipeModel rmLarger = new RecipeModel();
+		rmLarger.setPrepTime(10);
+		
+		assertEquals(1, rmLarger.compareTo(rm));
+	}
+	
+	@Test
+	public void testEqual() {
+		RecipeModel rm = new RecipeModel();
+		rm.setPrepTime(10);
+		
+		RecipeModel rmEqual = new RecipeModel();
+		rmEqual.setPrepTime(10);
+		
+		assertEquals(0, rmEqual.compareTo(rm));
+	}
+	
+	@Test
+	public void testThisFavorite() {
+		RecipeModel rm = new RecipeModel();
+		rm.setInFavorites(true);
+		
+		RecipeModel rmFavorite = new RecipeModel();
+		rmFavorite.setInFavorites(false);
+		
+		assertEquals(1, rmFavorite.compareTo(rm));
+	}
+	
+	@Test
+	public void testOtherFavorite() {
+		RecipeModel rm = new RecipeModel();
+		rm.setInFavorites(true);
+		
+		RecipeModel rmFavorite = new RecipeModel();
+		rmFavorite.setInFavorites(false);
+		
+		assertEquals(-1, rm.compareTo(rmFavorite));
+	}
+	
+	@Test
+	public void testBothFavorite() {
+		RecipeModel rm = new RecipeModel();
+		rm.setInFavorites(true);
+		rm.setPrepTime(1);
+		
+		RecipeModel rmFavorite = new RecipeModel();
+		rmFavorite.setInFavorites(true);
+		rmFavorite.setPrepTime(2);
+		
+		assertEquals(-1, rm.compareTo(rmFavorite));
+	}
+	
+	@Test
+	public void testNeitherFavorite() {
+		RecipeModel rm = new RecipeModel();
+		rm.setInFavorites(false);
+		rm.setPrepTime(1);
+		
+		RecipeModel rmFavorite = new RecipeModel();
+		rmFavorite.setInFavorites(false);
+		rmFavorite.setPrepTime(2);
+		
+		assertEquals(-1, rm.compareTo(rmFavorite));
 	}
 
 }
