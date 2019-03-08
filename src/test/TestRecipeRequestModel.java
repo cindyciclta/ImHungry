@@ -2,39 +2,38 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
-
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
-import models.EdamamRequestModel;
 import models.MockRecipeRequestModel;
 import models.ResponseCodeModel;
 
-public class TestEdamamRequestModel extends Mockito{
-	
-	//private static EdamamRequestModel cached;
-	
-	@Mock
-	static public MockRecipeRequestModel cached;
-	@Before
-    public void setUpMock() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        
-    }
-	
+public class TestRecipeRequestModel{
+	private static MockRecipeRequestModel cached;
 	@BeforeClass
-	public static void setUp() {
+	public static void setUpBeforeClass() throws Exception {
+		//MockitoAnnotations.initMocks(this);
 		cached = new MockRecipeRequestModel();
 		assertTrue(cached.edamam.checkParameters("coffee", 5));
 		assertEquals(ResponseCodeModel.OK, cached.completeTask("coffee", 5));
 	}
-	
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
 	@Test
 	public void testInvalidLimit() {
 		assertFalse(cached.edamam.checkParameters("chicken", -5));
