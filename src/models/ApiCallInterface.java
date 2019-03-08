@@ -3,6 +3,12 @@ package models;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * An interface implemented by all API calls
+ * 
+ * T refers to the results objected within the 
+ * ApiCallInterface
+ */
 public interface ApiCallInterface<T> {
 	
 	// Deviation no results

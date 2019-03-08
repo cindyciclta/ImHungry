@@ -12,6 +12,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Not production code, used for mocking requests
+ * To edamam
+ *
+ */
 public class MockRecipeRequestModel{
 
 	public MockRecipeRequestModel() {

@@ -16,6 +16,9 @@ import java.util.Set;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Scrapes AllRecipes for information on the recipes
+ */
 public class EdamamRequestModel implements ApiCallInterface<RecipeModel> {
 	
 	public final String URL_LINK = "https://www.allrecipes.com/search/results/?wt=";

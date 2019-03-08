@@ -2,6 +2,9 @@ package models;
 
 import java.util.*;
 
+/**
+ * Stores recipe information
+ */
 public class RecipeModel extends ListItemModel implements Comparable<RecipeModel>{
 	
 	private String name; // Deviation from plan

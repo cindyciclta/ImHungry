@@ -7,6 +7,10 @@ import java.net.URL;
 import java.io.IOException;
 import java.net.*;
 
+/**
+ * Get calls a distance from google distance API
+ *
+ */
 public class GoogleMapsRequestModel {
 	
 	
@@ -15,6 +19,7 @@ public class GoogleMapsRequestModel {
 	
 	private final String API_KEY = "AIzaSyCjNWygHe9tBxPhVtCR7SrCOn6_hUw5H2Y";
 	
+	// for storing lat and lon of destination restaurant
 	private double lat;
 	private double lon;
 	

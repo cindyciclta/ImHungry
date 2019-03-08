@@ -7,12 +7,19 @@ import java.util.List;
 
 import org.json.JSONArray;
 
+
+/**
+ * Stores links for a given collage
+ * does not generate the collage
+ */
 public class CollageGenerationModel {
+	
+	
 	private String term;
-	private int NUMBER_OF_PICTURES = 10;
+	private final int NUMBER_OF_PICTURES = 10;
 	private String[] imagelist;
-	private int actualsize = 0;
-	private ArrayList<String> list;
+	private int actualsize = 0; // actual size of collage list
+	private ArrayList<String> list; // list of links of collage
 	public CollageGenerationModel() {
 		list = new ArrayList<String>();
 	}
@@ -41,6 +48,7 @@ public class CollageGenerationModel {
 		this.list = iList;
 		this.actualsize = size;
 	}
+	
 	public ArrayList<String> getList() {
 		return this.list;
 	}

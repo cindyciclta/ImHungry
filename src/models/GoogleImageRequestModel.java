@@ -13,6 +13,11 @@ import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
+/**
+ * GETs a set of 10 google image links
+ * using HttpRequest
+ */
 public class GoogleImageRequestModel {
 	private CollageGenerationModel results;
 	private String term;
@@ -22,6 +27,12 @@ public class GoogleImageRequestModel {
 		this.results = collageModel;
 	}
 	
+	/**
+	 * performs url hit against Google Images
+	 * @param imagesearch input search term, assumed correct
+	 * @return String json response
+	 * @throws Exception
+	 */
 	public String getResponse(String imagesearch) throws Exception{
 		
 		imagesearch.trim();

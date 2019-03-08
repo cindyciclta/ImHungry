@@ -2,7 +2,8 @@ package models;
 
 /**
  * Existance of class is deviation from design. Used to 
- * remove session storage from JS. 
+ * remove session storage from JS. Subclassed by 
+ * RestaurantModel and RecipeModel.
  * @author veda
  *
  */

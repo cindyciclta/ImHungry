@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Used for mocking requests to yelp
+ *
+ */
 public class MockYelpRequestModel {
 
 	public MockYelpRequestModel() {
@@ -20,6 +24,9 @@ public class MockYelpRequestModel {
 		}
 		return null;
 	}
+	
+	// mocks a call to request - checks if the request is in cache
+	// or caches the request fresh
 	public ResponseCodeModel completeTask(String term, int limit) {
  		ResponseCodeModel responseResult = ResponseCodeModel.OK;
 
