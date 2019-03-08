@@ -43,8 +43,8 @@ Scenario: Check title, column titles, number of results, appropriate fields (RTP
 
 Scenario: Select a restaurant (RTPF5c)
 
-	When I clicked the link for "Jade Wok"
-	Then I am on the "Jade Wok" page
+	When I clicked the link for "Dirt Dog"
+	Then I am on the "Dirt Dog" page
 	
 Scenario: Select a recipe (RTPF6c)
 
