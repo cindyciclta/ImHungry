@@ -278,7 +278,7 @@
                            </select>
                        </div>
                    </li>
-                   <li class="nav-item">
+                   <li class="nav-item mb-3">
                        <input class="btn btn-secondary" onclick=<%="redirectToManageList("+ index + ")"%> type="button" value="Manage Lists">
                    </li>
                    <li class="nav-item">
