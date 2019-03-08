@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ResponseModel {
-	private String collage;
 	private int limit;
 	
 	private String term;
@@ -18,10 +17,6 @@ public class ResponseModel {
 	
 	public String getSearchTerm() {
 		return term;
-	}
-	
-	public String getCollageBase64String() {
-		return collage;
 	}
 	
 	public void sort() {
@@ -75,25 +70,13 @@ public class ResponseModel {
 		
 		EdamamRequestModel edamam = new EdamamRequestModel();
 		response = edamam.checkParameters(term, limit);
-		if(!response) {
-			return false;
-		}
 		ResponseCodeModel responseCode = edamam.completeTask();
-		if(!responseCode.equals(ResponseCodeModel.OK)) {
-			return false;
-		}
 		this.recipes = edamam;
 		
 		// TODO: add the yelp API here
 		YelpRequestModel yelp = new YelpRequestModel();
 		response = yelp.checkParameters(term, limit);
-		if(!response) {
-			return false;
-		}
 		responseCode = yelp.completeTask();
-		if(!responseCode.equals(ResponseCodeModel.OK)) {
-			return false;
-		}
 		this.restaurants = yelp;
 		
 		// TODO: add the google images API here

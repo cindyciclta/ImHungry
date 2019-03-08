@@ -1,3 +1,18 @@
+Given(/^I am on the USC CS webpage$/) do
+  visit 'https://www.cs.usc.edu/'
+end
+
+When(/^I click the Contact Us button$/) do
+  click_on('Contact Us')
+end
+
+Then(/^I should be on the Contact page$/) do
+  expect(page).to have_current_path('/about/contact/')
+end
+
+
+## START HERE ##
+
 
 # Manage List Page
 

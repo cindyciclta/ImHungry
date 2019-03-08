@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.junit.Test;
 
-
 import models.RestaurantModel;
 
 public class TestRestaurantModel {
@@ -84,6 +83,30 @@ public class TestRestaurantModel {
 	}
 	
 	@Test
+	public void testModifierDoNotShow() {
+		RestaurantModel rm = new RestaurantModel();
+		rm.setInDoNotShow(true);
+		Map<String, String> res = rm.getFormattedFieldsForResultsPage();
+		assertEquals("donotshow", res.get("modifier"));
+	}
+	
+	@Test
+	public void testModifierFavorites() {
+		RestaurantModel rm = new RestaurantModel();
+		rm.setInFavorites(true);
+		Map<String, String> res = rm.getFormattedFieldsForResultsPage();
+		assertEquals("favorites", res.get("modifier"));
+	}
+	
+	@Test
+	public void testToExplore() {
+		RestaurantModel rm = new RestaurantModel();
+		rm.setInToExplore(true);
+		Map<String, String> res = rm.getFormattedFieldsForResultsPage();
+		assertEquals("toexplore", res.get("modifier"));
+	}
+	
+	@Test
 	public void testSetLatLong() {
 		RestaurantModel rm = new RestaurantModel();	
 		assertTrue(rm.setLatLong(10, 10));
@@ -108,6 +131,12 @@ public class TestRestaurantModel {
 	}
 	
 	@Test
+	public void testSetCaption() {
+		RestaurantModel rm = new RestaurantModel();	
+		assertTrue(rm.setAddress("123 main st"));
+	}
+	
+	@Test
 	public void testSetLinkToPage() {
 		RestaurantModel rm = new RestaurantModel();	
 		assertTrue(rm.setLinkToPage("google.com"));
@@ -123,6 +152,84 @@ public class TestRestaurantModel {
 	public void testSetDrivingTimeInvalid() {
 		RestaurantModel rm = new RestaurantModel();	
 		assertFalse(rm.setDrivingTime(-10));
+	}
+	
+	@Test
+	public void testCompareToLower() {
+		RestaurantModel rm = new RestaurantModel();	
+		RestaurantModel rmHigher = new RestaurantModel();
+		rm.setDrivingTime(1);
+		rmHigher.setDrivingTime(2);
+		
+		assertEquals(-1, rm.compareTo(rmHigher));
+	}
+	
+	@Test
+	public void testCompareToEquals() {
+		RestaurantModel rm = new RestaurantModel();	
+		RestaurantModel rmEqual = new RestaurantModel();
+		rm.setDrivingTime(1);
+		rmEqual.setDrivingTime(1);
+		
+		assertEquals(0, rm.compareTo(rmEqual));
+	}
+	
+	@Test
+	public void testCompareToHigher() {
+		RestaurantModel rm = new RestaurantModel();	
+		RestaurantModel rmHigher = new RestaurantModel();
+		rm.setDrivingTime(1);
+		rmHigher.setDrivingTime(2);
+		
+		assertEquals(1, rmHigher.compareTo(rm));
+	}
+	
+	@Test
+	public void testThisFavorite() {
+		RestaurantModel rm = new RestaurantModel();
+		rm.setInFavorites(true);
+		
+		RestaurantModel rmFavorite = new RestaurantModel();
+		rmFavorite.setInFavorites(false);
+		
+		assertEquals(1, rmFavorite.compareTo(rm));
+	}
+	
+	@Test
+	public void testOtherFavorite() {
+		RestaurantModel rm = new RestaurantModel();
+		rm.setInFavorites(true);
+		
+		RestaurantModel rmFavorite = new RestaurantModel();
+		rmFavorite.setInFavorites(false);
+		
+		assertEquals(-1, rm.compareTo(rmFavorite));
+	}
+	
+	@Test
+	public void testBothFavorite() {
+		RestaurantModel rm = new RestaurantModel();
+		rm.setInFavorites(true);
+		rm.setDrivingTime(1);
+		
+		RestaurantModel rmFavorite = new RestaurantModel();
+		rmFavorite.setInFavorites(true);
+		rmFavorite.setDrivingTime(2);
+		
+		assertEquals(-1, rm.compareTo(rmFavorite));
+	}
+	
+	@Test
+	public void testNeitherFavorite() {
+		RestaurantModel rm = new RestaurantModel();
+		rm.setInFavorites(false);
+		rm.setDrivingTime(1);
+		
+		RestaurantModel rmFavorite = new RestaurantModel();
+		rmFavorite.setInFavorites(false);
+		rmFavorite.setDrivingTime(2);
+		
+		assertEquals(-1, rm.compareTo(rmFavorite));
 	}
 	
 	
