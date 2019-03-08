@@ -27,7 +27,7 @@ public class GoogleImageRequestModel {
 		imagesearch.trim();
 		String trimmed = imagesearch.replaceAll("\\_", "+");
 		//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
-		URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyAXQIcDDxDyKhuBXztNpFg1qggmeNc0ySA" + 
+		URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyAYRhioUnfQAukxmVkqsxKWA11YV5MVb2Q" + 
 				"&cx=018271258977134758236:ifnf_dla9yk&q=" + trimmed + "&searchType=image");
 		HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 	    con.setRequestProperty("User-Agent", "Chrome");
@@ -51,12 +51,14 @@ public class GoogleImageRequestModel {
 			imagesearch.trim();
 			String trimmed = imagesearch.replaceAll("\\_", "+");
 			//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
-			URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyAXQIcDDxDyKhuBXztNpFg1qggmeNc0ySA" + 
+			URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyAYRhioUnfQAukxmVkqsxKWA11YV5MVb2Q" + 
 					"&cx=018271258977134758236:ifnf_dla9yk&q=" + trimmed + "&searchType=image");
 			HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 		    con.setRequestProperty("User-Agent", "Chrome");
 			con.addRequestProperty("Referer", "localhost:8080");
-
+			if (con.getResponseCode() > 200) {
+				System.out.println("Google Image API Error Code: " + con.getResponseCode());
+			}
 			//Parse JSON file and Serialize the Objects
 			String line;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -64,7 +66,7 @@ public class GoogleImageRequestModel {
 			//Get all data from API
 			while((line = reader.readLine()) != null) {
 				response += line;
-				//System.out.println(line);
+				System.out.println(line);
 			}
 
 		    if (!response.isEmpty()) {
