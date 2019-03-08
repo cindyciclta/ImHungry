@@ -64,7 +64,7 @@ public class GoogleImageRequestModel {
 			//Get all data from API
 			while((line = reader.readLine()) != null) {
 				response += line;
-				System.out.println(line);
+				//System.out.println(line);
 			}
 
 		    if (!response.isEmpty()) {
