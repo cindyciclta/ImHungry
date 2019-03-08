@@ -16,6 +16,6 @@ Background:
 	
 Scenario: Add items to lists and have results change appropriately (RTPF7b, RTPF7c, RTPF7a)
 
-	Then I should see "Humble Potato" as the first result for "Recipes"
+	Then I should see "Humble Potato" as the first result for "Restaurants"
 	And I do not see "Ultimate Twice Baked Potatoes"
 
