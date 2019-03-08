@@ -38,7 +38,7 @@ public class GoogleImageRequestModel {
 		imagesearch.trim();
 		String trimmed = imagesearch.replaceAll("\\_", "+");
 		//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
-		URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyAYRhioUnfQAukxmVkqsxKWA11YV5MVb2Q" + 
+		URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyAqAClJ63YQN5UtnDUNED9c2qZf6op5yow" + 
 				"&cx=018271258977134758236:ifnf_dla9yk&q=" + trimmed + "&searchType=image");
 		HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
 	    con.setRequestProperty("User-Agent", "Chrome");
@@ -58,27 +58,7 @@ public class GoogleImageRequestModel {
 	
 	public ResponseCodeModel APIImageSearch(String imagesearch) {	
 		try {
-			//System.out.println("went apiimage "+ imagesearch);
-			imagesearch.trim();
-			String trimmed = imagesearch.replaceAll("\\_", "+");
-			//The URL to Google Image API - API key and Custom Control key included, Add the imageSearch at the end.
-			URL url = new URL("https://www.googleapis.com/customsearch/v1?key=AIzaSyAYRhioUnfQAukxmVkqsxKWA11YV5MVb2Q" + 
-					"&cx=018271258977134758236:ifnf_dla9yk&q=" + trimmed + "&searchType=image");
-			HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
-		    con.setRequestProperty("User-Agent", "Chrome");
-			con.addRequestProperty("Referer", "localhost:8080");
-			if (con.getResponseCode() > 200) {
-				System.out.println("Google Image API Error Code: " + con.getResponseCode());
-			}
-			//Parse JSON file and Serialize the Objects
-			String line;
-			BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			String response = "";
-			//Get all data from API
-			while((line = reader.readLine()) != null) {
-				response += line;
-//				System.out.println(line);
-			}
+			String response = getResponse(imagesearch);
 
 		    if (!response.isEmpty()) {
 		    	//Parses the JSON object to get the image and store the url link to an ArrayList
@@ -98,20 +78,6 @@ public class GoogleImageRequestModel {
 		    	}
 		    	this.results.setListofImages(allimageurl, actualsize);
 		    }
-			String responsee = getResponse(imagesearch);
-	    	//Parses the JSON object to get the image and store the url link to an ArrayList
-	    	JSONObject json = new JSONObject(responsee);
-	    	JSONArray items = json.getJSONArray("items");
-	    	ArrayList <String> allimageurl = new ArrayList<String>();
-			int actualsize = 0;
-	    	for (int i = 0; i < 10 ; i ++) {
-	    		JSONObject item_i = items.getJSONObject(i);
-		    	JSONObject imageobj = item_i.getJSONObject("image");
-		    	String string_urlimage = imageobj.getString("thumbnailLink");
-		    	allimageurl.add(string_urlimage);
-		    	actualsize++;
-	    	}
-	    	this.results.setListofImages(allimageurl, actualsize);
 		} catch (Exception e) {
 			return ResponseCodeModel.INTERNAL_ERROR;
 	    }  
